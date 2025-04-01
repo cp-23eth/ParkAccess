@@ -3,7 +3,7 @@
         xmlns:vm="using:ParkAccess.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="800"
         x:Class="ParkAccess.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -19,15 +19,15 @@
 		<Color x:Key="SecondaryColor">#3a0ca3</Color>
 		<Color x:Key="AccentColor">#4cc9f0</Color>
 		<Color x:Key="SuccessColor">#06d6a0</Color>
+		<PathIcon x:Key="IconLock" Classes="Lock" Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z" Width="18" Height="18"/>
+		<PathIcon x:Key="IconUnlock" Classes="Unlock" Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z" Width="18" Height="18" />
 	</Window.Resources>
 
 	<Window.Styles>
-		<!-- Window styles -->
 		<Style Selector="Window">
 			<Setter Property="FontFamily" Value="Inter, Segoe UI, San Francisco, sans-serif"/>
 		</Style>
 
-		<!-- TabControl styles -->
 		<Style Selector="TabControl">
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="Padding" Value="16"/>
@@ -57,7 +57,19 @@
 			<Setter Property="Opacity" Value="1"/>
 		</Style>
 
-		<!-- ToggleButton styles -->
+		<Style Selector="Button">
+			<Setter Property="CornerRadius" Value="24"/>
+			<Setter Property="Background" Value="#f0f0f4"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="Padding" Value="20 14"/>
+			<Setter Property="MinWidth" Value="140"/>
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="Background" Duration="0:0:0.2"/>
+				</Transitions>
+			</Setter>
+		</Style>
+
 		<Style Selector="ToggleButton">
 			<Setter Property="CornerRadius" Value="24"/>
 			<Setter Property="Background" Value="#f0f0f4"/>
@@ -121,37 +133,19 @@
 			<Setter Property="IsVisible" Value="True"/>
 		</Style>
 
-		<!-- Calendar styles -->
-		<Style Selector="Calendar">
-			<Setter Property="Margin" Value="0 24 0 0"/>
-			<Setter Property="Background" Value="White"/>
-			<Setter Property="BorderThickness" Value="0"/>
-			<Setter Property="CornerRadius" Value="12"/>
-			<Setter Property="Padding" Value="8"/>
-		</Style>
-
-		<Style Selector="CalendarItem">
-			<Setter Property="BorderThickness" Value="0"/>
-			<Setter Property="CornerRadius" Value="10"/>
-		</Style>
-
-		<Style Selector="CalendarDayButton">
-			<Setter Property="CornerRadius" Value="6"/>
-		</Style>
-
-		<Style Selector="CalendarDayButton:selected">
-			<Setter Property="Background" Value="{DynamicResource PrimaryColor}"/>
-		</Style>
-
-		<!-- Card styles -->
 		<Style Selector="Border.Card">
 			<Setter Property="Background" Value="White"/>
 			<Setter Property="CornerRadius" Value="16"/>
 			<Setter Property="Padding" Value="24"/>
 			<Setter Property="Margin" Value="0"/>
-
 		</Style>
 
+		<Style Selector="TextBlock.SectionTitle">
+			<Setter Property="FontSize" Value="18"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="Foreground" Value="#333333"/>
+			<Setter Property="Margin" Value="0 0 0 16"/>
+		</Style>
 	</Window.Styles>
 
 	<Design.DataContext>
@@ -167,19 +161,20 @@
                    Margin="12 0 0 16"/>
 
 		<TabControl Grid.Row="1" Margin="0">
-			<TabItem Header="Parking 1">
+			<TabItem Header="Ouverture manuelle">
 				<Border Classes="Card">
-					<Grid RowDefinitions="Auto,Auto" VerticalAlignment="Center">
-						<Grid Grid.Row="0" ColumnDefinitions="*,Auto,*" HorizontalAlignment="Center">
-							<TextBlock Grid.Column="0"
-                                       Text="Gate Status"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Right"
-                                       Margin="0 0 16 0"
-                                       FontSize="14"
-                                       Foreground="#555555"/>
+					<StackPanel Spacing="24">
+						<!-- Parking 1 Section -->
+						<Grid RowDefinitions="Auto,Auto">
+							<TextBlock Grid.Row="0"
+                                       Classes="SectionTitle"
+                                       Text="Parking 1"
+                                       HorizontalAlignment="Center"/>
 
-							<ToggleButton Grid.Column="1" IsChecked="False" Margin="0" HorizontalContentAlignment="Center">
+							<ToggleButton Grid.Row="1"
+                                         IsChecked="False"
+                                         HorizontalAlignment="Center"
+                                         HorizontalContentAlignment="Center">
 								<StackPanel Orientation="Horizontal" Spacing="12">
 									<PathIcon Classes="Lock"
                                               Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
@@ -189,115 +184,126 @@
                                               Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
                                               Width="18"
                                               Height="18"/>
-									<TextBlock Classes="ButtonText Close" Text="Closed"/>
-									<TextBlock Classes="ButtonText Open" Text="Open"/>
+									<TextBlock Classes="ButtonText Close" Text="Fermé"/>
+									<TextBlock Classes="ButtonText Open" Text="Ouvert"/>
 								</StackPanel>
 							</ToggleButton>
+						</Grid>
 
-							<TextBlock Grid.Column="2"
-                                       Text="Available Dates"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       Margin="16 0 0 0"
-                                       FontSize="14"
-                                       Foreground="#555555"
-                                       Opacity="0"/>
+						<Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
+
+						<!-- Parking 2 Section -->
+						<Grid RowDefinitions="Auto,Auto">
+							<TextBlock Grid.Row="0"
+                                       Classes="SectionTitle"
+                                       Text="Parking 2"
+                                       HorizontalAlignment="Center"/>
+
+							<ToggleButton Grid.Row="1"
+                                         IsChecked="False"
+                                         HorizontalAlignment="Center"
+                                         HorizontalContentAlignment="Center">
+								<StackPanel Orientation="Horizontal" Spacing="12">
+									<PathIcon Classes="Lock"
+                                              Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
+                                              Width="18"
+                                              Height="18"/>
+									<PathIcon Classes="Unlock"
+                                              Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
+                                              Width="18"
+                                              Height="18"/>
+									<TextBlock Classes="ButtonText Close" Text="Fermé"/>
+									<TextBlock Classes="ButtonText Open" Text="Ouvert"/>
+								</StackPanel>
+							</ToggleButton>
 						</Grid>
-						<Grid Grid.Row="1" ColumnDefinitions="Auto" HorizontalAlignment="Center" Margin="0 24 0 0">
-							<Border Classes="Card" Padding="8" Margin="0">
-								<Calendar x:Name="calendarP1" SelectionMode="SingleRange"/>
-							</Border>
+
+						<Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
+
+						<!-- Parking 3 Section -->
+						<Grid RowDefinitions="Auto,Auto">
+							<TextBlock Grid.Row="0"
+                                       Classes="SectionTitle"
+                                       Text="Parking 3"
+                                       HorizontalAlignment="Center"/>
+
+							<ToggleButton Grid.Row="1"
+                                         IsChecked="False"
+                                         HorizontalAlignment="Center"
+                                         HorizontalContentAlignment="Center">
+								<StackPanel Orientation="Horizontal" Spacing="12">
+									<PathIcon Classes="Lock"
+                                              Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
+                                              Width="18"
+                                              Height="18"/>
+									<PathIcon Classes="Unlock"
+                                              Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
+                                              Width="18"
+                                              Height="18"/>
+									<TextBlock Classes="ButtonText Close" Text="Fermé"/>
+									<TextBlock Classes="ButtonText Open" Text="Ouvert"/>
+								</StackPanel>
+							</ToggleButton>
 						</Grid>
-					</Grid>
+					</StackPanel>
 				</Border>
 			</TabItem>
 
-			<TabItem Header="Parking 2">
+            <TabItem Header="Ajouter une planification">
+                <Border Classes="Card">
+                    <StackPanel Spacing="20">
+                        <TextBlock Text="Nouvelle planification"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   Margin="0 0 0 20"/>
+
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="Nom :" VerticalAlignment="Center"/>
+							<TextBox Grid.Row="0" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Nom de la planification"/>
+
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="Description :" VerticalAlignment="Center"/>
+							<TextBox Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Description de la planification" AcceptsReturn="True" TextWrapping="Wrap"/>
+							
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="2" Grid.Column="1" PlaceholderText="Sélectionner un parking" Width="300" HorizontalAlignment="Left" Margin="10">
+                                <ComboBoxItem>Parking 1</ComboBoxItem>
+                                <ComboBoxItem>Parking 2</ComboBoxItem>
+                                <ComboBoxItem>Parking 3</ComboBoxItem>
+                            </ComboBox>
+
+							<TextBlock Grid.Row="3" Grid.Column="0" Text="Date de la planification :" VerticalAlignment="Center"/>
+							<DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10"/>
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Heure de début :" VerticalAlignment="Center"/>
+                            <TimePicker Grid.Row="4" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10"/>
+
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Heure de fin :" VerticalAlignment="Center"/>
+                            <TimePicker Grid.Row="5" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10"/>
+                        </Grid>
+						
+						<Button Content="Enregistrer"
+								Background="{DynamicResource PrimaryColor}"
+								Foreground="White"
+								HorizontalAlignment="Center"
+								VerticalAlignment="Center"
+								HorizontalContentAlignment="Center"
+								Margin="0 20 0 0"/>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+
+			<TabItem Header="Voir les planifications">
 				<Border Classes="Card">
-					<Grid RowDefinitions="Auto,Auto" VerticalAlignment="Center">
-						<Grid Grid.Row="0" ColumnDefinitions="*,Auto,*" HorizontalAlignment="Center">
-							<TextBlock Grid.Column="0"
-                                       Text="Gate Status"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Right"
-                                       Margin="0 0 16 0"
-                                       FontSize="14"
-                                       Foreground="#555555"/>
+					<Grid RowDefinitions="Auto,*">
+						<TextBlock Grid.Row="0"
+                                   Text="Planifications existantes"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   Margin="0 0 0 20"/>
 
-							<ToggleButton Grid.Column="1" IsChecked="False" Margin="0" HorizontalContentAlignment="Center">
-								<StackPanel Orientation="Horizontal" Spacing="12">
-									<PathIcon Classes="Lock"
-                                              Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
-                                              Width="18"
-                                              Height="18"/>
-									<PathIcon Classes="Unlock"
-                                              Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
-                                              Width="18"
-                                              Height="18"/>
-									<TextBlock Classes="ButtonText Close" Text="Closed"/>
-									<TextBlock Classes="ButtonText Open" Text="Open"/>
-								</StackPanel>
-							</ToggleButton>
-
-							<TextBlock Grid.Column="2"
-                                       Text="Available Dates"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       Margin="16 0 0 0"
-                                       FontSize="14"
-                                       Foreground="#555555"
-                                       Opacity="0"/>
-						</Grid>
-						<Grid Grid.Row="1" ColumnDefinitions="Auto" HorizontalAlignment="Center" Margin="0 24 0 0">
-							<Border Classes="Card" Padding="8" Margin="0">
-								<Calendar x:Name="calendarP2" SelectionMode="SingleRange"/>
-							</Border>
-						</Grid>
-					</Grid>
-				</Border>
-			</TabItem>
-
-			<TabItem Header="Parking 3">
-				<Border Classes="Card">
-					<Grid RowDefinitions="Auto,Auto" VerticalAlignment="Center">
-						<Grid Grid.Row="0" ColumnDefinitions="*,Auto,*" HorizontalAlignment="Center">
-							<TextBlock Grid.Column="0"
-                                       Text="Gate Status"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Right"
-                                       Margin="0 0 16 0"
-                                       FontSize="14"
-                                       Foreground="#555555"/>
-
-							<ToggleButton Grid.Column="1" IsChecked="False" Margin="0" HorizontalContentAlignment="Center">
-								<StackPanel Orientation="Horizontal" Spacing="12">
-									<PathIcon Classes="Lock"
-                                              Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
-                                              Width="18"
-                                              Height="18"/>
-									<PathIcon Classes="Unlock"
-                                              Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
-                                              Width="18"
-                                              Height="18"/>
-									<TextBlock Classes="ButtonText Close" Text="Closed"/>
-									<TextBlock Classes="ButtonText Open" Text="Open"/>
-								</StackPanel>
-							</ToggleButton>
-
-							<TextBlock Grid.Column="2"
-                                       Text="Available Dates"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       Margin="16 0 0 0"
-                                       FontSize="14"
-                                       Foreground="#555555"
-                                       Opacity="0"/>
-						</Grid>
-						<Grid Grid.Row="1" ColumnDefinitions="Auto" HorizontalAlignment="Center" Margin="0 24 0 0">
-							<Border Classes="Card" Padding="8" Margin="0">
-								<Calendar x:Name="calendarP3" SelectionMode="SingleRange"/>
-							</Border>
-						</Grid>
+						
 					</Grid>
 				</Border>
 			</TabItem>
