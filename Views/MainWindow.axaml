@@ -172,6 +172,7 @@
                                        HorizontalAlignment="Center"/>
 
 							<ToggleButton Grid.Row="1"
+										  Name="parkingBtn1"
                                          IsChecked="False"
                                          HorizontalAlignment="Center"
                                          HorizontalContentAlignment="Center" Command="{Binding ActionOne}">

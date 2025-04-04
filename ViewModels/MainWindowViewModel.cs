@@ -41,6 +41,7 @@ namespace ParkAccess.ViewModels
         {
             try
             {
+                
                 string url = $"http://{ip}/relay/0";
                 HttpResponseMessage response = await client.GetAsync(url);
                 if (response.IsSuccessStatusCode)
@@ -49,14 +50,7 @@ namespace ParkAccess.ViewModels
                     using JsonDocument doc = JsonDocument.Parse(jsonResponse);
                     bool isOn = doc.RootElement.GetProperty("ison").GetBoolean();
 
-                    if (isOn == true)
-                    {
-                        status = true;
-                    } 
-                    else
-                    {
-                        status = false;
-                    }
+                    status = isOn;
                 }
                 else
                 {
@@ -72,7 +66,7 @@ namespace ParkAccess.ViewModels
         [RelayCommand]
         public async Task ActionOne()
         {
-            ip = "157.26.121.53";
+            ip = "157.26.121.111";
 
             await chooseCommand(ip);
 
