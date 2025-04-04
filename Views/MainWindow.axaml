@@ -164,7 +164,8 @@
 			<TabItem Header="Ouverture manuelle">
 				<Border Classes="Card">
 					<StackPanel Spacing="24">
-						<!-- Parking 1 Section -->
+						<!-- Section 1 -->
+						<!-- Section parking 1 -->
 						<Grid RowDefinitions="Auto,Auto">
 							<TextBlock Grid.Row="0"
                                        Classes="SectionTitle"
@@ -172,7 +173,7 @@
                                        HorizontalAlignment="Center"/>
 
 							<ToggleButton Grid.Row="1"
-										  Name="parkingBtn1"
+										 Name="parkingBtn1"
                                          IsChecked="False"
                                          HorizontalAlignment="Center"
                                          HorizontalContentAlignment="Center" Command="{Binding ActionOne}">
@@ -192,8 +193,7 @@
 						</Grid>
 
 						<Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
-
-						<!-- Parking 2 Section -->
+						<!-- Section parking 2 -->
 						<Grid RowDefinitions="Auto,Auto">
 							<TextBlock Grid.Row="0"
                                        Classes="SectionTitle"
@@ -221,7 +221,7 @@
 
 						<Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
 
-						<!-- Parking 3 Section -->
+						<!-- Section parking 3 -->
 						<Grid RowDefinitions="Auto,Auto">
 							<TextBlock Grid.Row="0"
                                        Classes="SectionTitle"
@@ -250,6 +250,7 @@
 				</Border>
 			</TabItem>
 
+			<!-- Section 2 -->
             <TabItem Header="Ajouter une planification">
                 <Border Classes="Card">
                     <StackPanel Spacing="20">
@@ -261,29 +262,30 @@
 
                         <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
 							<TextBlock Grid.Row="0" Grid.Column="0" Text="Nom :" VerticalAlignment="Center"/>
-							<TextBox Grid.Row="0" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Nom de la planification"/>
+							<TextBox Grid.Row="0" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Nom de la planification" x:Name="nameText"/>
 
 							<TextBlock Grid.Row="1" Grid.Column="0" Text="Description :" VerticalAlignment="Center"/>
-							<TextBox Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Description de la planification" AcceptsReturn="True" TextWrapping="Wrap"/>
+							<TextBox Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Description de la planification" AcceptsReturn="True" TextWrapping="Wrap" Name="descriptionText"/>
 							
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
-                            <ComboBox Grid.Row="2" Grid.Column="1" PlaceholderText="Sélectionner un parking" Width="300" HorizontalAlignment="Left" Margin="10">
+                            <ComboBox Grid.Row="2" Grid.Column="1" PlaceholderText="Sélectionner un parking" Width="300" HorizontalAlignment="Left" Margin="10" Name="parkingChoice">
                                 <ComboBoxItem>Parking 1</ComboBoxItem>
                                 <ComboBoxItem>Parking 2</ComboBoxItem>
                                 <ComboBoxItem>Parking 3</ComboBoxItem>
                             </ComboBox>
 
 							<TextBlock Grid.Row="3" Grid.Column="0" Text="Date de la planification :" VerticalAlignment="Center"/>
-							<DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10"/>
+							<DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Name="dateChoice"/>
 
                             <TextBlock Grid.Row="4" Grid.Column="0" Text="Heure de début :" VerticalAlignment="Center"/>
-                            <TimePicker Grid.Row="4" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10"/>
+                            <TimePicker Grid.Row="4" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Name="beginHourChoice"/>
 
                             <TextBlock Grid.Row="5" Grid.Column="0" Text="Heure de fin :" VerticalAlignment="Center"/>
-                            <TimePicker Grid.Row="5" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10"/>
+                            <TimePicker Grid.Row="5" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Name="finalHourChoice"/>
                         </Grid>
 						
 						<Button Content="Enregistrer"
+								Command="{Binding CreateActivity}"
 								Background="{DynamicResource PrimaryColor}"
 								Foreground="White"
 								HorizontalAlignment="Center"
@@ -294,6 +296,7 @@
                 </Border>
             </TabItem>
 
+			<!-- Section 3 -->
 			<TabItem Header="Voir les planifications">
 				<Border Classes="Card">
 					<Grid RowDefinitions="Auto,*">
@@ -302,9 +305,7 @@
                                    FontSize="20"
                                    FontWeight="SemiBold"
                                    HorizontalAlignment="Center"
-                                   Margin="0 0 0 20"/>
-
-						
+                                   Margin="0 0 0 20"/>						
 					</Grid>
 				</Border>
 			</TabItem>

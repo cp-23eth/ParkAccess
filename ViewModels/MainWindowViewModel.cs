@@ -5,6 +5,9 @@ using System.Net.Http;
 using Avalonia.Controls;
 using System.Text.Json;
 using Microsoft.Graph.Models;
+using Microsoft.Identity.Client;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace ParkAccess.ViewModels
 {
