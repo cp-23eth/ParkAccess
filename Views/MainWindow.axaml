@@ -164,91 +164,144 @@
 			<TabItem Header="Ouverture manuelle">
 				<Border Classes="Card">
 					<StackPanel Spacing="24">
-						<!-- Section 1 -->
-						<!-- Section parking 1 -->
-						<Grid RowDefinitions="Auto,Auto">
-							<TextBlock Grid.Row="0"
-                                       Classes="SectionTitle"
-                                       Text="Parking 1"
-                                       HorizontalAlignment="Center"/>
+						<!-- CEFF Selection Dropdown -->
+						<Grid RowDefinitions="Auto">
+							<StackPanel Spacing="10" HorizontalAlignment="Center">
+								<TextBlock Text="Sélectionner un établissement"
+										  FontSize="16"
+										  FontWeight="Medium"
+										  HorizontalAlignment="Center"/>
+								<ComboBox x:Name="ceffSelector"
+										  Width="300"
+										  HorizontalAlignment="Center"
+										  SelectedIndex="0"
+										  SelectionChanged="ceffSelector_SelectionChanged">
+									<ComboBoxItem>CEFF Industrie</ComboBoxItem>
+									<ComboBoxItem>CEFF Santé-Social</ComboBoxItem>
+									<ComboBoxItem>CEFF Commerce</ComboBoxItem>
+									<ComboBoxItem>CEFF Artisanal</ComboBoxItem>
+								</ComboBox>
 
-							<ToggleButton Grid.Row="1"
-										 Name="parkingBtn1"
-                                         IsChecked="False"
-                                         HorizontalAlignment="Center"
-                                         HorizontalContentAlignment="Center" Command="{Binding ActionOne}">
-								<StackPanel Orientation="Horizontal" Spacing="12">
-									<PathIcon Classes="Lock"
-                                              Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
-                                              Width="18"
-                                              Height="18"/>
-									<PathIcon Classes="Unlock"
-                                              Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
-                                              Width="18"
-                                              Height="18"/>
-									<TextBlock Classes="ButtonText Close" Text="Fermé"/>
-									<TextBlock Classes="ButtonText Open" Text="Ouvert"/>
-								</StackPanel>
-							</ToggleButton>
-						</Grid>
-
-						<Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
-						<!-- Section parking 2 -->
-						<Grid RowDefinitions="Auto,Auto">
-							<TextBlock Grid.Row="0"
-                                       Classes="SectionTitle"
-                                       Text="Parking 2"
-                                       HorizontalAlignment="Center"/>
-
-							<ToggleButton Grid.Row="1"
-                                         IsChecked="False"
-                                         HorizontalAlignment="Center"
-                                         HorizontalContentAlignment="Center">
-								<StackPanel Orientation="Horizontal" Spacing="12">
-									<PathIcon Classes="Lock"
-                                              Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
-                                              Width="18"
-                                              Height="18"/>
-									<PathIcon Classes="Unlock"
-                                              Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
-                                              Width="18"
-                                              Height="18"/>
-									<TextBlock Classes="ButtonText Close" Text="Fermé"/>
-									<TextBlock Classes="ButtonText Open" Text="Ouvert"/>
-								</StackPanel>
-							</ToggleButton>
+							</StackPanel>
 						</Grid>
 
 						<Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
 
-						<!-- Section parking 3 -->
-						<Grid RowDefinitions="Auto,Auto">
-							<TextBlock Grid.Row="0"
-                                       Classes="SectionTitle"
-                                       Text="Parking 3"
-                                       HorizontalAlignment="Center"/>
+						<!-- CEFF Industrie Content -->
+						<StackPanel x:Name="ceffIndustrieContent" IsVisible="True" Spacing="24">
+							<!-- Section Pierre-Jolissaint -->
+							<Grid RowDefinitions="Auto,Auto">
+								<TextBlock Grid.Row="0"
+										  Classes="SectionTitle"
+										  Text="Pierre-Jolissaint"
+										  HorizontalAlignment="Center"/>
 
-							<ToggleButton Grid.Row="1"
-                                         IsChecked="False"
-                                         HorizontalAlignment="Center"
-                                         HorizontalContentAlignment="Center">
-								<StackPanel Orientation="Horizontal" Spacing="12">
-									<PathIcon Classes="Lock"
-                                              Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
-                                              Width="18"
-                                              Height="18"/>
-									<PathIcon Classes="Unlock"
-                                              Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
-                                              Width="18"
-                                              Height="18"/>
-									<TextBlock Classes="ButtonText Close" Text="Fermé"/>
-									<TextBlock Classes="ButtonText Open" Text="Ouvert"/>
-								</StackPanel>
-							</ToggleButton>
-						</Grid>
+								<ToggleButton Grid.Row="1"
+											 Name="parkingBtn1"
+											 IsChecked="False"
+											 HorizontalAlignment="Center"
+											 HorizontalContentAlignment="Center"
+											 Command="{Binding ActionOne}">
+									<StackPanel Orientation="Horizontal" Spacing="12">
+										<PathIcon Classes="Lock"
+												 Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
+												 Width="18"
+												 Height="18"/>
+										<PathIcon Classes="Unlock"
+												 Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
+												 Width="18"
+												 Height="18"/>
+										<TextBlock Classes="ButtonText Close" Text="Fermé"/>
+										<TextBlock Classes="ButtonText Open" Text="Ouvert"/>
+									</StackPanel>
+								</ToggleButton>
+							</Grid>
+							<Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
+							<!-- Section Baptiste-Savoye -->
+							<Grid RowDefinitions="Auto,Auto">
+								<TextBlock Grid.Row="0"
+										  Classes="SectionTitle"
+										  Text="Baptiste-Savoye"
+										  HorizontalAlignment="Center"/>
+
+								<ToggleButton Grid.Row="1"
+											 IsChecked="False"
+											 HorizontalAlignment="Center"
+											 HorizontalContentAlignment="Center">
+									<StackPanel Orientation="Horizontal" Spacing="12">
+										<PathIcon Classes="Lock"
+												 Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
+												 Width="18"
+												 Height="18"/>
+										<PathIcon Classes="Unlock"
+												 Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
+												 Width="18"
+												 Height="18"/>
+										<TextBlock Classes="ButtonText Close" Text="Fermé"/>
+										<TextBlock Classes="ButtonText Open" Text="Ouvert"/>
+									</StackPanel>
+								</ToggleButton>
+							</Grid>
+
+							<Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
+
+							<!-- Section Service Info -->
+							<Grid RowDefinitions="Auto,Auto">
+								<TextBlock Grid.Row="0"
+										  Classes="SectionTitle"
+										  Text="Service Info"
+										  HorizontalAlignment="Center"/>
+
+								<ToggleButton Grid.Row="1"
+											 IsChecked="False"
+											 HorizontalAlignment="Center"
+											 HorizontalContentAlignment="Center">
+									<StackPanel Orientation="Horizontal" Spacing="12">
+										<PathIcon Classes="Lock"
+												 Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
+												 Width="18"
+												 Height="18"/>
+										<PathIcon Classes="Unlock"
+												 Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
+												 Width="18"
+												 Height="18"/>
+										<TextBlock Classes="ButtonText Close" Text="Fermé"/>
+										<TextBlock Classes="ButtonText Open" Text="Ouvert"/>
+									</StackPanel>
+								</ToggleButton>
+							</Grid>
+						</StackPanel>
+
+						<!-- CEFF Santé-Social Content -->
+						<StackPanel x:Name="ceffSanteSocialContent" IsVisible="False" Spacing="24">
+							<TextBlock Text="Aucune section disponible pour le moment"
+									   HorizontalAlignment="Center"
+									   FontStyle="Italic"
+									   Opacity="0.7"
+									   Margin="0 20"/>
+						</StackPanel>
+
+						<!-- CEFF Commerce Content (Empty for now) -->
+						<StackPanel x:Name="ceffCommerceContent" IsVisible="False" Spacing="24">
+							<TextBlock Text="Aucune section disponible pour le moment"
+									   HorizontalAlignment="Center"
+									   FontStyle="Italic"
+									   Opacity="0.7"
+									   Margin="0 20"/>
+						</StackPanel>
+
+						<!-- CEFF Artisanal Content (Empty for now) -->
+						<StackPanel x:Name="ceffArtisanalContent" IsVisible="False" Spacing="24">
+							<TextBlock Text="Aucune section disponible pour le moment"
+									   HorizontalAlignment="Center"
+									   FontStyle="Italic"
+									   Opacity="0.7"
+									   Margin="0 20"/>
+						</StackPanel>
 					</StackPanel>
 				</Border>
 			</TabItem>
+
 
 			<!-- Section 2 -->
             <TabItem Header="Ajouter une planification">
@@ -269,9 +322,9 @@
 							
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
                             <ComboBox Grid.Row="2" Grid.Column="1" PlaceholderText="Sélectionner un parking" Width="300" HorizontalAlignment="Left" Margin="10" Name="parkingChoice">
-                                <ComboBoxItem>Parking 1</ComboBoxItem>
-                                <ComboBoxItem>Parking 2</ComboBoxItem>
-                                <ComboBoxItem>Parking 3</ComboBoxItem>
+                                <ComboBoxItem>Pierre-Jolissaint</ComboBoxItem>
+                                <ComboBoxItem>Baptiste-Savoye</ComboBoxItem>
+                                <ComboBoxItem>Service Info</ComboBoxItem>
                             </ComboBox>
 
 							<TextBlock Grid.Row="3" Grid.Column="0" Text="Date de la planification :" VerticalAlignment="Center"/>
@@ -296,12 +349,11 @@
                 </Border>
             </TabItem>
 
-			<!-- Section 3 -->
-			<TabItem Header="Voir les planifications">
+			<TabItem Header="Voir les prochaines planifications">
 				<Border Classes="Card">
 					<Grid RowDefinitions="Auto,*">
 						<TextBlock Grid.Row="0"
-                                   Text="Planifications existantes"
+                                   Text="5 prochaines planifications"
                                    FontSize="20"
                                    FontWeight="SemiBold"
                                    HorizontalAlignment="Center"

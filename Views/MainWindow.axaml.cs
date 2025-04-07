@@ -23,6 +23,24 @@ public partial class MainWindow : Window
         InitializeBtn();
     }
 
+    private void ceffSelector_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (sender is ComboBox combo && combo.SelectedItem is ComboBoxItem selectedItem)
+        {
+            string? selectedText = selectedItem.Content?.ToString();
+
+            if (ceffIndustrieContent != null)
+                ceffIndustrieContent.IsVisible = selectedText == "CEFF Industrie";
+            if (ceffSanteSocialContent != null)
+                ceffSanteSocialContent.IsVisible = selectedText == "CEFF Santé-Social";
+            if (ceffCommerceContent != null)
+                ceffCommerceContent.IsVisible = selectedText == "CEFF Commerce";
+            if (ceffArtisanalContent != null)
+                ceffArtisanalContent.IsVisible = selectedText == "CEFF Artisanal";
+        }
+    }
+
+
     async void InitializeBtn()
     {
         try
