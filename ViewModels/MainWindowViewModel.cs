@@ -16,7 +16,7 @@ namespace ParkAccess.ViewModels
     {
         private static readonly HttpClient client = new HttpClient();
         string ip = "";
-        string url = "https://localhost:7159/api/calendar/parkings";
+        string url = "http://157.26.121.168:7159/api/calendar/parkings";
         public bool status { get; set; }
 
         public ObservableCollection<Parking> Parkings { get; } = new ObservableCollection<Parking>();
@@ -62,7 +62,7 @@ namespace ParkAccess.ViewModels
                     });
                 }
             }
-            catch (HttpRequestException e)
+            catch (HttpRequestException)
             {
                 
             }
