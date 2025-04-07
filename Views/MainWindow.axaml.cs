@@ -61,7 +61,7 @@ public partial class MainWindow : Window
 
         try
         {
-            using var timer = new PeriodicTimer(TimeSpan.FromSeconds(5));
+            using var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(100));
             while (await timer.WaitForNextTickAsync(token))
             {
                 await Dispatcher.UIThread.InvokeAsync(InitializeBtn);

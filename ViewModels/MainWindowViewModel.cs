@@ -2,12 +2,10 @@
 using System;
 using System.Threading.Tasks;
 using System.Net.Http;
-using Avalonia.Controls;
 using System.Text.Json;
+using System.Collections.ObjectModel;
 using Microsoft.Graph.Models;
-using Microsoft.Identity.Client;
-using Newtonsoft.Json;
-using System.Text;
+using System.Collections.Generic;
 
 namespace ParkAccess.ViewModels
 {
@@ -17,7 +15,18 @@ namespace ParkAccess.ViewModels
         string ip = "";
         public bool status { get; set; }
 
-        
+        public ObservableCollection<Parking> Parkings { get;}
+
+        public MainWindowViewModel ()
+        {
+            var parking = new List<Parking>
+            {
+                new Parking("Pierre-Jolissaint", "Pierre-Jolissaint.parking@iceff.ch", "Industrie", "157.26.121.184"),
+                new Parking("Pierre-Jolissaint", "Pierre-Jolissaint.parking@iceff.ch", "Industrie", "157.26.121.184"),
+                new Parking("Pierre-Jolissaint", "Pierre-Jolissaint.parking@iceff.ch", "Industrie", "157.26.121.184")
+            };
+            Parkings = new ObservableCollection<Parking>(parking);
+        }
 
         private async Task SendShellyCommand(string ip,string state)
         {
