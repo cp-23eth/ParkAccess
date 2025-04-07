@@ -180,3 +180,63 @@
 2025-04-07 14:51:30.723 +02:00 [INF] Ajout du parking : Nom: Parking - Baptiste-Savoye, Mail: parking.bastiste-savoye@iceff.ch, Ceff: Industrie, Ip: 157.26.121.185
 2025-04-07 14:51:30.723 +02:00 [INF] Ajout du parking : Nom: Parking - Pierre-Jolissaint, Mail: parking.pierre-jolissaint@iceff.ch, Ceff: Industrie, Ip: 157.26.121.186
 2025-04-07 14:51:30.723 +02:00 [INF] Ajout du parking : Nom: Parking - Service Info, Mail: parking.service-info@iceff.ch, Ceff: Industrie, Ip: 157.26.121.187
+2025-04-07 14:54:03.188 +02:00 [INF] [{"nom":"Parking Test","ceff":"Industrie","mail":"parking.test@iceff.ch","ip":"157.26.121.184"},{"nom":"Parking - Baptiste-Savoye","ceff":"Industrie","mail":"parking.bastiste-savoye@iceff.ch","ip":"157.26.121.185"},{"nom":"Parking - Pierre-Jolissaint","ceff":"Industrie","mail":"parking.pierre-jolissaint@iceff.ch","ip":"157.26.121.186"},{"nom":"Parking - Service Info","ceff":"Industrie","mail":"parking.service-info@iceff.ch","ip":"157.26.121.187"}]
+2025-04-07 14:54:03.189 +02:00 [INF] Count parkings: 4
+2025-04-07 14:54:03.189 +02:00 [INF] Nombre de parkings désérialisés : 4
+2025-04-07 14:54:03.189 +02:00 [INF] Ajout du parking : Nom: Parking Test, Mail: parking.test@iceff.ch, Ceff: Industrie, Ip: 157.26.121.184
+2025-04-07 14:54:03.189 +02:00 [INF] Ajout du parking : Nom: Parking - Baptiste-Savoye, Mail: parking.bastiste-savoye@iceff.ch, Ceff: Industrie, Ip: 157.26.121.185
+2025-04-07 14:54:03.189 +02:00 [INF] Ajout du parking : Nom: Parking - Pierre-Jolissaint, Mail: parking.pierre-jolissaint@iceff.ch, Ceff: Industrie, Ip: 157.26.121.186
+2025-04-07 14:54:03.189 +02:00 [INF] Ajout du parking : Nom: Parking - Service Info, Mail: parking.service-info@iceff.ch, Ceff: Industrie, Ip: 157.26.121.187
+2025-04-07 14:54:05.285 +02:00 [INF] [{"nom":"Parking Test","ceff":"Industrie","mail":"parking.test@iceff.ch","ip":"157.26.121.184"},{"nom":"Parking - Baptiste-Savoye","ceff":"Industrie","mail":"parking.bastiste-savoye@iceff.ch","ip":"157.26.121.185"},{"nom":"Parking - Pierre-Jolissaint","ceff":"Industrie","mail":"parking.pierre-jolissaint@iceff.ch","ip":"157.26.121.186"},{"nom":"Parking - Service Info","ceff":"Industrie","mail":"parking.service-info@iceff.ch","ip":"157.26.121.187"}]
+2025-04-07 14:54:05.286 +02:00 [INF] Count parkings: 4
+2025-04-07 14:54:05.286 +02:00 [INF] Nombre de parkings désérialisés : 4
+2025-04-07 14:54:05.286 +02:00 [INF] Ajout du parking : Nom: Parking Test, Mail: parking.test@iceff.ch, Ceff: Industrie, Ip: 157.26.121.184
+2025-04-07 14:54:05.286 +02:00 [INF] Ajout du parking : Nom: Parking - Baptiste-Savoye, Mail: parking.bastiste-savoye@iceff.ch, Ceff: Industrie, Ip: 157.26.121.185
+2025-04-07 14:54:05.286 +02:00 [INF] Ajout du parking : Nom: Parking - Pierre-Jolissaint, Mail: parking.pierre-jolissaint@iceff.ch, Ceff: Industrie, Ip: 157.26.121.186
+2025-04-07 14:54:05.286 +02:00 [INF] Ajout du parking : Nom: Parking - Service Info, Mail: parking.service-info@iceff.ch, Ceff: Industrie, Ip: 157.26.121.187
+2025-04-07 14:55:48.092 +02:00 [INF] [{"nom":"Parking Test","ceff":"Industrie","mail":"parking.test@iceff.ch","ip":"157.26.121.184"},{"nom":"Parking - Baptiste-Savoye","ceff":"Industrie","mail":"parking.bastiste-savoye@iceff.ch","ip":"157.26.121.185"},{"nom":"Parking - Pierre-Jolissaint","ceff":"Industrie","mail":"parking.pierre-jolissaint@iceff.ch","ip":"157.26.121.186"},{"nom":"Parking - Service Info","ceff":"Industrie","mail":"parking.service-info@iceff.ch","ip":"157.26.121.187"}]
+2025-04-07 14:55:48.096 +02:00 [INF] Count parkings: 4
+2025-04-07 14:55:48.096 +02:00 [INF] Nombre de parkings désérialisés : 4
+2025-04-07 14:55:48.098 +02:00 [INF] Ajout du parking : Nom: Parking Test, Mail: parking.test@iceff.ch, Ceff: Industrie, Ip: 157.26.121.184
+2025-04-07 14:55:48.100 +02:00 [INF] Ajout du parking : Nom: Parking - Baptiste-Savoye, Mail: parking.bastiste-savoye@iceff.ch, Ceff: Industrie, Ip: 157.26.121.185
+2025-04-07 14:55:48.100 +02:00 [INF] Ajout du parking : Nom: Parking - Pierre-Jolissaint, Mail: parking.pierre-jolissaint@iceff.ch, Ceff: Industrie, Ip: 157.26.121.186
+2025-04-07 14:55:48.100 +02:00 [INF] Ajout du parking : Nom: Parking - Service Info, Mail: parking.service-info@iceff.ch, Ceff: Industrie, Ip: 157.26.121.187
+2025-04-07 14:55:48.104 +02:00 [INF] [{"nom":"Parking Test","ceff":"Industrie","mail":"parking.test@iceff.ch","ip":"157.26.121.184"},{"nom":"Parking - Baptiste-Savoye","ceff":"Industrie","mail":"parking.bastiste-savoye@iceff.ch","ip":"157.26.121.185"},{"nom":"Parking - Pierre-Jolissaint","ceff":"Industrie","mail":"parking.pierre-jolissaint@iceff.ch","ip":"157.26.121.186"},{"nom":"Parking - Service Info","ceff":"Industrie","mail":"parking.service-info@iceff.ch","ip":"157.26.121.187"}]
+2025-04-07 14:55:48.104 +02:00 [INF] Count parkings: 4
+2025-04-07 14:55:48.105 +02:00 [INF] Nombre de parkings désérialisés : 4
+2025-04-07 14:55:48.105 +02:00 [INF] Ajout du parking : Nom: Parking Test, Mail: parking.test@iceff.ch, Ceff: Industrie, Ip: 157.26.121.184
+2025-04-07 14:55:48.105 +02:00 [INF] Ajout du parking : Nom: Parking - Baptiste-Savoye, Mail: parking.bastiste-savoye@iceff.ch, Ceff: Industrie, Ip: 157.26.121.185
+2025-04-07 14:55:48.105 +02:00 [INF] Ajout du parking : Nom: Parking - Pierre-Jolissaint, Mail: parking.pierre-jolissaint@iceff.ch, Ceff: Industrie, Ip: 157.26.121.186
+2025-04-07 14:55:48.105 +02:00 [INF] Ajout du parking : Nom: Parking - Service Info, Mail: parking.service-info@iceff.ch, Ceff: Industrie, Ip: 157.26.121.187
+2025-04-07 14:55:48.105 +02:00 [INF] Ajout du parking : Nom: Parking Test, Mail: parking.test@iceff.ch, Ceff: Industrie, Ip: 157.26.121.184
+2025-04-07 14:55:48.105 +02:00 [INF] Ajout du parking : Nom: Parking - Baptiste-Savoye, Mail: parking.bastiste-savoye@iceff.ch, Ceff: Industrie, Ip: 157.26.121.185
+2025-04-07 14:55:48.105 +02:00 [INF] Ajout du parking : Nom: Parking - Pierre-Jolissaint, Mail: parking.pierre-jolissaint@iceff.ch, Ceff: Industrie, Ip: 157.26.121.186
+2025-04-07 14:55:48.105 +02:00 [INF] Ajout du parking : Nom: Parking - Service Info, Mail: parking.service-info@iceff.ch, Ceff: Industrie, Ip: 157.26.121.187
+2025-04-07 15:00:00.583 +02:00 [INF] [{"nom":"Parking Test","ceff":"Industrie","mail":"parking.test@iceff.ch","ip":"157.26.121.184"},{"nom":"Parking - Baptiste-Savoye","ceff":"Industrie","mail":"parking.bastiste-savoye@iceff.ch","ip":"157.26.121.185"},{"nom":"Parking - Pierre-Jolissaint","ceff":"Industrie","mail":"parking.pierre-jolissaint@iceff.ch","ip":"157.26.121.186"},{"nom":"Parking - Service Info","ceff":"Industrie","mail":"parking.service-info@iceff.ch","ip":"157.26.121.187"}]
+2025-04-07 15:00:00.606 +02:00 [INF] Count parkings: 4
+2025-04-07 15:00:00.607 +02:00 [INF] Nombre de parkings désérialisés : 4
+2025-04-07 15:00:00.614 +02:00 [INF] Ajout du parking : Nom: Parking Test, Mail: parking.test@iceff.ch, Ceff: Industrie, Ip: 157.26.121.184
+2025-04-07 15:00:00.617 +02:00 [INF] Ajout du parking : Nom: Parking - Baptiste-Savoye, Mail: parking.bastiste-savoye@iceff.ch, Ceff: Industrie, Ip: 157.26.121.185
+2025-04-07 15:00:00.617 +02:00 [INF] Ajout du parking : Nom: Parking - Pierre-Jolissaint, Mail: parking.pierre-jolissaint@iceff.ch, Ceff: Industrie, Ip: 157.26.121.186
+2025-04-07 15:00:00.617 +02:00 [INF] Ajout du parking : Nom: Parking - Service Info, Mail: parking.service-info@iceff.ch, Ceff: Industrie, Ip: 157.26.121.187
+2025-04-07 15:04:13.230 +02:00 [INF] [{"nom":"Parking Test","ceff":"Industrie","mail":"parking.test@iceff.ch","ip":"157.26.121.184"},{"nom":"Parking - Baptiste-Savoye","ceff":"Industrie","mail":"parking.bastiste-savoye@iceff.ch","ip":"157.26.121.185"},{"nom":"Parking - Pierre-Jolissaint","ceff":"Industrie","mail":"parking.pierre-jolissaint@iceff.ch","ip":"157.26.121.186"},{"nom":"Parking - Service Info","ceff":"Industrie","mail":"parking.service-info@iceff.ch","ip":"157.26.121.187"}]
+2025-04-07 15:04:13.255 +02:00 [INF] Count parkings: 4
+2025-04-07 15:04:13.255 +02:00 [INF] Nombre de parkings désérialisés : 4
+2025-04-07 15:04:13.258 +02:00 [INF] Ajout du parking : Nom: Parking Test, Mail: parking.test@iceff.ch, Ceff: Industrie, Ip: 157.26.121.184
+2025-04-07 15:04:13.260 +02:00 [INF] Ajout du parking : Nom: Parking - Baptiste-Savoye, Mail: parking.bastiste-savoye@iceff.ch, Ceff: Industrie, Ip: 157.26.121.185
+2025-04-07 15:04:13.260 +02:00 [INF] Ajout du parking : Nom: Parking - Pierre-Jolissaint, Mail: parking.pierre-jolissaint@iceff.ch, Ceff: Industrie, Ip: 157.26.121.186
+2025-04-07 15:04:13.260 +02:00 [INF] Ajout du parking : Nom: Parking - Service Info, Mail: parking.service-info@iceff.ch, Ceff: Industrie, Ip: 157.26.121.187
+2025-04-07 15:06:45.782 +02:00 [INF] [{"nom":"Parking Test","ceff":"Industrie","mail":"parking.test@iceff.ch","ip":"157.26.121.184"},{"nom":"Parking - Baptiste-Savoye","ceff":"Industrie","mail":"parking.bastiste-savoye@iceff.ch","ip":"157.26.121.185"},{"nom":"Parking - Pierre-Jolissaint","ceff":"Industrie","mail":"parking.pierre-jolissaint@iceff.ch","ip":"157.26.121.186"},{"nom":"Parking - Service Info","ceff":"Industrie","mail":"parking.service-info@iceff.ch","ip":"157.26.121.187"}]
+2025-04-07 15:06:45.801 +02:00 [INF] Count parkings: 4
+2025-04-07 15:06:45.802 +02:00 [INF] Nombre de parkings désérialisés : 4
+2025-04-07 15:06:45.804 +02:00 [INF] Ajout du parking : Nom: Parking Test, Mail: parking.test@iceff.ch, Ceff: Industrie, Ip: 157.26.121.184
+2025-04-07 15:06:45.806 +02:00 [INF] Ajout du parking : Nom: Parking - Baptiste-Savoye, Mail: parking.bastiste-savoye@iceff.ch, Ceff: Industrie, Ip: 157.26.121.185
+2025-04-07 15:06:45.806 +02:00 [INF] Ajout du parking : Nom: Parking - Pierre-Jolissaint, Mail: parking.pierre-jolissaint@iceff.ch, Ceff: Industrie, Ip: 157.26.121.186
+2025-04-07 15:06:45.806 +02:00 [INF] Ajout du parking : Nom: Parking - Service Info, Mail: parking.service-info@iceff.ch, Ceff: Industrie, Ip: 157.26.121.187
+2025-04-07 15:09:31.035 +02:00 [INF] [{"nom":"Parking Test","ceff":"Industrie","mail":"parking.test@iceff.ch","ip":"157.26.121.184"},{"nom":"Parking - Baptiste-Savoye","ceff":"Industrie","mail":"parking.bastiste-savoye@iceff.ch","ip":"157.26.121.185"},{"nom":"Parking - Pierre-Jolissaint","ceff":"Industrie","mail":"parking.pierre-jolissaint@iceff.ch","ip":"157.26.121.186"},{"nom":"Parking - Service Info","ceff":"Industrie","mail":"parking.service-info@iceff.ch","ip":"157.26.121.187"}]
+2025-04-07 15:09:31.057 +02:00 [INF] Count parkings: 4
+2025-04-07 15:09:31.057 +02:00 [INF] Nombre de parkings désérialisés : 4
+2025-04-07 15:09:31.060 +02:00 [INF] Ajout du parking : Nom: Parking Test, Mail: parking.test@iceff.ch, Ceff: Industrie, Ip: 157.26.121.184
+2025-04-07 15:09:31.062 +02:00 [INF] Ajout du parking : Nom: Parking - Baptiste-Savoye, Mail: parking.bastiste-savoye@iceff.ch, Ceff: Industrie, Ip: 157.26.121.185
+2025-04-07 15:09:31.062 +02:00 [INF] Ajout du parking : Nom: Parking - Pierre-Jolissaint, Mail: parking.pierre-jolissaint@iceff.ch, Ceff: Industrie, Ip: 157.26.121.186
+2025-04-07 15:09:31.062 +02:00 [INF] Ajout du parking : Nom: Parking - Service Info, Mail: parking.service-info@iceff.ch, Ceff: Industrie, Ip: 157.26.121.187

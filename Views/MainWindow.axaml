@@ -375,7 +375,7 @@
                 </Border>
             </TabItem>
 			
-			<TabItem Header="Voir les prochaines planifications">
+			<TabItem Header="Voir les planifications">
 				<Border Classes="Card">
 					<Grid RowDefinitions="Auto,*">
 						<TextBlock Grid.Row="0"
@@ -405,7 +405,7 @@
 									   VerticalAlignment="Center"/>
 							
 							<Button Content="Ajouter un parking"
-									Click="OnAddButtonClick"
+									Click="OnParkButtonClick"
 									Grid.Column="2"
 									HorizontalAlignment="Left"
 									VerticalAlignment="Center"

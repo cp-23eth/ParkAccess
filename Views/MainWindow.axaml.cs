@@ -168,9 +168,9 @@ public partial class MainWindow : Window
                 ceffArtisanalContent.IsVisible = selectedText == "CEFF Artisanal";
         }
     }
-    private async void OnAddButtonClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private async void OnParkButtonClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        var popup = new PopupWindow();
+        var popup = new PopupPark();
         await popup.ShowDialog(this);
     }
 }

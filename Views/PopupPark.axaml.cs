@@ -3,9 +3,9 @@ using System;
 
 namespace ParkAccess
 {
-    public partial class PopupWindow : Window
+    public partial class PopupPark : Window
     {
-        public PopupWindow()
+        public PopupPark()
         {
             InitializeComponent();
         }
