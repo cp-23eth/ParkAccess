@@ -86,13 +86,12 @@ public partial class MainWindow : Window
         string tenantId = "0bd66e42-d830-4cdc-b580-f835a405d038";
         string clientId = "315ca165-3c88-45c1-b62f-45679cb58e62";
         string clientSecret = "6Ge8Q~v-yOZbjJIRNAUbqNLzS3uGcRaQ4X8N_dn-";
-        string resourceEmail = "parking.test@iceff.ch";
 
 
         string accessToken = await GetAccessToken(tenantId, clientId, clientSecret);
         if (!string.IsNullOrEmpty(accessToken))
         {
-            await CreateEvent(resourceEmail, accessToken);
+            await CreateEvent(accessToken);
         }
     }
 
@@ -108,7 +107,7 @@ public partial class MainWindow : Window
         return authResult.AccessToken;
     }
 
-    async Task CreateEvent(string resourceEmail, string accessToken)
+    async Task CreateEvent(string accessToken)
     {
         if (dateChoice.SelectedDate is null || beginHourChoice.SelectedTime is null || finalHourChoice.SelectedTime is null)
         {
@@ -116,39 +115,42 @@ public partial class MainWindow : Window
             return;
         }
 
-        var planning = new PlanningData
+        if (nameText.Text != null)
         {
-            Name = nameText.Text,
-            Parking = parkingChoice.SelectedItem?.ToString() ?? "Parking inconnu",
-            StartDateTime = dateChoice.SelectedDate.Value.Date + beginHourChoice.SelectedTime.Value,
-            EndDateTime = dateChoice.SelectedDate.Value.Date + finalHourChoice.SelectedTime.Value
-        };
+            var planning = new EventData
+            {
+                Name = nameText.Text,
+                ParkingMail = (DataContext as MainWindowViewModel)?.SelectedParking?.Mail ?? "Parking inconnu", // parkingChoice.SelectedItem?.ToString() ?? 
+                StartDateTime = dateChoice.SelectedDate.Value.Date + beginHourChoice.SelectedTime.Value,
+                EndDateTime = dateChoice.SelectedDate.Value.Date + finalHourChoice.SelectedTime.Value
+            };
 
-        var eventPayload = new
-        {
-            subject = planning.Name,
-            start = new { dateTime = planning.StartDateTime.ToString("yyyy-MM-ddTHH:mm:ss"), timeZone = "Europe/Paris" },
-            end = new { dateTime = planning.EndDateTime.ToString("yyyy-MM-ddTHH:mm:ss"), timeZone = "Europe/Paris" },
-            location = new { displayName = planning.Parking },
-        };
+            var eventPayload = new
+            {
+                subject = planning.Name,
+                start = new { dateTime = planning.StartDateTime.ToString("yyyy-MM-ddTHH:mm:ss"), timeZone = "Europe/Paris" },
+                end = new { dateTime = planning.EndDateTime.ToString("yyyy-MM-ddTHH:mm:ss"), timeZone = "Europe/Paris" },
+                location = new { displayName = planning.ParkingMail },
+            };
 
-        var jsonPayload = JsonConvert.SerializeObject(eventPayload, Formatting.Indented);
-        var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+            var jsonPayload = JsonConvert.SerializeObject(eventPayload, Formatting.Indented);
+            var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
-        var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
-        var url = $"https://graph.microsoft.com/v1.0/users/{resourceEmail}/events";
-        var response = await httpClient.PostAsync(url, content);
+            var url = $"https://graph.microsoft.com/v1.0/users/{(DataContext as MainWindowViewModel)?.SelectedParking?.Mail}/events";
+            var response = await httpClient.PostAsync(url, content);
 
-        if (response.IsSuccessStatusCode)
-        {
-            Console.WriteLine("Événement créé avec succès !");
-        }
-        else
-        {
-            string errorResponse = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($"Erreur: {response.StatusCode} - {errorResponse}");
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Événement créé avec succès !");
+            }
+            else
+            {
+                string errorResponse = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Erreur: {response.StatusCode} - {errorResponse}");
+            }
         }
     }
 

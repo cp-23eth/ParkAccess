@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ParkAccess.ViewModels
 {
-    public class PlanningData
+    public class EventData
     {
         public string Name { get; set; }
-        public string Parking { get; set; }
+        public string ParkingMail { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
     }
