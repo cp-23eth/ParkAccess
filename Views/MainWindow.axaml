@@ -349,6 +349,7 @@
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
 							<ComboBox Grid.Row="2" Grid.Column="1"
 									  Width="300" HorizontalAlignment="Left" Margin="10"
+									  PlaceholderText="Sélectionner un parking"
 									  ItemsSource="{Binding Parkings}"
 									  SelectedItem="{Binding SelectedParking}">
 								<ComboBox.ItemTemplate>
