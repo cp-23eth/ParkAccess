@@ -10,8 +10,6 @@
         Title="ParkAccess"
         Background="#f5f5f7"
         TransparencyLevelHint="AcrylicBlur"
-        ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaChromeHints="PreferSystemChrome"
         WindowStartupLocation="CenterScreen">
 
 	<Window.Resources>

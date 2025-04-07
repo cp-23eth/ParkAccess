@@ -69,7 +69,7 @@ namespace ParkAccess.ViewModels
         [RelayCommand]
         public async Task ActionOne()
         {
-            ip = "157.26.121.111";
+            ip = "157.26.121.184";
 
             await chooseCommand(ip);
 
