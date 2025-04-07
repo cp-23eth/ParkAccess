@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Text;
 using CommunityToolkit.Mvvm.Input;
 using Avalonia.Interactivity;
+using ParkAccess.ViewModels;
 
 namespace ParkAccess.Views;
 
@@ -77,27 +78,33 @@ public partial class MainWindow : Window
 
     async Task CreateEvent(string resourceEmail, string accessToken)
     {
-        var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+        if (dateChoice.SelectedDate is null || beginHourChoice.SelectedTime is null || finalHourChoice.SelectedTime is null)
+        {
+            Console.WriteLine("Champs de date ou d'heure manquants.");
+            return;
+        }
+
+        var planning = new PlanningData
+        {
+            Name = nameText.Text,
+            Parking = parkingChoice.SelectedItem?.ToString() ?? "Parking inconnu",
+            StartDateTime = dateChoice.SelectedDate.Value.Date + beginHourChoice.SelectedTime.Value,
+            EndDateTime = dateChoice.SelectedDate.Value.Date + finalHourChoice.SelectedTime.Value
+        };
 
         var eventPayload = new
         {
-            subject = nameText.Text,
-            start = new { dateTime = dateChoice + "T" + beginHourChoice, timeZone = "Europe/Paris" },
-            end = new { dateTime = dateChoice + "T" + finalHourChoice, timeZone = "Europe/Paris" },
-            location = new { displayName = parkingChoice },
-            //attendees = new[]
-            //{
-            //    new
-            //    {
-            //        emailAddress = new { address = "cp-23eth@iceff.ch", name = "Ethan Hofstetter" },
-            //        type = "required"
-            //    }
-            //}
+            subject = planning.Name,
+            start = new { dateTime = planning.StartDateTime.ToString("yyyy-MM-ddTHH:mm:ss"), timeZone = "Europe/Paris" },
+            end = new { dateTime = planning.EndDateTime.ToString("yyyy-MM-ddTHH:mm:ss"), timeZone = "Europe/Paris" },
+            location = new { displayName = planning.Parking },
         };
 
-        var jsonPayload = JsonConvert.SerializeObject(eventPayload);
+        var jsonPayload = JsonConvert.SerializeObject(eventPayload, Formatting.Indented);
         var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+        var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
 
         var url = $"https://graph.microsoft.com/v1.0/users/{resourceEmail}/events";
         var response = await httpClient.PostAsync(url, content);

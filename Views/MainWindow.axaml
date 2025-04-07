@@ -268,20 +268,20 @@
 							<TextBox Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Description de la planification" AcceptsReturn="True" TextWrapping="Wrap" Name="descriptionText"/>
 							
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
-                            <ComboBox Grid.Row="2" Grid.Column="1" PlaceholderText="Sélectionner un parking" Width="300" HorizontalAlignment="Left" Margin="10" Name="parkingChoice">
+                            <ComboBox Grid.Row="2" Grid.Column="1" PlaceholderText="Sélectionner un parking" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="parkingChoice">
                                 <ComboBoxItem>Parking 1</ComboBoxItem>
                                 <ComboBoxItem>Parking 2</ComboBoxItem>
                                 <ComboBoxItem>Parking 3</ComboBoxItem>
                             </ComboBox>
 
 							<TextBlock Grid.Row="3" Grid.Column="0" Text="Date de la planification :" VerticalAlignment="Center"/>
-							<DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Name="dateChoice"/>
+							<DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="dateChoice"/>
 
                             <TextBlock Grid.Row="4" Grid.Column="0" Text="Heure de début :" VerticalAlignment="Center"/>
-                            <TimePicker Grid.Row="4" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Name="beginHourChoice"/>
+                            <TimePicker Grid.Row="4" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="beginHourChoice"/>
 
                             <TextBlock Grid.Row="5" Grid.Column="0" Text="Heure de fin :" VerticalAlignment="Center"/>
-                            <TimePicker Grid.Row="5" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Name="finalHourChoice"/>
+                            <TimePicker Grid.Row="5" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="finalHourChoice"/>
                         </Grid>
 						
 						<Button Content="Enregistrer"
