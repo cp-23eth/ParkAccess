@@ -10,6 +10,8 @@ using System.Text;
 using CommunityToolkit.Mvvm.Input;
 using Avalonia.Interactivity;
 using ParkAccess.ViewModels;
+using System.Threading;
+using Avalonia.Threading;
 
 namespace ParkAccess.Views;
 
@@ -17,30 +19,15 @@ public partial class MainWindow : Window
 {
     string ip = "157.26.121.184";
     private static readonly HttpClient client = new HttpClient();
+    private CancellationTokenSource? _cts;
 
     public MainWindow()
     {
         InitializeComponent();
         InitializeBtn();
+
+        StartPeriodicRefresh();
     }
-
-    private void ceffSelector_SelectionChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        if (sender is ComboBox combo && combo.SelectedItem is ComboBoxItem selectedItem)
-        {
-            string? selectedText = selectedItem.Content?.ToString();
-
-            if (ceffIndustrieContent != null)
-                ceffIndustrieContent.IsVisible = selectedText == "CEFF Industrie";
-            if (ceffSanteSocialContent != null)
-                ceffSanteSocialContent.IsVisible = selectedText == "CEFF Santé-Social";
-            if (ceffCommerceContent != null)
-                ceffCommerceContent.IsVisible = selectedText == "CEFF Commerce";
-            if (ceffArtisanalContent != null)
-                ceffArtisanalContent.IsVisible = selectedText == "CEFF Artisanal";
-        }
-    }
-
 
     async void InitializeBtn()
     {
@@ -65,6 +52,33 @@ public partial class MainWindow : Window
         {
             Console.WriteLine($"Exception : {ex.Message}");
         }
+    }
+
+    private async void StartPeriodicRefresh()
+    {
+        _cts = new CancellationTokenSource();
+        var token = _cts.Token;
+
+        try
+        {
+            using var timer = new PeriodicTimer(TimeSpan.FromSeconds(5));
+            while (await timer.WaitForNextTickAsync(token))
+            {
+                await Dispatcher.UIThread.InvokeAsync(InitializeBtn);
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            
+        }
+    }
+
+    protected override void OnClosing(WindowClosingEventArgs e)
+    {
+        _cts?.Cancel();
+        _cts?.Dispose();
+        _cts = null;
+        base.OnClosing(e);
     }
 
     async void CreateActivity(object sender, RoutedEventArgs e)
@@ -135,6 +149,23 @@ public partial class MainWindow : Window
         {
             string errorResponse = await response.Content.ReadAsStringAsync();
             Console.WriteLine($"Erreur: {response.StatusCode} - {errorResponse}");
+        }
+    }
+
+    private void ceffSelector_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (sender is ComboBox combo && combo.SelectedItem is ComboBoxItem selectedItem)
+        {
+            string? selectedText = selectedItem.Content?.ToString();
+
+            if (ceffIndustrieContent != null)
+                ceffIndustrieContent.IsVisible = selectedText == "CEFF Industrie";
+            if (ceffSanteSocialContent != null)
+                ceffSanteSocialContent.IsVisible = selectedText == "CEFF Santé-Social";
+            if (ceffCommerceContent != null)
+                ceffCommerceContent.IsVisible = selectedText == "CEFF Commerce";
+            if (ceffArtisanalContent != null)
+                ceffArtisanalContent.IsVisible = selectedText == "CEFF Artisanal";
         }
     }
 }

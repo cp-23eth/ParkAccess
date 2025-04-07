@@ -9,7 +9,6 @@ namespace ParkAccess.ViewModels
     public class PlanningData
     {
         public string Name { get; set; }
-        //public string Description { get; set; }
         public string Parking { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
