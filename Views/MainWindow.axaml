@@ -382,13 +382,26 @@
 			
 			<TabItem Header="Voir les planifications">
 				<Border Classes="Card">
-					<Grid RowDefinitions="Auto,*">
-						<TextBlock Grid.Row="0"
-                                   Text="A implémenter"
-                                   FontSize="20"
-                                   FontWeight="SemiBold"
-                                   HorizontalAlignment="Center"
-                                   Margin="0 0 0 20"/>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="200"/>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="200"/>
+						</Grid.ColumnDefinitions>
+
+						<TextBlock Text="Liste des planifications"
+								   FontSize="20"
+								   FontWeight="SemiBold"
+								   Grid.Column="1"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Center"/>
+
+						<Button Content="Ajouter un parking"
+								Click="OnPlanButtonClick"
+								Grid.Column="2"
+								HorizontalAlignment="Left"
+								VerticalAlignment="Center"
+								Margin="10,0"/>
 					</Grid>
 				</Border>
 			</TabItem>

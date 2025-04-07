@@ -175,4 +175,10 @@ public partial class MainWindow : Window
         var popup = new PopupPark();
         await popup.ShowDialog(this);
     }
+
+    private async void OnPlanButtonClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var popup = new PopupPlani();
+        await popup.ShowDialog(this);
+    }
 }
