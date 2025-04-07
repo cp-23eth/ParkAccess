@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Text;
 using CommunityToolkit.Mvvm.Input;
+using Avalonia.Interactivity;
 
 namespace ParkAccess.Views;
 
@@ -47,8 +48,7 @@ public partial class MainWindow : Window
         }
     }
 
-    [RelayCommand]
-    async Task CreateActivity()
+    async void CreateActivity(object sender, RoutedEventArgs e)
     {
         string tenantId = "0bd66e42-d830-4cdc-b580-f835a405d038";
         string clientId = "315ca165-3c88-45c1-b62f-45679cb58e62";

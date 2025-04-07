@@ -285,7 +285,7 @@
                         </Grid>
 						
 						<Button Content="Enregistrer"
-								Command="{Binding CreateActivity}"
+								Click="CreateActivity"
 								Background="{DynamicResource PrimaryColor}"
 								Foreground="White"
 								HorizontalAlignment="Center"
