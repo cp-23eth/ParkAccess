@@ -15,7 +15,7 @@ namespace ParkAccess.Views;
 
 public partial class MainWindow : Window
 {
-    string ip = "157.26.121.111";
+    string ip = "157.26.121.184";
     private static readonly HttpClient client = new HttpClient();
 
     public MainWindow()

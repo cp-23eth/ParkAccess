@@ -165,6 +165,24 @@
 				<Border Classes="Card">
 					<StackPanel Spacing="24">
 						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
+						<!-- CEFF Selection Dropdown -->
 						<Grid RowDefinitions="Auto">
 							<StackPanel Spacing="10" HorizontalAlignment="Center">
 								<TextBlock Text="Sélectionner un établissement"
