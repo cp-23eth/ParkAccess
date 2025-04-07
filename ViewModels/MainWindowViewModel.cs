@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using static Microsoft.Graph.Constants;
 using Serilog;
 using Avalonia.Threading;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace ParkAccess.ViewModels
 {
@@ -16,10 +17,17 @@ namespace ParkAccess.ViewModels
     {
         private static readonly HttpClient client = new HttpClient();
         string ip = "";
-        string url = "https://localhost:7159/api/calendar/parkings";
+        string url = "http://157.26.121.168:7159/api/calendar/parkings";
         public bool status { get; set; }
 
-        public ObservableCollection<Parking> Parkings { get; } = new ObservableCollection<Parking>();
+        public ObservableCollection<Parking> Parkings { get; } = new();
+
+        private Parking _selectedParking;
+        public Parking SelectedParking
+        {
+            get => _selectedParking;
+            set => SetProperty(ref _selectedParking, value);
+        }
 
         public MainWindowViewModel ()
         {
@@ -36,16 +44,16 @@ namespace ParkAccess.ViewModels
             {
                 HttpResponseMessage response = await client.GetAsync(url);
                 response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
+                string json = await response.Content.ReadAsStringAsync();
 
-                Log.Information(responseBody);
+                Log.Information(json);
 
                 var options = new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 };
 
-                var parkings = JsonSerializer.Deserialize<ObservableCollection<Parking>>(responseBody, options);
+                var parkings = JsonSerializer.Deserialize<ObservableCollection<Parking>>(json, options);
 
                 Log.Information($"Count parkings: {parkings?.Count}");
                 if (parkings != null)

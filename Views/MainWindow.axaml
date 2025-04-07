@@ -347,11 +347,16 @@
 							<TextBox Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Description de la planification" AcceptsReturn="True" TextWrapping="Wrap" Name="descriptionText"/>
 							
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
-                            <ComboBox Grid.Row="2" Grid.Column="1" PlaceholderText="Sélectionner un parking" Width="300" HorizontalAlignment="Left" Margin="10" Name="parkingChoice">
-                                <ComboBoxItem>Parking 1</ComboBoxItem>
-                                <ComboBoxItem>Parking 2</ComboBoxItem>
-                                <ComboBoxItem>Parking 3</ComboBoxItem>
-                            </ComboBox>
+							<ComboBox Grid.Row="2" Grid.Column="1"
+									  Width="300" HorizontalAlignment="Left" Margin="10"
+									  ItemsSource="{Binding Parkings}"
+									  SelectedItem="{Binding SelectedParking}">
+								<ComboBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding Nom}" />
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+							</ComboBox>
 
 							<TextBlock Grid.Row="3" Grid.Column="0" Text="Date de la planification :" VerticalAlignment="Center"/>
 							<DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="dateChoice"/>
