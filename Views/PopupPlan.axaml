@@ -91,6 +91,10 @@
 				</Grid>
 
 				<Button Content="Enregistrer"
+<<<<<<< HEAD
+=======
+						Click="CreateActivity"
+>>>>>>> 7eece8b77a0e1f2584cacf0248cf17b05f3d85af
 						Background="{DynamicResource PrimaryColor}"
 						Foreground="White"
 						HorizontalAlignment="Center"

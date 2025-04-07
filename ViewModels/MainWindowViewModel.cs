@@ -70,7 +70,7 @@ namespace ParkAccess.ViewModels
                     });
                 }
             }
-            catch (HttpRequestException e)
+            catch (HttpRequestException)
             {
                 
             }

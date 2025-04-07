@@ -21,8 +21,6 @@ namespace ParkAccess
         [JsonPropertyName("ip")]
         public string Ip { get; set; }
 
-        public Parking() { }
-
         public Parking(string nom, string mail, string ceff, string ip)
         {
             Nom = nom;

@@ -69,7 +69,7 @@ public partial class MainWindow : Window
         }
         catch (OperationCanceledException)
         {
-            
+
         }
     }
 
@@ -169,5 +169,10 @@ public partial class MainWindow : Window
             if (ceffArtisanalContent != null)
                 ceffArtisanalContent.IsVisible = selectedText == "CEFF Artisanal";
         }
+    }
+    private async void OnParkButtonClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var popup = new PopupPark();
+        await popup.ShowDialog(this);
     }
 }

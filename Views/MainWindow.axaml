@@ -380,7 +380,7 @@
                 </Border>
             </TabItem>
 			
-			<TabItem Header="Voir les prochaines planifications">
+			<TabItem Header="Voir les planifications">
 				<Border Classes="Card">
 					<Grid RowDefinitions="Auto,*">
 						<TextBlock Grid.Row="0"
@@ -388,18 +388,35 @@
                                    FontSize="20"
                                    FontWeight="SemiBold"
                                    HorizontalAlignment="Center"
-                                   Margin="0 0 0 20"/>						
+                                   Margin="0 0 0 20"/>
 					</Grid>
 				</Border>
 			</TabItem>
 			<TabItem Header="Voir les parkings">
 				<Border Classes="Card">
 					<StackPanel Spacing="20">
-						<TextBlock Text="Liste des parkings"
-								   FontSize="20"
-								   FontWeight="SemiBold"
-								   HorizontalAlignment="Center"
-								   Margin="0 0 0 20"/>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="200"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="200"/>
+							</Grid.ColumnDefinitions>
+
+							<TextBlock Text="Liste des parkings"
+									   FontSize="20"
+									   FontWeight="SemiBold"
+									   Grid.Column="1"
+									   HorizontalAlignment="Center"
+									   VerticalAlignment="Center"/>
+							
+							<Button Content="Ajouter un parking"
+									Click="OnParkButtonClick"
+									Grid.Column="2"
+									HorizontalAlignment="Left"
+									VerticalAlignment="Center"
+									Margin="10,0"/>
+						</Grid>
+
 
 						<DataGrid ItemsSource="{Binding Parkings}"
 								  AutoGenerateColumns="False"
