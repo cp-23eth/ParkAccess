@@ -80,7 +80,7 @@
 		  PlaceholderText="Sélectionner un parking"
           SelectedItem="{CompiledBinding SelectedParking}">
 			<ComboBox.ItemTemplate>
-				<DataTemplate x:DataType="local:Parking">
+				<DataTemplate x:DataType="local:ParkingData">
 					<TextBlock Text="{CompiledBinding Nom}" />
 				</DataTemplate>
 			</ComboBox.ItemTemplate>

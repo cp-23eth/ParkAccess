@@ -16,14 +16,13 @@ namespace ParkAccess.ViewModels
     public partial class MainWindowViewModel : ViewModelBase
     {
         private static readonly HttpClient client = new HttpClient();
-        string ip = "";
-        string url = "http://157.26.121.168:7159/api/calendar/parkings";
         public bool status { get; set; }
 
-        public ObservableCollection<Parking> Parkings { get; } = new();
+        public ObservableCollection<ParkingData> Parkings { get; } = new();
+        public ObservableCollection<EventData> Events { get; } = new();
 
-        private Parking _selectedParking;
-        public Parking SelectedParking
+        private ParkingData _selectedParking;
+        public ParkingData SelectedParking
         {
             get => _selectedParking;
             set => SetProperty(ref _selectedParking, value);
@@ -36,10 +35,51 @@ namespace ParkAccess.ViewModels
                 .CreateLogger();
 
             InitializeParkings();
+            InitializeEvents();
         }
 
         public async void InitializeParkings()
         {
+            string url = "http://157.26.121.168:7159/api/calendar/parkings";
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                string json = await response.Content.ReadAsStringAsync();
+
+                //log.information(json);
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                var parkings = JsonSerializer.Deserialize<ObservableCollection<ParkingData>>(json, options);
+
+                //Log.Information($"Count parkings: {parkings?.Count}");
+                if (parkings != null)
+                {
+                    //Log.Information($"Nombre de parkings désérialisés : {parkings.Count}");
+                    await Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        Parkings.Clear();
+                        foreach (var p in parkings)
+                        {
+                            //Log.Information($"Ajout du parking : Nom: {parking.Nom}, Mail: {parking.Mail}, Ceff: {parking.Ceff}, Ip: {parking.Ip}");
+                            Parkings.Add(p);
+                        }
+                    });
+                }
+            }
+            catch (HttpRequestException)
+            {
+                
+            }
+        }
+
+        public async void InitializeEvents()
+        {
+            string url = "http://157.26.121.168:7159/api/calendar/events";
             try
             {
                 HttpResponseMessage response = await client.GetAsync(url);
@@ -53,28 +93,24 @@ namespace ParkAccess.ViewModels
                     PropertyNameCaseInsensitive = true
                 };
 
-                var parkings = JsonSerializer.Deserialize<ObservableCollection<Parking>>(json, options);
+                var events = JsonSerializer.Deserialize<ObservableCollection<EventData>>(json, options);
 
-                //Log.Information($"Count parkings: {parkings?.Count}");
-                if (parkings != null)
+                if (events != null)
                 {
-                    //Log.Information($"Nombre de parkings désérialisés : {parkings.Count}");
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Parkings.Clear();
-                        foreach (var parking in parkings)
+                        Events.Clear();
+                        foreach (var e in events)
                         {
-                            //Log.Information($"Ajout du parking : Nom: {parking.Nom}, Mail: {parking.Mail}, Ceff: {parking.Ceff}, Ip: {parking.Ip}");
-                            Parkings.Add(parking);
+                            Events.Add(e);
                         }
                     });
                 }
             }
             catch (HttpRequestException)
             {
-                
+
             }
-            
         }
 
         private async Task SendShellyCommand(string ip,string state)
@@ -127,7 +163,7 @@ namespace ParkAccess.ViewModels
         [RelayCommand]
         public async Task ActionOne()
         {
-            ip = "157.26.121.184";
+            string ip = "157.26.121.184";
 
             await chooseCommand(ip);
 

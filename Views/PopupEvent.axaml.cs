@@ -21,9 +21,9 @@ public partial class PopupEvent : Window
     private static readonly HttpClient client = new HttpClient();
     string url = "http://157.26.121.168:7159/api/calendar/parkings";
 
-    public ObservableCollection<Parking> Parkings { get; } = new();
+    public ObservableCollection<ParkingData> Parkings { get; } = new();
 
-    public Parking SelectedParking { get; set; }
+    public ParkingData SelectedParking { get; set; }
 
     public PopupEvent()
     {
@@ -47,7 +47,7 @@ public partial class PopupEvent : Window
                 PropertyNameCaseInsensitive = true
             };
 
-            var parkings = System.Text.Json.JsonSerializer.Deserialize<ObservableCollection<Parking>>(json, options);
+            var parkings = System.Text.Json.JsonSerializer.Deserialize<ObservableCollection<ParkingData>>(json, options);
 
             if (parkings != null)
             {

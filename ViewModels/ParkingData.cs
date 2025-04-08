@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ParkAccess
 {
-    public class Parking
+    public class ParkingData
     {
         [JsonPropertyName("nom")]
         public string Nom { get; set; }
@@ -21,7 +21,7 @@ namespace ParkAccess
         [JsonPropertyName("ip")]
         public string Ip { get; set; }
 
-        public Parking(string nom, string mail, string ceff, string ip)
+        public ParkingData(string nom, string mail, string ceff, string ip)
         {
             Nom = nom;
             Mail = mail;

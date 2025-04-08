@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using ParkAccess.ViewModels;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace ParkAccess
             InitializeComponent();
         }
 
-        public async Task AddParkingAsync(Parking newParking)
+        public async Task AddParkingAsync(ParkingData newParking)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -45,7 +46,7 @@ namespace ParkAccess
             }
         }
 
-        private async Task<bool> ParkingExistsAsync(Parking newParking)
+        private async Task<bool> ParkingExistsAsync(ParkingData newParking)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -58,7 +59,7 @@ namespace ParkAccess
                     string json = await response.Content.ReadAsStringAsync();
 
                     var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                    var existingParkings = JsonSerializer.Deserialize<List<Parking>>(json, options);
+                    var existingParkings = JsonSerializer.Deserialize<List<ParkingData>>(json, options);
 
                     return existingParkings?.Any(p =>
                         p.Nom == newParking.Nom &&
@@ -85,7 +86,7 @@ namespace ParkAccess
             var selectedItem = ceffComboBox.SelectedItem as ComboBoxItem;
             string ceff = selectedItem?.Content.ToString();
 
-            Parking newParking = new Parking(
+            ParkingData newParking = new ParkingData(
                 nameParking.Text,
                 emailParking.Text,
                 ceff,
