@@ -33,15 +33,16 @@ namespace ParkAccess
                 });
 
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync(url, content);
 
-                if (response.IsSuccessStatusCode)
+                client.DefaultRequestHeaders.Add("X-Api-Key", "123456789");
+
+                try
                 {
-                    Log.Information("Parking ajouté avec succès !");
+                    HttpResponseMessage response = await client.PostAsync(url, content);
                 }
-                else
+                catch (Exception ex)
                 {
-                    Log.Information($"Erreur : {response.StatusCode}");
+                    
                 }
             }
         }
@@ -54,7 +55,10 @@ namespace ParkAccess
 
                 try
                 {
-                    HttpResponseMessage response = await client.GetAsync(url);
+                    var request = new HttpRequestMessage(HttpMethod.Get, url);
+                    request.Headers.Add("X-Api-Key", "123456789");
+
+                    HttpResponseMessage response = await client.SendAsync(request);
                     response.EnsureSuccessStatusCode();
                     string json = await response.Content.ReadAsStringAsync();
 
@@ -77,7 +81,6 @@ namespace ParkAccess
 
         private async void OnSave(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            Log.Information("OnSave called");
             if (nameParking.Text == null || emailParking.Text == null || ipParking.Text == null || ceffComboBox.SelectedItem == null)
             {
                 return;
@@ -92,8 +95,6 @@ namespace ParkAccess
                 ceff,
                 ipParking.Text
             );
-
-            Log.Information("newParking " + "Nom : " + newParking.Nom.ToString() + " Mail : " + newParking.Mail.ToString() + " Ceff : " + newParking.Ceff.ToString() + " Ip : " + newParking.Ip.ToString());
 
             if (!await ParkingExistsAsync(newParking))
             {

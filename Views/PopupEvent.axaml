@@ -73,12 +73,12 @@
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
                 <ComboBox Grid.Row="2" Grid.Column="1"
                           Width="300" HorizontalAlignment="Left" Margin="10"
-                          ItemsSource="{CompiledBinding Parkings}"
+                          ItemsSource="{Binding Parkings}"
                           PlaceholderText="Sélectionner un parking"
-                          SelectedItem="{CompiledBinding SelectedParking}">
+                          SelectedItem="{Binding SelectedParking}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate x:DataType="local:ParkingData">
-                            <TextBlock Text="{CompiledBinding Nom}" />
+                            <TextBlock Text="{Binding Nom}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>

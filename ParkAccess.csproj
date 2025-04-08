@@ -34,6 +34,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\DeleteParking.axaml.cs">
+      <DependentUpon>DeleteParking.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DeleteEvent.axaml.cs">
+      <DependentUpon>DeleteEvent.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PopupParking.axaml.cs">
       <DependentUpon>PopupParking.axaml</DependentUpon>
     </Compile>

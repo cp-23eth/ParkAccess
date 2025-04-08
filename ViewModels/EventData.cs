@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace ParkAccess.ViewModels
+namespace ParkAccess
 {
     public class EventData
     {
