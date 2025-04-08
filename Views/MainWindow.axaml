@@ -12,324 +12,324 @@
         TransparencyLevelHint="AcrylicBlur"
         WindowStartupLocation="CenterScreen">
 
-	<Window.Resources>
-		<Color x:Key="PrimaryColor">#4361ee</Color>
-		<Color x:Key="SecondaryColor">#3a0ca3</Color>
-		<Color x:Key="AccentColor">#4cc9f0</Color>
-		<Color x:Key="SuccessColor">#06d6a0</Color>
-		<PathIcon x:Key="IconLock" Classes="Lock" Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z" Width="18" Height="18"/>
-		<PathIcon x:Key="IconUnlock" Classes="Unlock" Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z" Width="18" Height="18" />
-	</Window.Resources>
+    <Window.Resources>
+        <Color x:Key="PrimaryColor">#4361ee</Color>
+        <Color x:Key="SecondaryColor">#3a0ca3</Color>
+        <Color x:Key="AccentColor">#4cc9f0</Color>
+        <Color x:Key="SuccessColor">#06d6a0</Color>
+        <PathIcon x:Key="IconLock" Classes="Lock" Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z" Width="18" Height="18"/>
+        <PathIcon x:Key="IconUnlock" Classes="Unlock" Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z" Width="18" Height="18" />
+    </Window.Resources>
 
-	<Window.Styles>
-		<Style Selector="Window">
-			<Setter Property="FontFamily" Value="Inter, Segoe UI, San Francisco, sans-serif"/>
-		</Style>
+    <Window.Styles>
+        <Style Selector="Window">
+            <Setter Property="FontFamily" Value="Inter, Segoe UI, San Francisco, sans-serif"/>
+        </Style>
 
-		<Style Selector="TabControl">
-			<Setter Property="Background" Value="Transparent"/>
-			<Setter Property="Padding" Value="16"/>
-		</Style>
+        <Style Selector="TabControl">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="16"/>
+        </Style>
 
-		<Style Selector="TabItem">
-			<Setter Property="FontSize" Value="17"/>
-			<Setter Property="Foreground" Value="#555555"/>
-			<Setter Property="Margin" Value="0 0 4 0"/>
-			<Setter Property="Padding" Value="16 6"/>
-			<Setter Property="BorderThickness" Value="0"/>
-			<Setter Property="Background" Value="Transparent"/>
-		</Style>
+        <Style Selector="TabItem">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="Foreground" Value="#555555"/>
+            <Setter Property="Margin" Value="0 0 4 0"/>
+            <Setter Property="Padding" Value="16 6"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
 
-		<Style Selector="TabItem:selected">
-			<Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"/>
-			<Setter Property="FontWeight" Value="SemiBold"/>
-		</Style>
+        <Style Selector="TabItem:selected">
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
 
-		<Style Selector="TabItem:pointerover /template/ Border#PART_SelectedPipe">
-			<Setter Property="Background" Value="{DynamicResource AccentColor}"/>
-			<Setter Property="Opacity" Value="0.6"/>
-		</Style>
+        <Style Selector="TabItem:pointerover /template/ Border#PART_SelectedPipe">
+            <Setter Property="Background" Value="{DynamicResource AccentColor}"/>
+            <Setter Property="Opacity" Value="0.6"/>
+        </Style>
 
-		<Style Selector="TabItem:selected /template/ Border#PART_SelectedPipe">
-			<Setter Property="Background" Value="{DynamicResource PrimaryColor}"/>
-			<Setter Property="Opacity" Value="1"/>
-		</Style>
+        <Style Selector="TabItem:selected /template/ Border#PART_SelectedPipe">
+            <Setter Property="Background" Value="{DynamicResource PrimaryColor}"/>
+            <Setter Property="Opacity" Value="1"/>
+        </Style>
 
-		<Style Selector="Button">
-			<Setter Property="CornerRadius" Value="24"/>
-			<Setter Property="Background" Value="#f0f0f4"/>
-			<Setter Property="BorderThickness" Value="0"/>
-			<Setter Property="Padding" Value="20 14"/>
-			<Setter Property="MinWidth" Value="140"/>
-			<Setter Property="Transitions">
-				<Transitions>
-					<BrushTransition Property="Background" Duration="0:0:0.2"/>
-				</Transitions>
-			</Setter>
-		</Style>
+        <Style Selector="Button">
+            <Setter Property="CornerRadius" Value="24"/>
+            <Setter Property="Background" Value="#f0f0f4"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20 14"/>
+            <Setter Property="MinWidth" Value="140"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
 
-		<Style Selector="ToggleButton">
-			<Setter Property="CornerRadius" Value="24"/>
-			<Setter Property="Background" Value="#f0f0f4"/>
-			<Setter Property="BorderThickness" Value="0"/>
-			<Setter Property="Padding" Value="20 14"/>
-			<Setter Property="MinWidth" Value="140"/>
-			<Setter Property="Transitions">
-				<Transitions>
-					<BrushTransition Property="Background" Duration="0:0:0.2"/>
-				</Transitions>
-			</Setter>
-		</Style>
+        <Style Selector="ToggleButton">
+            <Setter Property="CornerRadius" Value="24"/>
+            <Setter Property="Background" Value="#f0f0f4"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20 14"/>
+            <Setter Property="MinWidth" Value="140"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
 
-		<Style Selector="ToggleButton:pointerover">
-			<Setter Property="Background" Value="#e8e8ec"/>
-		</Style>
+        <Style Selector="ToggleButton:pointerover">
+            <Setter Property="Background" Value="#e8e8ec"/>
+        </Style>
 
-		<Style Selector="ToggleButton:checked">
-			<Setter Property="Background" Value="{DynamicResource SuccessColor}"/>
-		</Style>
+        <Style Selector="ToggleButton:checked">
+            <Setter Property="Background" Value="{DynamicResource SuccessColor}"/>
+        </Style>
 
-		<Style Selector="TextBlock.ButtonText">
-			<Setter Property="FontSize" Value="14"/>
-			<Setter Property="FontWeight" Value="Medium"/>
-			<Setter Property="HorizontalAlignment" Value="Center"/>
-		</Style>
+        <Style Selector="TextBlock.ButtonText">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
 
-		<Style Selector="ToggleButton TextBlock.Open">
-			<Setter Property="IsVisible" Value="False"/>
-			<Setter Property="Foreground" Value="White"/>
-		</Style>
+        <Style Selector="ToggleButton TextBlock.Open">
+            <Setter Property="IsVisible" Value="False"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
 
-		<Style Selector="ToggleButton:checked TextBlock.Open">
-			<Setter Property="IsVisible" Value="True"/>
-		</Style>
+        <Style Selector="ToggleButton:checked TextBlock.Open">
+            <Setter Property="IsVisible" Value="True"/>
+        </Style>
 
-		<Style Selector="ToggleButton TextBlock.Close">
-			<Setter Property="IsVisible" Value="True"/>
-			<Setter Property="Foreground" Value="#555555"/>
-		</Style>
+        <Style Selector="ToggleButton TextBlock.Close">
+            <Setter Property="IsVisible" Value="True"/>
+            <Setter Property="Foreground" Value="#555555"/>
+        </Style>
 
-		<Style Selector="ToggleButton:checked TextBlock.Close">
-			<Setter Property="IsVisible" Value="False"/>
-		</Style>
+        <Style Selector="ToggleButton:checked TextBlock.Close">
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
 
-		<Style Selector="ToggleButton PathIcon.Lock">
-			<Setter Property="IsVisible" Value="True"/>
-			<Setter Property="Foreground" Value="#555555"/>
-		</Style>
+        <Style Selector="ToggleButton PathIcon.Lock">
+            <Setter Property="IsVisible" Value="True"/>
+            <Setter Property="Foreground" Value="#555555"/>
+        </Style>
 
-		<Style Selector="ToggleButton:checked PathIcon.Lock">
-			<Setter Property="IsVisible" Value="False"/>
-		</Style>
+        <Style Selector="ToggleButton:checked PathIcon.Lock">
+            <Setter Property="IsVisible" Value="False"/>
+        </Style>
 
-		<Style Selector="ToggleButton PathIcon.Unlock">
-			<Setter Property="IsVisible" Value="False"/>
-			<Setter Property="Foreground" Value="White"/>
-		</Style>
+        <Style Selector="ToggleButton PathIcon.Unlock">
+            <Setter Property="IsVisible" Value="False"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
 
-		<Style Selector="ToggleButton:checked PathIcon.Unlock">
-			<Setter Property="IsVisible" Value="True"/>
-		</Style>
+        <Style Selector="ToggleButton:checked PathIcon.Unlock">
+            <Setter Property="IsVisible" Value="True"/>
+        </Style>
 
-		<Style Selector="Border.Card">
-			<Setter Property="Background" Value="White"/>
-			<Setter Property="CornerRadius" Value="16"/>
-			<Setter Property="Padding" Value="24"/>
-			<Setter Property="Margin" Value="0"/>
-		</Style>
+        <Style Selector="Border.Card">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="24"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
 
-		<Style Selector="TextBlock.SectionTitle">
-			<Setter Property="FontSize" Value="18"/>
-			<Setter Property="FontWeight" Value="SemiBold"/>
-			<Setter Property="Foreground" Value="#333333"/>
-			<Setter Property="Margin" Value="0 0 0 16"/>
-		</Style>
-		<Style Selector="DataGrid">
-			<Setter Property="Background" Value="White"/>
-			<Setter Property="BorderThickness" Value="1"/>
-			<Setter Property="BorderBrush" Value="#e5e5e5"/>
-			<Setter Property="HorizontalGridLinesBrush" Value="#e5e5e5"/>
-			<Setter Property="VerticalGridLinesBrush" Value="#e5e5e5"/>
-			<Setter Property="CanUserReorderColumns" Value="False"/>
-			<Setter Property="CanUserResizeColumns" Value="True"/>
-			<Setter Property="CanUserSortColumns" Value="True"/>
-		</Style>
+        <Style Selector="TextBlock.SectionTitle">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Margin" Value="0 0 0 16"/>
+        </Style>
+        <Style Selector="DataGrid">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#e5e5e5"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#e5e5e5"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#e5e5e5"/>
+            <Setter Property="CanUserReorderColumns" Value="False"/>
+            <Setter Property="CanUserResizeColumns" Value="True"/>
+            <Setter Property="CanUserSortColumns" Value="True"/>
+        </Style>
 
-		<Style Selector="DataGridColumnHeader">
-			<Setter Property="Background" Value="#f7f7f9"/>
-			<Setter Property="FontWeight" Value="SemiBold"/>
-			<Setter Property="Padding" Value="12 8"/>
-			<Setter Property="HorizontalContentAlignment" Value="Left"/>
-		</Style>
+        <Style Selector="DataGridColumnHeader">
+            <Setter Property="Background" Value="#f7f7f9"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="12 8"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
 
-		<Style Selector="DataGridRow">
-			<Setter Property="Padding" Value="0"/>
-			<Setter Property="Height" Value="40"/>
-		</Style>
+        <Style Selector="DataGridRow">
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Height" Value="40"/>
+        </Style>
 
-		<Style Selector="DataGridCell">
-			<Setter Property="Padding" Value="12 8"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-		</Style>
+        <Style Selector="DataGridCell">
+            <Setter Property="Padding" Value="12 8"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
 
-	</Window.Styles>
+    </Window.Styles>
 
-	<Design.DataContext>
-		<vm:MainWindowViewModel/>
-	</Design.DataContext>
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
 
-	<Grid RowDefinitions="Auto,*" Margin="12 40 12 12">
-		<TextBlock Grid.Row="0"
+    <Grid RowDefinitions="Auto,*" Margin="12 40 12 12">
+        <TextBlock Grid.Row="0"
                    Text="Park Access Management"
                    FontSize="24"
                    FontWeight="SemiBold"
                    Foreground="#333333"
                    Margin="12 0 0 16"/>
 
-		<TabControl Grid.Row="1" Margin="0">
-			<TabItem Header="Ouverture manuelle">
-				<Border Classes="Card">
-					<StackPanel Spacing="24">
-						<!-- CEFF Selection Dropdown -->
-						<Grid RowDefinitions="Auto">
-							<StackPanel Spacing="10" HorizontalAlignment="Center">
-								<TextBlock Text="Sélectionner un établissement"
-										  FontSize="16"
-										  FontWeight="Medium"
-										  HorizontalAlignment="Center"/>
-								<ComboBox x:Name="ceffSelector"
-										  Width="300"
-										  HorizontalAlignment="Center"
-										  SelectedIndex="0"
-										  SelectionChanged="ceffSelector_SelectionChanged">
-									<ComboBoxItem>CEFF Industrie</ComboBoxItem>
-									<ComboBoxItem>CEFF Santé-Social</ComboBoxItem>
-									<ComboBoxItem>CEFF Commerce</ComboBoxItem>
-									<ComboBoxItem>CEFF Artisanal</ComboBoxItem>
-								</ComboBox>
+        <TabControl Grid.Row="1" Margin="0">
+            <TabItem Header="Ouverture manuelle">
+                <Border Classes="Card">
+                    <StackPanel Spacing="24">
+                        <!-- CEFF Selection Dropdown -->
+                        <Grid RowDefinitions="Auto">
+                            <StackPanel Spacing="10" HorizontalAlignment="Center">
+                                <TextBlock Text="Sélectionner un établissement"
+                                           FontSize="16"
+                                           FontWeight="Medium"
+                                           HorizontalAlignment="Center"/>
+                                <ComboBox x:Name="ceffSelector"
+                                          Width="300"
+                                          HorizontalAlignment="Center"
+                                          SelectedIndex="0"
+                                          SelectionChanged="ceffSelector_SelectionChanged">
+                                    <ComboBoxItem>CEFF Industrie</ComboBoxItem>
+                                    <ComboBoxItem>CEFF Santé-Social</ComboBoxItem>
+                                    <ComboBoxItem>CEFF Commerce</ComboBoxItem>
+                                    <ComboBoxItem>CEFF Artisanal</ComboBoxItem>
+                                </ComboBox>
 
-							</StackPanel>
-						</Grid>
+                            </StackPanel>
+                        </Grid>
 
-						<Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
+                        <Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
 
-						<!-- CEFF Industrie Content -->
-						<StackPanel x:Name="ceffIndustrieContent" IsVisible="True" Spacing="24">
-							<!-- Section Pierre-Jolissaint -->
-							<Grid RowDefinitions="Auto,Auto">
-								<TextBlock Grid.Row="0"
-										  Classes="SectionTitle"
-										  Text="Pierre-Jolissaint"
-										  HorizontalAlignment="Center"/>
+                        <!-- CEFF Industrie Content -->
+                        <StackPanel x:Name="ceffIndustrieContent" IsVisible="True" Spacing="24">
+                            <!-- Section Pierre-Jolissaint -->
+                            <Grid RowDefinitions="Auto,Auto">
+                                <TextBlock Grid.Row="0"
+                                           Classes="SectionTitle"
+                                           Text="Pierre-Jolissaint"
+                                           HorizontalAlignment="Center"/>
 
-								<ToggleButton Grid.Row="1"
-											 Name="parkingBtn1"
-											 IsChecked="False"
-											 HorizontalAlignment="Center"
-											 HorizontalContentAlignment="Center"
-											 Command="{Binding ActionOne}">
-									<StackPanel Orientation="Horizontal" Spacing="12">
-										<PathIcon Classes="Lock"
-												 Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
-												 Width="18"
-												 Height="18"/>
-										<PathIcon Classes="Unlock"
-												 Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
-												 Width="18"
-												 Height="18"/>
-										<TextBlock Classes="ButtonText Close" Text="Fermé"/>
-										<TextBlock Classes="ButtonText Open" Text="Ouvert"/>
-									</StackPanel>
-								</ToggleButton>
-							</Grid>
-							<Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
-							<!-- Section Baptiste-Savoye -->
-							<Grid RowDefinitions="Auto,Auto">
-								<TextBlock Grid.Row="0"
-										  Classes="SectionTitle"
-										  Text="Baptiste-Savoye"
-										  HorizontalAlignment="Center"/>
+                                <ToggleButton Grid.Row="1"
+                                              Name="parkingBtn1"
+                                              IsChecked="False"
+                                              HorizontalAlignment="Center"
+                                              HorizontalContentAlignment="Center"
+                                              Command="{Binding ActionOne}">
+                                    <StackPanel Orientation="Horizontal" Spacing="12">
+                                        <PathIcon Classes="Lock"
+                                                  Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
+                                                  Width="18"
+                                                  Height="18"/>
+                                        <PathIcon Classes="Unlock"
+                                                  Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
+                                                  Width="18"
+                                                  Height="18"/>
+                                        <TextBlock Classes="ButtonText Close" Text="Fermé"/>
+                                        <TextBlock Classes="ButtonText Open" Text="Ouvert"/>
+                                    </StackPanel>
+                                </ToggleButton>
+                            </Grid>
+                            <Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
+                            <!-- Section Baptiste-Savoye -->
+                            <Grid RowDefinitions="Auto,Auto">
+                                <TextBlock Grid.Row="0"
+                                           Classes="SectionTitle"
+                                           Text="Baptiste-Savoye"
+                                           HorizontalAlignment="Center"/>
 
-								<ToggleButton Grid.Row="1"
-											 IsChecked="False"
-											 HorizontalAlignment="Center"
-											 HorizontalContentAlignment="Center">
-									<StackPanel Orientation="Horizontal" Spacing="12">
-										<PathIcon Classes="Lock"
-												 Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
-												 Width="18"
-												 Height="18"/>
-										<PathIcon Classes="Unlock"
-												 Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
-												 Width="18"
-												 Height="18"/>
-										<TextBlock Classes="ButtonText Close" Text="Fermé"/>
-										<TextBlock Classes="ButtonText Open" Text="Ouvert"/>
-									</StackPanel>
-								</ToggleButton>
-							</Grid>
+                                <ToggleButton Grid.Row="1"
+                                              IsChecked="False"
+                                              HorizontalAlignment="Center"
+                                              HorizontalContentAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" Spacing="12">
+                                        <PathIcon Classes="Lock"
+                                                  Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
+                                                  Width="18"
+                                                  Height="18"/>
+                                        <PathIcon Classes="Unlock"
+                                                  Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
+                                                  Width="18"
+                                                  Height="18"/>
+                                        <TextBlock Classes="ButtonText Close" Text="Fermé"/>
+                                        <TextBlock Classes="ButtonText Open" Text="Ouvert"/>
+                                    </StackPanel>
+                                </ToggleButton>
+                            </Grid>
 
-							<Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
+                            <Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
 
-							<!-- Section Service Info -->
-							<Grid RowDefinitions="Auto,Auto">
-								<TextBlock Grid.Row="0"
-										  Classes="SectionTitle"
-										  Text="Service Info"
-										  HorizontalAlignment="Center"/>
+                            <!-- Section Service Info -->
+                            <Grid RowDefinitions="Auto,Auto">
+                                <TextBlock Grid.Row="0"
+                                           Classes="SectionTitle"
+                                           Text="Service Info"
+                                           HorizontalAlignment="Center"/>
 
-								<ToggleButton Grid.Row="1"
-											 IsChecked="False"
-											 HorizontalAlignment="Center"
-											 HorizontalContentAlignment="Center">
-									<StackPanel Orientation="Horizontal" Spacing="12">
-										<PathIcon Classes="Lock"
-												 Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
-												 Width="18"
-												 Height="18"/>
-										<PathIcon Classes="Unlock"
-												 Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
-												 Width="18"
-												 Height="18"/>
-										<TextBlock Classes="ButtonText Close" Text="Fermé"/>
-										<TextBlock Classes="ButtonText Open" Text="Ouvert"/>
-									</StackPanel>
-								</ToggleButton>
-							</Grid>
-						</StackPanel>
+                                <ToggleButton Grid.Row="1"
+                                              IsChecked="False"
+                                              HorizontalAlignment="Center"
+                                              HorizontalContentAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" Spacing="12">
+                                        <PathIcon Classes="Lock"
+                                                  Data="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"
+                                                  Width="18"
+                                                  Height="18"/>
+                                        <PathIcon Classes="Unlock"
+                                                  Data="M144 144c0-44.2 35.8-80 80-80c31.9 0 59.4 18.6 72.3 45.7c7.6 16 26.7 22.8 42.6 15.2s22.8-26.7 15.2-42.6C331 33.7 281.5 0 224 0C144.5 0 80 64.5 80 144l0 48-16 0c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-240 0 0-48z"
+                                                  Width="18"
+                                                  Height="18"/>
+                                        <TextBlock Classes="ButtonText Close" Text="Fermé"/>
+                                        <TextBlock Classes="ButtonText Open" Text="Ouvert"/>
+                                    </StackPanel>
+                                </ToggleButton>
+                            </Grid>
+                        </StackPanel>
 
-						<!-- CEFF Santé-Social Content -->
-						<StackPanel x:Name="ceffSanteSocialContent" IsVisible="False" Spacing="24">
-							<TextBlock Text="Aucune section disponible pour le moment"
-									   HorizontalAlignment="Center"
-									   FontStyle="Italic"
-									   Opacity="0.7"
-									   Margin="0 20"/>
-						</StackPanel>
+                        <!-- CEFF Santé-Social Content -->
+                        <StackPanel x:Name="ceffSanteSocialContent" IsVisible="False" Spacing="24">
+                            <TextBlock Text="Aucune section disponible pour le moment"
+                                       HorizontalAlignment="Center"
+                                       FontStyle="Italic"
+                                       Opacity="0.7"
+                                       Margin="0 20"/>
+                        </StackPanel>
 
-						<!-- CEFF Commerce Content (Empty for now) -->
-						<StackPanel x:Name="ceffCommerceContent" IsVisible="False" Spacing="24">
-							<TextBlock Text="Aucune section disponible pour le moment"
-									   HorizontalAlignment="Center"
-									   FontStyle="Italic"
-									   Opacity="0.7"
-									   Margin="0 20"/>
-						</StackPanel>
+                        <!-- CEFF Commerce Content (Empty for now) -->
+                        <StackPanel x:Name="ceffCommerceContent" IsVisible="False" Spacing="24">
+                            <TextBlock Text="Aucune section disponible pour le moment"
+                                       HorizontalAlignment="Center"
+                                       FontStyle="Italic"
+                                       Opacity="0.7"
+                                       Margin="0 20"/>
+                        </StackPanel>
 
-						<!-- CEFF Artisanal Content (Empty for now) -->
-						<StackPanel x:Name="ceffArtisanalContent" IsVisible="False" Spacing="24">
-							<TextBlock Text="Aucune section disponible pour le moment"
-									   HorizontalAlignment="Center"
-									   FontStyle="Italic"
-									   Opacity="0.7"
-									   Margin="0 20"/>
-						</StackPanel>
-					</StackPanel>
-				</Border>
-			</TabItem>
+                        <!-- CEFF Artisanal Content (Empty for now) -->
+                        <StackPanel x:Name="ceffArtisanalContent" IsVisible="False" Spacing="24">
+                            <TextBlock Text="Aucune section disponible pour le moment"
+                                       HorizontalAlignment="Center"
+                                       FontStyle="Italic"
+                                       Opacity="0.7"
+                                       Margin="0 20"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </TabItem>
 
 
-			<!-- Section 2 -->
+            <!-- Section 2 -->
             <TabItem Header="Ajouter une planification">
                 <Border Classes="Card">
                     <StackPanel Spacing="20">
@@ -340,26 +340,26 @@
                                    Margin="0 0 0 20"/>
 
                         <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
-							<TextBlock Grid.Row="0" Grid.Column="0" Text="Nom :" VerticalAlignment="Center"/>
-							<TextBox Grid.Row="0" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Nom de la planification" x:Name="nameText"/>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Nom :" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Nom de la planification" x:Name="nameText"/>
 
-							<TextBlock Grid.Row="1" Grid.Column="0" Text="Description :" VerticalAlignment="Center"/>
-							<TextBox Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Description de la planification" AcceptsReturn="True" TextWrapping="Wrap" Name="descriptionText"/>
-							
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Description :" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Description de la planification" AcceptsReturn="True" TextWrapping="Wrap" Name="descriptionText"/>
+
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
-							<ComboBox Grid.Row="2" Grid.Column="1"
-									  Width="300" HorizontalAlignment="Left" Margin="10"
-									  ItemsSource="{Binding Parkings}"
-									  SelectedItem="{Binding SelectedParking}">
-								<ComboBox.ItemTemplate>
-									<DataTemplate>
-										<TextBlock Text="{Binding Nom}" />
-									</DataTemplate>
-								</ComboBox.ItemTemplate>
-							</ComboBox>
+                            <ComboBox Grid.Row="2" Grid.Column="1"
+                                      Width="300" HorizontalAlignment="Left" Margin="10"
+                                      ItemsSource="{Binding Parkings}"
+                                      SelectedItem="{Binding SelectedParking}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Nom}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
 
-							<TextBlock Grid.Row="3" Grid.Column="0" Text="Date de la planification :" VerticalAlignment="Center"/>
-							<DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="dateChoice"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Date de la planification :" VerticalAlignment="Center"/>
+                            <DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="dateChoice"/>
 
                             <TextBlock Grid.Row="4" Grid.Column="0" Text="Heure de début :" VerticalAlignment="Center"/>
                             <TimePicker Grid.Row="4" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="beginHourChoice"/>
@@ -367,97 +367,97 @@
                             <TextBlock Grid.Row="5" Grid.Column="0" Text="Heure de fin :" VerticalAlignment="Center"/>
                             <TimePicker Grid.Row="5" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="finalHourChoice"/>
                         </Grid>
-						
-						<Button Content="Enregistrer"
-								Click="CreateActivity"
-								Background="{DynamicResource PrimaryColor}"
-								Foreground="White"
-								HorizontalAlignment="Center"
-								VerticalAlignment="Center"
-								HorizontalContentAlignment="Center"
-								Margin="0 20 0 0"/>
+
+                        <Button Content="Enregistrer"
+                                Click="CreateActivity"
+                                Background="{DynamicResource PrimaryColor}"
+                                Foreground="White"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                Margin="0 20 0 0"/>
                     </StackPanel>
                 </Border>
             </TabItem>
-			
-			<TabItem Header="Voir les planifications">
-				<Border Classes="Card">
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="200"/>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="200"/>
-						</Grid.ColumnDefinitions>
 
-						<TextBlock Text="Liste des planifications"
-								   FontSize="20"
-								   FontWeight="SemiBold"
-								   Grid.Column="1"
-								   HorizontalAlignment="Center"
-								   VerticalAlignment="Center"/>
+            <TabItem Header="Voir les planifications">
+                <Border Classes="Card">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
 
-						<Button Content="Ajouter un parking"
-								Click="OnPlanButtonClick"
-								Grid.Column="2"
-								HorizontalAlignment="Left"
-								VerticalAlignment="Center"
-								Margin="10,0"/>
-					</Grid>
-				</Border>
-			</TabItem>
-			<TabItem Header="Voir les parkings">
-				<Border Classes="Card">
-					<StackPanel Spacing="20">
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="200"/>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="200"/>
-							</Grid.ColumnDefinitions>
+                        <TextBlock Text="Liste des planifications"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
 
-							<TextBlock Text="Liste des parkings"
-									   FontSize="20"
-									   FontWeight="SemiBold"
-									   Grid.Column="1"
-									   HorizontalAlignment="Center"
-									   VerticalAlignment="Center"/>
-							
-							<Button Content="Ajouter un parking"
-									Click="OnParkButtonClick"
-									Grid.Column="2"
-									HorizontalAlignment="Left"
-									VerticalAlignment="Center"
-									Margin="10,0"/>
-						</Grid>
+                        <Button Content="Ajouter un parking"
+                                Click="OnPlanButtonClick"
+                                Grid.Column="2"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Margin="10,0"/>
+                    </Grid>
+                </Border>
+            </TabItem>
+            <TabItem Header="Voir les parkings">
+                <Border Classes="Card">
+                    <StackPanel Spacing="20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Liste des parkings"
+                                       FontSize="20"
+                                       FontWeight="SemiBold"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+
+                            <Button Content="Ajouter un parking"
+                                    Click="OnParkButtonClick"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Margin="10,0"/>
+                        </Grid>
 
 
-						<DataGrid ItemsSource="{Binding Parkings}"
-								  AutoGenerateColumns="False"
-								  IsReadOnly="True"
-								  GridLinesVisibility="All"
-								  BorderThickness="1"
-								  BorderBrush="#e5e5e5"
-								  Margin="10"
-								  MaxHeight="400">
-							<DataGrid.Columns>
-								<DataGridTextColumn Header="Nom"
-													Binding="{Binding Nom}"
-													Width="*"/>
-								<DataGridTextColumn Header="Email"
-													Binding="{Binding Mail}"
-													Width="*"/>
-								<DataGridTextColumn Header="Ceff"
-													Binding="{Binding Ceff}"
-													Width="*"/>
-								<DataGridTextColumn Header="Adresse IP"
-													Binding="{Binding Ip}"
-													Width="*"/>
-							</DataGrid.Columns>
-						</DataGrid>
-					</StackPanel>
-				</Border>
-			</TabItem>
+                        <DataGrid ItemsSource="{Binding Parkings}"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  GridLinesVisibility="All"
+                                  BorderThickness="1"
+                                  BorderBrush="#e5e5e5"
+                                  Margin="10"
+                                  MaxHeight="400">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Nom"
+                                                    Binding="{Binding Nom}"
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Email"
+                                                    Binding="{Binding Mail}"
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Ceff"
+                                                    Binding="{Binding Ceff}"
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Adresse IP"
+                                                    Binding="{Binding Ip}"
+                                                    Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Border>
+            </TabItem>
 
-		</TabControl>
-	</Grid>
+        </TabControl>
+    </Grid>
 </Window>
