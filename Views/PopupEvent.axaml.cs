@@ -16,7 +16,7 @@ using System.Text;
 
 namespace ParkAccess;
 
-public partial class PopupPlani : Window
+public partial class PopupEvent : Window
 {
     private static readonly HttpClient client = new HttpClient();
     string url = "http://157.26.121.168:7159/api/calendar/parkings";
@@ -25,7 +25,7 @@ public partial class PopupPlani : Window
 
     public Parking SelectedParking { get; set; }
 
-    public PopupPlani()
+    public PopupEvent()
     {
         InitializeComponent();
         DataContext = this;

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace ParkAccess
 {
-    public partial class PopupPark : Window
+    public partial class PopupParking : Window
     {
-        public PopupPark()
+        public PopupParking()
         {
             InitializeComponent();
         }
