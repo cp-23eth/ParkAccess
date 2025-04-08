@@ -34,8 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\PopupPark.axaml.cs">
-      <DependentUpon>PopupPark.axaml</DependentUpon>
+    <Compile Update="Views\PopupParking.axaml.cs">
+      <DependentUpon>PopupParking.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PopupEvent.axaml.cs">
+      <DependentUpon>PopupEvent.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

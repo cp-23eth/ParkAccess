@@ -99,13 +99,13 @@ public partial class MainWindow : Window
     }
     private async void OnParkButtonClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        var popup = new PopupPark();
+        var popup = new PopupParking();
         await popup.ShowDialog(this);
     }
 
     private async void OnPlanButtonClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        var popup = new PopupPlani();
+        var popup = new PopupEvent();
         await popup.ShowDialog(this);
     }
 }
