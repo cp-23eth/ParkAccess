@@ -2,12 +2,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400"
+        xmlns:local="clr-namespace:ParkAccess"
+        mc:Ignorable="d"
         x:Class="ParkAccess.PopupPlani"
+        x:DataType="local:PopupPlani"
         Width="600"
-        Height="400"
+        Height="500"
         Title="PopupPlani"
-        CanResize="False">
+        CanResize="False"
+		WindowStartupLocation="CenterOwner">
 
     <Window.Resources>
         <Color x:Key="PrimaryColor">#4361ee</Color>
@@ -55,7 +58,6 @@
         </Style>
 
     </Window.Styles>
-    <!--
     <Border Classes="Card">
     <StackPanel Spacing="20">
     <TextBlock Text="Nouvelle planification"
@@ -72,17 +74,17 @@
     <TextBox Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Description de la planification" AcceptsReturn="True" TextWrapping="Wrap" Name="descriptionText"/>
 
     <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
-    <ComboBox Grid.Row="2" Grid.Column="1"
-    Width="300" HorizontalAlignment="Left" Margin="10"
-    ItemsSource="{Binding Parkings}"
-    SelectedItem="{Binding SelectedParking}">
-    <ComboBox.ItemTemplate>
-    <DataTemplate>
-    <TextBlock Text="{Binding Nom}" />
-    </DataTemplate>
-    </ComboBox.ItemTemplate>
-    </ComboBox>
-
+		<ComboBox Grid.Row="2" Grid.Column="1"
+          Width="300" HorizontalAlignment="Left" Margin="10"
+          ItemsSource="{CompiledBinding Parkings}"
+		  PlaceholderText="Sélectionner un parking"
+          SelectedItem="{CompiledBinding SelectedParking}">
+			<ComboBox.ItemTemplate>
+				<DataTemplate x:DataType="local:Parking">
+					<TextBlock Text="{CompiledBinding Nom}" />
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
     <TextBlock Grid.Row="3" Grid.Column="0" Text="Date de la planification :" VerticalAlignment="Center"/>
     <DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="dateChoice"/>
 
@@ -103,5 +105,4 @@
     Margin="0 20 0 0"/>
     </StackPanel>
     </Border>
-    -->
 </Window>

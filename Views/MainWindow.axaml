@@ -327,61 +327,7 @@
                     </StackPanel>
                 </Border>
             </TabItem>
-
-
-            <!-- Section 2 -->
-            <TabItem Header="Ajouter une planification">
-                <Border Classes="Card">
-                    <StackPanel Spacing="20">
-                        <TextBlock Text="Nouvelle planification"
-                                   FontSize="20"
-                                   FontWeight="SemiBold"
-                                   HorizontalAlignment="Center"
-                                   Margin="0 0 0 20"/>
-
-                        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Nom :" VerticalAlignment="Center"/>
-                            <TextBox Grid.Row="0" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Nom de la planification" x:Name="nameText"/>
-
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Description :" VerticalAlignment="Center"/>
-                            <TextBox Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Description de la planification" AcceptsReturn="True" TextWrapping="Wrap" Name="descriptionText"/>
-
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
-							<ComboBox Grid.Row="2" Grid.Column="1"
-									  Width="300" HorizontalAlignment="Left" Margin="10"
-									  PlaceholderText="Sélectionner un parking"
-									  ItemsSource="{Binding Parkings}"
-									  SelectedItem="{Binding SelectedParking}">
-								<ComboBox.ItemTemplate>
-									<DataTemplate>
-										<TextBlock Text="{Binding Nom}" />
-									</DataTemplate>
-								</ComboBox.ItemTemplate>
-							</ComboBox>
-
-                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Date de la planification :" VerticalAlignment="Center"/>
-                            <DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="dateChoice"/>
-
-                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Heure de début :" VerticalAlignment="Center"/>
-                            <TimePicker Grid.Row="4" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="beginHourChoice"/>
-
-                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Heure de fin :" VerticalAlignment="Center"/>
-                            <TimePicker Grid.Row="5" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="finalHourChoice"/>
-                        </Grid>
-
-                        <Button Content="Enregistrer"
-                                Click="CreateActivity"
-                                Background="{DynamicResource PrimaryColor}"
-                                Foreground="White"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                HorizontalContentAlignment="Center"
-                                Margin="0 20 0 0"/>
-                    </StackPanel>
-                </Border>
-            </TabItem>
-
-            <TabItem Header="Voir les planifications">
+            <TabItem Header="Voir les évenements">
                 <Border Classes="Card">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -390,14 +336,14 @@
                             <ColumnDefinition Width="200"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="Liste des planifications"
+                        <TextBlock Text="Liste des évenements"
                                    FontSize="20"
                                    FontWeight="SemiBold"
                                    Grid.Column="1"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"/>
 
-                        <Button Content="Ajouter un parking"
+                        <Button Content="Ajouter un évenement"
                                 Click="OnPlanButtonClick"
                                 Grid.Column="2"
                                 HorizontalAlignment="Left"

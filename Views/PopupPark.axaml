@@ -7,7 +7,8 @@
 		Width="600"
 		Height="400"
         Title="PopupPark"
-		CanResize="False">
+		CanResize="False"
+		WindowStartupLocation="CenterOwner">
 
 	<Window.Resources>
 		<Color x:Key="PrimaryColor">#4361ee</Color>

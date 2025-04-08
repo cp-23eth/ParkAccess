@@ -14,10 +14,6 @@ namespace ParkAccess
     {
         public PopupPark()
         {
-            Log.Logger = new LoggerConfiguration()
-                .WriteTo.File("log.txt")
-                .CreateLogger();
-
             InitializeComponent();
         }
 

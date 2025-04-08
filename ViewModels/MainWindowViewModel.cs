@@ -55,16 +55,16 @@ namespace ParkAccess.ViewModels
 
                 var parkings = JsonSerializer.Deserialize<ObservableCollection<Parking>>(json, options);
 
-                Log.Information($"Count parkings: {parkings?.Count}");
+                //Log.Information($"Count parkings: {parkings?.Count}");
                 if (parkings != null)
                 {
-                    Log.Information($"Nombre de parkings désérialisés : {parkings.Count}");
+                    //Log.Information($"Nombre de parkings désérialisés : {parkings.Count}");
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         Parkings.Clear();
                         foreach (var parking in parkings)
                         {
-                            Log.Information($"Ajout du parking : Nom: {parking.Nom}, Mail: {parking.Mail}, Ceff: {parking.Ceff}, Ip: {parking.Ip}");
+                            //Log.Information($"Ajout du parking : Nom: {parking.Nom}, Mail: {parking.Mail}, Ceff: {parking.Ceff}, Ip: {parking.Ip}");
                             Parkings.Add(parking);
                         }
                     });
