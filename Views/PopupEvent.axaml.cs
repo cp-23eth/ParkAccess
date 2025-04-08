@@ -19,7 +19,6 @@ namespace ParkAccess;
 public partial class PopupEvent : Window
 {
     private static readonly HttpClient client = new HttpClient();
-    string url = "http://157.26.121.168:7159/api/calendar/parkings";
 
     public ObservableCollection<ParkingData> Parkings { get; } = new();
 
@@ -34,9 +33,13 @@ public partial class PopupEvent : Window
 
     public async void InitializeParkings()
     {
+        string url = "http://157.26.121.168:7159/api/calendar/parkings";
         try
         {
-            HttpResponseMessage response = await client.GetAsync(url);
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            request.Headers.Add("X-Api-Key", "123456789");
+
+            HttpResponseMessage response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             string json = await response.Content.ReadAsStringAsync();
 

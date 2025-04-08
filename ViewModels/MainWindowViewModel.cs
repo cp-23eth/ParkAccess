@@ -36,7 +36,8 @@ namespace ParkAccess.ViewModels
 
             RefreshData();
         }
-        private void RefreshData()
+
+        public void RefreshData()
         {
             InitializeParkings();
             InitializeEvents();
@@ -48,7 +49,11 @@ namespace ParkAccess.ViewModels
             string url = "http://157.26.121.168:7159/api/calendar/parkings";
             try
             {
-                HttpResponseMessage response = await client.GetAsync(url);
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
+                request.Headers.Add("X-Api-Key", "123456789");
+
+                HttpResponseMessage response = await client.SendAsync(request);
+
                 response.EnsureSuccessStatusCode();
                 string json = await response.Content.ReadAsStringAsync();
 
@@ -87,7 +92,11 @@ namespace ParkAccess.ViewModels
             string url = "http://157.26.121.168:7159/api/calendar/events";
             try
             {
-                HttpResponseMessage response = await client.GetAsync(url);
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
+                request.Headers.Add("X-Api-Key", "123456789");
+
+                HttpResponseMessage response = await client.SendAsync(request);
+
                 response.EnsureSuccessStatusCode();
                 string json = await response.Content.ReadAsStringAsync();
 

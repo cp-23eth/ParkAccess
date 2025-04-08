@@ -2,11 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="350"
-        x:Class="ParkAccess.DelParking"
-        Title="DelParking"
+        xmlns:local="clr-namespace:ParkAccess"
+		mc:Ignorable="d"
+        x:Class="ParkAccess.DeleteEvent"
+        x:DataType="local:DeleteEvent"
         Width="600"
         Height="350"
+        Title="DeleteEvent"
         CanResize="False"
         WindowStartupLocation="CenterOwner">
 
@@ -65,19 +67,21 @@
 
             <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Evenement :" VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="0"
-                          Grid.Column="1"
-                          Width="300"
-                          HorizontalAlignment="Left"
-                          Margin="10"
-                          PlaceholderText="Sélectionner un Evenement">
-                    <ComboBoxItem Content="Evenement 1"/>
-                    <ComboBoxItem Content="Evenement 2"/>
-                    <ComboBoxItem Content="Evenement 3"/>
-                </ComboBox>
+				<ComboBox Grid.Row="2" Grid.Column="1"
+                          Width="300" HorizontalAlignment="Left" Margin="10"
+                          ItemsSource="{Binding Events}"
+                          PlaceholderText="Sélectionner un évenement"
+                          SelectedItem="{Binding SelectedEvent}">
+					<ComboBox.ItemTemplate>
+						<DataTemplate x:DataType="local:EventData">
+							<TextBlock Text="{Binding Name}" />
+						</DataTemplate>
+					</ComboBox.ItemTemplate>
+				</ComboBox>
             </Grid>
 
             <Button Content="Supprimer"
+					Click="OnDelete"
                     Foreground="White"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"

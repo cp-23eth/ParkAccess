@@ -1,0 +1,92 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParkAccess"
+        mc:Ignorable="d"
+        x:Class="ParkAccess.DeleteParking"
+        x:DataType="local:DeleteParking"
+        Width="600"
+        Height="350"
+        Title="DeleteParking"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
+
+	<Window.Resources>
+		<Color x:Key="PrimaryColor">#4361ee</Color>
+		<Color x:Key="SecondaryColor">#3a0ca3</Color>
+		<Color x:Key="AccentColor">#4cc9f0</Color>
+		<Color x:Key="SuccessColor">#06d6a0</Color>
+	</Window.Resources>
+
+	<Window.Styles>
+		<Style Selector="Window">
+			<Setter Property="FontFamily" Value="Inter, Segoe UI, San Francisco, sans-serif"/>
+		</Style>
+
+		<Style Selector="Button">
+			<Setter Property="CornerRadius" Value="24"/>
+			<Setter Property="Background" Value="#ff4d4f"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="Padding" Value="20 14"/>
+			<Setter Property="MinWidth" Value="140"/>
+			<Setter Property="Transitions">
+				<Transitions>
+					<BrushTransition Property="Background" Duration="0:0:0.2"/>
+				</Transitions>
+			</Setter>
+		</Style>
+
+		<Style Selector="TextBlock.ButtonText">
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="FontWeight" Value="Medium"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+		</Style>
+
+		<Style Selector="Border.Card">
+			<Setter Property="Background" Value="White"/>
+			<Setter Property="CornerRadius" Value="16"/>
+			<Setter Property="Padding" Value="24"/>
+			<Setter Property="Margin" Value="0"/>
+		</Style>
+
+		<Style Selector="TextBlock.SectionTitle">
+			<Setter Property="FontSize" Value="18"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="Foreground" Value="#333333"/>
+			<Setter Property="Margin" Value="0 0 0 16"/>
+		</Style>
+	</Window.Styles>
+	<Border Classes="Card">
+		<StackPanel Spacing="20">
+			<TextBlock Text="Supprimer un parking"
+                       FontSize="20"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"
+                       Margin="0 0 0 20"/>
+
+			<Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
+				<TextBlock Grid.Row="0" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
+				<ComboBox Grid.Row="2" Grid.Column="1"
+                          Width="300" HorizontalAlignment="Left" Margin="10"
+                          ItemsSource="{Binding Parkings}"
+                          PlaceholderText="Sélectionner un parking"
+                          SelectedItem="{Binding SelectedParking}">
+					<ComboBox.ItemTemplate>
+						<DataTemplate x:DataType="local:ParkingData">
+							<TextBlock Text="{Binding Nom}" />
+						</DataTemplate>
+					</ComboBox.ItemTemplate>
+				</ComboBox>
+			</Grid>
+
+			<Button Content="Supprimer"
+					Click="OnDelete"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Margin="0 20 0 0"/>
+		</StackPanel>
+	</Border>
+</Window>
