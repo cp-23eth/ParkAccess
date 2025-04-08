@@ -10,6 +10,7 @@ using static Microsoft.Graph.Constants;
 using Serilog;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Linq;
 
 namespace ParkAccess.ViewModels
 {
@@ -46,11 +47,10 @@ namespace ParkAccess.ViewModels
 
         public async void InitializeParkings()
         {
-            string url = "http://157.26.121.168:7159/api/calendar/parkings";
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, url);
-                request.Headers.Add("X-Api-Key", "123456789");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
+                request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
                 HttpResponseMessage response = await client.SendAsync(request);
 
@@ -89,11 +89,10 @@ namespace ParkAccess.ViewModels
 
         public async void InitializeEvents()
         {
-            string url = "http://157.26.121.168:7159/api/calendar/events";
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, url);
-                request.Headers.Add("X-Api-Key", "123456789");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/events");
+                request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
                 HttpResponseMessage response = await client.SendAsync(request);
 
@@ -111,15 +110,19 @@ namespace ParkAccess.ViewModels
 
                 if (events != null)
                 {
+                    var sortedEvents = events.OrderBy(e => e.StartDateTime).ToList();
+
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         Events.Clear();
-                        foreach (var e in events)
+                        foreach (var e in sortedEvents)
                         {
                             Events.Add(e);
                         }
                     });
                 }
+
+
             }
             catch (HttpRequestException)
             {

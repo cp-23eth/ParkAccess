@@ -25,11 +25,10 @@ public partial class DeleteEvent : Window
     }
     public async void InitializeEvents()
     {
-        string url = "http://157.26.121.168:7159/api/calendar/events";
         try
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Add("X-Api-Key", "123456789");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/events");
+            request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
             HttpResponseMessage response = await client.SendAsync(request);
 
@@ -69,10 +68,8 @@ public partial class DeleteEvent : Window
             return;
         }
 
-        string url = $"http://157.26.121.168:7159/api/calendar/deleteevent/{SelectedEvent.Name}";
-
-        var request = new HttpRequestMessage(HttpMethod.Delete, url);
-        request.Headers.Add("X-Api-Key", "123456789");
+        var request = new HttpRequestMessage(HttpMethod.Delete, $"{Program.Settings.Api.BaseUrl}/deleteevent/{SelectedEvent.Name}");
+        request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
         HttpResponseMessage response = await client.SendAsync(request);
     }

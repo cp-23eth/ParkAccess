@@ -22,8 +22,6 @@ namespace ParkAccess
         {
             using (HttpClient client = new HttpClient())
             {
-                string url = "http://157.26.121.168:7159/api/calendar/addparking";
-
                 string json = JsonSerializer.Serialize(new
                 {
                     nom = newParking.Nom,
@@ -34,16 +32,9 @@ namespace ParkAccess
 
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                client.DefaultRequestHeaders.Add("X-Api-Key", "123456789");
+                client.DefaultRequestHeaders.Add("X-Api-Key", Program.Settings.Api.Key);
 
-                try
-                {
-                    HttpResponseMessage response = await client.PostAsync(url, content);
-                }
-                catch (Exception ex)
-                {
-                    
-                }
+                HttpResponseMessage response = await client.PostAsync($"{Program.Settings.Api.BaseUrl}/addparking", content);
             }
         }
 
@@ -51,12 +42,10 @@ namespace ParkAccess
         {
             using (HttpClient client = new HttpClient())
             {
-                string url = "http://157.26.121.168:7159/api/calendar/parkings";
-
                 try
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Get, url);
-                    request.Headers.Add("X-Api-Key", "123456789");
+                    var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
+                    request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
                     HttpResponseMessage response = await client.SendAsync(request);
                     response.EnsureSuccessStatusCode();

@@ -33,17 +33,14 @@ public partial class PopupEvent : Window
 
     public async void InitializeParkings()
     {
-        string url = "http://157.26.121.168:7159/api/calendar/parkings";
         try
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Add("X-Api-Key", "123456789");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
+            request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
             HttpResponseMessage response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             string json = await response.Content.ReadAsStringAsync();
-
-            Log.Information(json);
 
             var options = new JsonSerializerOptions
             {
@@ -54,7 +51,6 @@ public partial class PopupEvent : Window
 
             if (parkings != null)
             {
-                Log.Information($"Nombre de parkings désérialisés : {parkings.Count}");
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     Parkings.Clear();
@@ -74,7 +70,6 @@ public partial class PopupEvent : Window
 
     private async void CreateActivity(object sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        Log.Information("Création d'une activité...");
         string tenantId = "0bd66e42-d830-4cdc-b580-f835a405d038";
         string clientId = "315ca165-3c88-45c1-b62f-45679cb58e62";
         string clientSecret = "6Ge8Q~v-yOZbjJIRNAUbqNLzS3uGcRaQ4X8N_dn-";
@@ -102,7 +97,6 @@ public partial class PopupEvent : Window
     {
         if (dateChoice.SelectedDate is null || beginHourChoice.SelectedTime is null || finalHourChoice.SelectedTime is null)
         {
-            Log.Information("Champs de date ou d'heure manquants.");
             return;
         }
 

@@ -25,11 +25,10 @@ public partial class DeleteParking : Window
 
     public async void InitializeParkings()
     {
-        string url = "http://157.26.121.168:7159/api/calendar/parkings";
         try
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Add("X-Api-Key", "123456789");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
+            request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
             HttpResponseMessage response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
@@ -70,10 +69,8 @@ public partial class DeleteParking : Window
             return;
         }
 
-        string url = $"http://157.26.121.168:7159/api/calendar/deleteparking/{SelectedParking.Nom}";
-
-        var request = new HttpRequestMessage(HttpMethod.Delete, url);
-        request.Headers.Add("X-Api-Key", "123456789");
+        var request = new HttpRequestMessage(HttpMethod.Delete, $"{Program.Settings.Api.BaseUrl}/deleteparking/{SelectedParking.Nom}");
+        request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
         HttpResponseMessage response = await client.SendAsync(request);
     }
