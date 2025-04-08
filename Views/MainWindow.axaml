@@ -329,27 +329,52 @@
             </TabItem>
             <TabItem Header="Voir les évenements">
                 <Border Classes="Card">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="200"/>
-                        </Grid.ColumnDefinitions>
+                    <StackPanel Spacing="20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="Liste des évenements"
-                                   FontSize="20"
-                                   FontWeight="SemiBold"
-                                   Grid.Column="1"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
+                            <TextBlock Text="Liste des évenements"
+                                       FontSize="20"
+                                       FontWeight="SemiBold"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
 
-                        <Button Content="Ajouter un évenement"
-                                Click="OnPlanButtonClick"
-                                Grid.Column="2"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                Margin="10,0"/>
-                    </Grid>
+                            <Button Content="Ajouter un évenement"
+                                    Click="OnPlanButtonClick"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Margin="10,0"/>
+                        </Grid>
+                        <DataGrid ItemsSource="{Binding EventData}"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  GridLinesVisibility="All"
+                                  BorderThickness="1"
+                                  BorderBrush="#e5e5e5"
+                                  Margin="10"
+                                  MaxHeight="400">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Nom"
+                                                    Binding="{Binding Name}"
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Parking"
+                                                    Binding="{Binding ParkingMail}"
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Début"
+                                                    Binding="{Binding StartDateTime}"
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Fin"
+                                                    Binding="{Binding EndDateTime}"
+                                                    Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
                 </Border>
             </TabItem>
             <TabItem Header="Voir les parkings">
