@@ -60,12 +60,21 @@
             <Setter Property="Background" Value="#f0f0f4"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="20 14"/>
-            <Setter Property="MinWidth" Value="140"/>
             <Setter Property="Transitions">
                 <Transitions>
                     <BrushTransition Property="Background" Duration="0:0:0.2"/>
                 </Transitions>
             </Setter>
+        </Style>
+
+        <Style Selector="Button.DelButton">
+            <Setter Property="Background" Value="#ff4d4f"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.AddButton">
+            <Setter Property="Background" Value="#4361ee"/>
+            <Setter Property="Foreground" Value="White"/>
         </Style>
 
         <Style Selector="ToggleButton">
@@ -332,9 +341,10 @@
                     <StackPanel Spacing="20">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="300"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Text="Liste des évenements"
@@ -344,9 +354,18 @@
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"/>
 
-                            <Button Content="Ajouter un évenement"
+                            <Button Content="Ajouter"
+                                    Classes="AddButton"
                                     Click="OnPlanButtonClick"
                                     Grid.Column="2"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="10,0"/>
+
+                            <Button Content="Supprimer"
+                                    Classes="DelButton"
+                                    Click="OnDelPlanButtonClick"
+                                    Grid.Column="3"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     Margin="10,0"/>
@@ -358,7 +377,7 @@
                                   BorderThickness="1"
                                   BorderBrush="#e5e5e5"
                                   Margin="10"
-                                  MaxHeight="400">
+                                  MaxHeight="500">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Nom"
                                                     Binding="{Binding Name}"
@@ -382,9 +401,10 @@
                     <StackPanel Spacing="20">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="300"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="150"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Text="Liste des parkings"
@@ -394,14 +414,22 @@
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"/>
 
-                            <Button Content="Ajouter un parking"
+                            <Button Content="Ajouter"
+                                    Classes="AddButton"
                                     Click="OnParkButtonClick"
                                     Grid.Column="2"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Margin="10,0"/>
+
+                            <Button Content="Supprimer"
+                                    Classes="DelButton"
+                                    Click="OnDelParkButtonClick"
+                                    Grid.Column="3"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
                                     Margin="10,0"/>
                         </Grid>
-
 
                         <DataGrid ItemsSource="{Binding Parkings}"
                                   AutoGenerateColumns="False"
@@ -410,7 +438,7 @@
                                   BorderThickness="1"
                                   BorderBrush="#e5e5e5"
                                   Margin="10"
-                                  MaxHeight="400">
+                                  MaxHeight="500">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Nom"
                                                     Binding="{Binding Nom}"

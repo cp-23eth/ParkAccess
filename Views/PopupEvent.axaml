@@ -7,10 +7,10 @@
         x:Class="ParkAccess.PopupEvent"
         x:DataType="local:PopupEvent"
         Width="600"
-        Height="500"
+        Height="450"
         Title="PopupEvent"
         CanResize="False"
-		WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterOwner">
 
     <Window.Resources>
         <Color x:Key="PrimaryColor">#4361ee</Color>
@@ -59,50 +59,47 @@
 
     </Window.Styles>
     <Border Classes="Card">
-    <StackPanel Spacing="20">
-    <TextBlock Text="Nouvel évenement"
-    FontSize="20"
-    FontWeight="SemiBold"
-    HorizontalAlignment="Center"
-    Margin="0 0 0 20"/>
+        <StackPanel Spacing="20">
+            <TextBlock Text="Nouvel évenement"
+                       FontSize="20"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"
+                       Margin="0 0 0 20"/>
 
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
-    <TextBlock Grid.Row="0" Grid.Column="0" Text="Nom :" VerticalAlignment="Center"/>
-    <TextBox Grid.Row="0" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Nom de l'évenement" x:Name="nameText"/>
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Nom :" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Nom de l'évenement" x:Name="nameText"/>
 
-    <TextBlock Grid.Row="1" Grid.Column="0" Text="Description :" VerticalAlignment="Center"/>
-    <TextBox Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Description de l'évenement" AcceptsReturn="True" TextWrapping="Wrap" Name="descriptionText"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="2" Grid.Column="1"
+                          Width="300" HorizontalAlignment="Left" Margin="10"
+                          ItemsSource="{CompiledBinding Parkings}"
+                          PlaceholderText="Sélectionner un parking"
+                          SelectedItem="{CompiledBinding SelectedParking}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="local:ParkingData">
+                            <TextBlock Text="{CompiledBinding Nom}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Date de l'évenement :" VerticalAlignment="Center"/>
+                <DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="dateChoice"/>
 
-    <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
-		<ComboBox Grid.Row="2" Grid.Column="1"
-          Width="300" HorizontalAlignment="Left" Margin="10"
-          ItemsSource="{CompiledBinding Parkings}"
-		  PlaceholderText="Sélectionner un parking"
-          SelectedItem="{CompiledBinding SelectedParking}">
-			<ComboBox.ItemTemplate>
-				<DataTemplate x:DataType="local:ParkingData">
-					<TextBlock Text="{CompiledBinding Nom}" />
-				</DataTemplate>
-			</ComboBox.ItemTemplate>
-		</ComboBox>
-    <TextBlock Grid.Row="3" Grid.Column="0" Text="Date de l'évenement :" VerticalAlignment="Center"/>
-    <DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="dateChoice"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Heure de début :" VerticalAlignment="Center"/>
+                <TimePicker Grid.Row="4" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="beginHourChoice"/>
 
-    <TextBlock Grid.Row="4" Grid.Column="0" Text="Heure de début :" VerticalAlignment="Center"/>
-    <TimePicker Grid.Row="4" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="beginHourChoice"/>
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Heure de fin :" VerticalAlignment="Center"/>
+                <TimePicker Grid.Row="5" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="finalHourChoice"/>
+            </Grid>
 
-    <TextBlock Grid.Row="5" Grid.Column="0" Text="Heure de fin :" VerticalAlignment="Center"/>
-    <TimePicker Grid.Row="5" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="finalHourChoice"/>
-    </Grid>
-
-    <Button Content="Enregistrer"
-    Click="CreateActivity"
-    Background="{DynamicResource PrimaryColor}"
-    Foreground="White"
-    HorizontalAlignment="Center"
-    VerticalAlignment="Center"
-    HorizontalContentAlignment="Center"
-    Margin="0 20 0 0"/>
-    </StackPanel>
+            <Button Content="Enregistrer"
+                    Click="CreateActivity"
+                    Background="{DynamicResource PrimaryColor}"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Margin="0 20 0 0"/>
+        </StackPanel>
     </Border>
 </Window>

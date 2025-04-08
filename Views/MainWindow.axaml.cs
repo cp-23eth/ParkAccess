@@ -108,4 +108,16 @@ public partial class MainWindow : Window
         var popup = new PopupEvent();
         await popup.ShowDialog(this);
     }
+
+    private async void OnDelParkButtonClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var popup = new DelParking();
+        await popup.ShowDialog(this);
+    }
+
+    private async void OnDelPlanButtonClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var popup = new DelEvent();
+        await popup.ShowDialog(this);
+    }
 }
