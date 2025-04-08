@@ -66,21 +66,21 @@
 
 				<Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
 					<TextBlock Grid.Row="0" Grid.Column="0" Text="Nom :" VerticalAlignment="Center"/>
-					<TextBox Grid.Row="0" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Nom du parking"/>
+					<TextBox Grid.Row="0" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="nameParking" Watermark="Nom du parking"/>
 
 					<TextBlock Grid.Row="1" Grid.Column="0" Text="À quelle Ceff appartient-il :" VerticalAlignment="Center"/>
-					<ComboBox Grid.Row="1" Grid.Column="1" PlaceholderText="Sélectionner un Ceff" Width="300" HorizontalAlignment="Left" Margin="10">
-						<ComboBoxItem>Industrie</ComboBoxItem>
-						<ComboBoxItem>Santé-Social</ComboBoxItem>
-						<ComboBoxItem>Commerce</ComboBoxItem>
-						<ComboBoxItem>Artisanal</ComboBoxItem>
+					<ComboBox x:Name="ceffComboBox" Grid.Row="1" Grid.Column="1" PlaceholderText="Sélectionner un Ceff" Width="300" HorizontalAlignment="Left" Margin="10">
+						<ComboBoxItem Content="Industrie"></ComboBoxItem>
+						<ComboBoxItem Content="Santé-Social"></ComboBoxItem>
+						<ComboBoxItem Content="Commerce"></ComboBoxItem>
+						<ComboBoxItem Content="Artisanal"></ComboBoxItem>
 					</ComboBox>
 					
 					<TextBlock Grid.Row="2" Grid.Column="0" Text="Email :" VerticalAlignment="Center"/>
-					<TextBox Grid.Row="2" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Email"/>
+					<TextBox Grid.Row="2" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="emailParking" Watermark="Email"/>
 
 					<TextBlock Grid.Row="3" Grid.Column="0" Text="IP :" VerticalAlignment="Center"/>
-					<TextBox Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" Watermark="IP"/>
+					<TextBox Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="ipParking" Watermark="IP"/>
 				</Grid>
 				<Grid ColumnDefinitions="Auto,Auto" HorizontalAlignment="Center">
 					<Button Content="Enregistrer"
