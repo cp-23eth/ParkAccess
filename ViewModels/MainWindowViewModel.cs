@@ -34,9 +34,18 @@ namespace ParkAccess.ViewModels
                 .WriteTo.File("log.txt")
                 .CreateLogger();
 
-            InitializeParkings();
-            InitializeEvents();
+            StartDataRefreshLoop();
         }
+        private async void StartDataRefreshLoop()
+        {
+            while (true)
+            {
+                InitializeParkings();
+                InitializeEvents();
+                await Task.Delay(1000);
+            }
+        }
+
 
         public async void InitializeParkings()
         {
