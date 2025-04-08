@@ -355,6 +355,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Button Classes="RefreshButton"
+                                    Command="{Binding RefreshData}"
                                     Grid.Column="0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
@@ -426,6 +427,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Button Classes="RefreshButton"
+                                    Command="{Binding RefreshData}"
                                     Grid.Column="0"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
