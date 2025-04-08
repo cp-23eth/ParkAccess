@@ -374,7 +374,7 @@
                                   AutoGenerateColumns="False"
                                   IsReadOnly="True"
                                   GridLinesVisibility="All"
-                                  BorderThickness="1"
+                                  BorderThickness="2"
                                   BorderBrush="#e5e5e5"
                                   Margin="10"
                                   MaxHeight="500">
@@ -435,7 +435,7 @@
                                   AutoGenerateColumns="False"
                                   IsReadOnly="True"
                                   GridLinesVisibility="All"
-                                  BorderThickness="1"
+                                  BorderThickness="2"
                                   BorderBrush="#e5e5e5"
                                   Margin="10"
                                   MaxHeight="500">
