@@ -4,6 +4,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -40,6 +41,7 @@ namespace ParkAccess
 
         private async Task<bool> ParkingExistsAsync(ParkingData newParking)
         {
+            // TODO : il ne détecte pas les doubles parkings (avec le meme email)
             using (HttpClient client = new HttpClient())
             {
                 try
@@ -59,6 +61,8 @@ namespace ParkAccess
                         p.Ip == newParking.Ip &&
                         p.Mail == newParking.Mail
                     ) ?? false;
+
+
                 }
                 catch (Exception ex)
                 {
@@ -85,9 +89,19 @@ namespace ParkAccess
                 ipParking.Text
             );
 
+            IPAddress ip;
+
+            if (!IPAddress.TryParse(ipParking.Text, out ip))
+            {
+                Log.Information("Adresse Ip incorrecte");
+                return;
+            }
+
             if (!await ParkingExistsAsync(newParking))
             {
                 await AddParkingAsync(newParking);
+                Log.Information("Parking ajouté");
+                CreateParkingInfo();
             }
             else
             {
@@ -98,6 +112,11 @@ namespace ParkAccess
         private void OnClose(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void CreateParkingInfo()
+        {
+            MessageNewEvent.IsVisible = true;
         }
     }
 }

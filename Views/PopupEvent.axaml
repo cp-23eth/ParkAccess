@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         x:Class="ParkAccess.PopupEvent"
         x:DataType="local:PopupEvent"
-        Width="600"
+        Width="750"
         Height="450"
         Title="PopupEvent"
         CanResize="False"
@@ -90,7 +90,9 @@
 
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Heure de fin :" VerticalAlignment="Center"/>
                 <TimePicker Grid.Row="5" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="finalHourChoice"/>
-            </Grid>
+
+				<TextBlock x:Name="MessageNewEvent" IsVisible="false" FontSize="15" Text="Votre événement à bien été créé." Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			</Grid>
 
             <Button Content="Enregistrer"
                     Click="CreateActivity"

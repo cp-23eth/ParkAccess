@@ -13,6 +13,7 @@ using ParkAccess.ViewModels;
 using System.Threading.Tasks;
 using System;
 using System.Text;
+using Avalonia.Interactivity;
 
 namespace ParkAccess;
 
@@ -139,6 +140,7 @@ public partial class PopupEvent : Window
             if (response.IsSuccessStatusCode)
             {
                 Log.Information("Événement créé avec succès !");
+                CreateActivityInfo();
             }
             else
             {
@@ -146,5 +148,10 @@ public partial class PopupEvent : Window
                 Log.Information($"Erreur: {response.StatusCode} - {errorResponse}");
             }
         }
+    }
+
+    private void CreateActivityInfo()
+    {
+        MessageNewEvent.IsVisible = true;
     }
 }

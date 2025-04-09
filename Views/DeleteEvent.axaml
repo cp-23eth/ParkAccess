@@ -65,9 +65,9 @@
                        HorizontalAlignment="Center"
                        Margin="0 0 0 20"/>
 
-            <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Evenement :" VerticalAlignment="Center"/>
-				<ComboBox Grid.Row="2" Grid.Column="1"
+			<Grid RowDefinitions="Auto, Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
+				<TextBlock Grid.Row="0" Grid.Column="0" Text="Evenement :" VerticalAlignment="Center"/>
+				<ComboBox Grid.Row="0" Grid.Column="1"
                           Width="300" HorizontalAlignment="Left" Margin="10"
                           ItemsSource="{Binding Events}"
                           PlaceholderText="Sélectionner un évenement"
@@ -78,7 +78,9 @@
 						</DataTemplate>
 					</ComboBox.ItemTemplate>
 				</ComboBox>
-            </Grid>
+
+				<TextBlock x:Name="MessageNewEvent" IsVisible="false" FontSize="15" Text="Votre événement à bien été supprimé." Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			</Grid>
 
             <Button Content="Supprimer"
 					Click="OnDelete"

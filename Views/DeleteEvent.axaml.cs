@@ -72,6 +72,13 @@ public partial class DeleteEvent : Window
         request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
         HttpResponseMessage response = await client.SendAsync(request);
+        Log.Information("Evenement supprimé");
+        DeleteEventInfo();
+
     }
 
+    private void DeleteEventInfo()
+    {
+        MessageNewEvent.IsVisible = true;
+    }
 }

@@ -73,5 +73,13 @@ public partial class DeleteParking : Window
         request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
         HttpResponseMessage response = await client.SendAsync(request);
+        Log.Information($"Parking supprimé");
+        DeleteParkingInfo();
+
+    }
+
+    private void DeleteParkingInfo()
+    {
+        MessageNewEvent.IsVisible = true;
     }
 }
