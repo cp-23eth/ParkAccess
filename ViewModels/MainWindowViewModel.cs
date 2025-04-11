@@ -29,7 +29,7 @@ namespace ParkAccess.ViewModels
             set => SetProperty(ref _selectedParking, value);
         }
 
-        public MainWindowViewModel ()
+        public MainWindowViewModel()
         {
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.File("log.txt")
@@ -49,6 +49,12 @@ namespace ParkAccess.ViewModels
         {
             try
             {
+                if (Program.Settings?.Api == null || string.IsNullOrEmpty(Program.Settings.Api.BaseUrl) || string.IsNullOrEmpty(Program.Settings.Api.Key))
+                {
+                    Log.Error("API settings are not properly configured.");
+                    return;
+                }
+
                 var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
                 request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
@@ -76,11 +82,16 @@ namespace ParkAccess.ViewModels
                     });
                 }
             }
-            catch (HttpRequestException)
+            catch (HttpRequestException ex)
             {
-                
+                Log.Error($"HTTP request failed: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"An unexpected error occurred: {ex.Message}");
             }
         }
+
 
         public async void InitializeEvents()
         {
@@ -125,7 +136,7 @@ namespace ParkAccess.ViewModels
             }
         }
 
-        private async Task SendShellyCommand(string ip,string state)
+        private async Task SendShellyCommand(string ip, string state)
         {
             try
             {
@@ -150,7 +161,7 @@ namespace ParkAccess.ViewModels
         {
             try
             {
-                
+
                 string url = $"http://{ip}/relay/0";
                 HttpResponseMessage response = await client.GetAsync(url);
                 if (response.IsSuccessStatusCode)

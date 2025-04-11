@@ -2,111 +2,111 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="500"
         x:Class="ParkAccess.PopupParking"
-		Width="600"
-		Height="400"
+        Width="600"
+        Height="500"
         Title="PopupParking"
-		CanResize="False"
-		WindowStartupLocation="CenterOwner">
+        CanResize="False"
+        WindowStartupLocation="CenterOwner">
 
-	<Window.Resources>
-		<Color x:Key="PrimaryColor">#4361ee</Color>
-		<Color x:Key="SecondaryColor">#3a0ca3</Color>
-		<Color x:Key="AccentColor">#4cc9f0</Color>
-		<Color x:Key="SuccessColor">#06d6a0</Color>
-	</Window.Resources>
+    <Window.Resources>
+        <Color x:Key="PrimaryColor">#4361ee</Color>
+        <Color x:Key="SecondaryColor">#3a0ca3</Color>
+        <Color x:Key="AccentColor">#4cc9f0</Color>
+        <Color x:Key="SuccessColor">#06d6a0</Color>
+    </Window.Resources>
 
-	<Window.Styles>
-		<Style Selector="Window">
-			<Setter Property="FontFamily" Value="Inter, Segoe UI, San Francisco, sans-serif"/>
-		</Style>
+    <Window.Styles>
+        <Style Selector="Window">
+            <Setter Property="FontFamily" Value="Inter, Segoe UI, San Francisco, sans-serif"/>
+        </Style>
 
-		<Style Selector="Button">
-			<Setter Property="CornerRadius" Value="24"/>
-			<Setter Property="Background" Value="#f0f0f4"/>
-			<Setter Property="BorderThickness" Value="0"/>
-			<Setter Property="Padding" Value="20 14"/>
-			<Setter Property="MinWidth" Value="140"/>
-			<Setter Property="Transitions">
-				<Transitions>
-					<BrushTransition Property="Background" Duration="0:0:0.2"/>
-				</Transitions>
-			</Setter>
-		</Style>
+        <Style Selector="Button">
+            <Setter Property="CornerRadius" Value="24"/>
+            <Setter Property="Background" Value="#f0f0f4"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20 14"/>
+            <Setter Property="MinWidth" Value="140"/>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2"/>
+                </Transitions>
+            </Setter>
+        </Style>
 
-		<Style Selector="TextBlock.ButtonText">
-			<Setter Property="FontSize" Value="14"/>
-			<Setter Property="FontWeight" Value="Medium"/>
-			<Setter Property="HorizontalAlignment" Value="Center"/>
-		</Style>
+        <Style Selector="TextBlock.ButtonText">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
 
-		<Style Selector="Border.Card">
-			<Setter Property="Background" Value="White"/>
-			<Setter Property="CornerRadius" Value="16"/>
-			<Setter Property="Padding" Value="24"/>
-			<Setter Property="Margin" Value="0"/>
-		</Style>
+        <Style Selector="Border.Card">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="24"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
 
-		<Style Selector="TextBlock.SectionTitle">
-			<Setter Property="FontSize" Value="18"/>
-			<Setter Property="FontWeight" Value="SemiBold"/>
-			<Setter Property="Foreground" Value="#333333"/>
-			<Setter Property="Margin" Value="0 0 0 16"/>
-		</Style>
-	</Window.Styles>
+        <Style Selector="TextBlock.SectionTitle">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Margin" Value="0 0 0 16"/>
+        </Style>
+    </Window.Styles>
 
-	<StackPanel>
-		<Border Classes="Card">
-			<StackPanel Spacing="20">
-				<TextBlock Text="Nouveau Parking"
+    <StackPanel>
+        <Border Classes="Card">
+            <StackPanel Spacing="20">
+                <TextBlock Text="Nouveau Parking"
                            FontSize="20"
                            FontWeight="SemiBold"
                            HorizontalAlignment="Center"
                            Margin="0 0 0 20"/>
 
-				<Grid RowDefinitions="Auto,Auto,Auto,Auto, Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
-					<TextBlock Grid.Row="0" Grid.Column="0" Text="Nom :" VerticalAlignment="Center"/>
-					<TextBox Grid.Row="0" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="nameParking" Watermark="Nom du parking"/>
+                <Grid RowDefinitions="Auto,Auto,Auto,Auto,20" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Nom :" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="nameParking" Watermark="Nom du parking"/>
 
-					<TextBlock Grid.Row="1" Grid.Column="0" Text="À quelle Ceff appartient-il :" VerticalAlignment="Center"/>
-					<ComboBox x:Name="ceffComboBox" Grid.Row="1" Grid.Column="1" PlaceholderText="Sélectionner un Ceff" Width="300" HorizontalAlignment="Left" Margin="10">
-						<ComboBoxItem Content="Industrie"></ComboBoxItem>
-						<ComboBoxItem Content="Santé-Social"></ComboBoxItem>
-						<ComboBoxItem Content="Commerce"></ComboBoxItem>
-						<ComboBoxItem Content="Artisanal"></ComboBoxItem>
-					</ComboBox>
-					
-					<TextBlock Grid.Row="2" Grid.Column="0" Text="Email :" VerticalAlignment="Center"/>
-					<TextBox Grid.Row="2" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="emailParking" Watermark="Email"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Ceff :" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="ceffComboBox" Grid.Row="1" Grid.Column="1" PlaceholderText="Sélectionner un Ceff" Width="300" HorizontalAlignment="Left" Margin="10">
+                        <ComboBoxItem Content="Industrie"></ComboBoxItem>
+                        <ComboBoxItem Content="Santé-Social"></ComboBoxItem>
+                        <ComboBoxItem Content="Commerce"></ComboBoxItem>
+                        <ComboBoxItem Content="Artisanal"></ComboBoxItem>
+                    </ComboBox>
 
-					<TextBlock Grid.Row="3" Grid.Column="0" Text="IP :" VerticalAlignment="Center"/>
-					<TextBox Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="ipParking" Watermark="IP"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Email :" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="emailParking" Watermark="Email"/>
 
-					<TextBlock x:Name="MessageNewParking" IsVisible="false" FontSize="15" Text="Votre parking à bien été créé." Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-				</Grid>
-				<Grid ColumnDefinitions="Auto,Auto" HorizontalAlignment="Center">
-					<Button Content="Enregistrer"
-                        Background="{DynamicResource PrimaryColor}"
-                        Foreground="White"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-						Grid.Column="0"
-                        HorizontalContentAlignment="Center"
-                        Margin="10"
-						Click="OnSave"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="IP :" VerticalAlignment="Center" Margin="0 0 0 30"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10 10 10 30" x:Name="ipParking" Watermark="IP"/>
 
-					<Button Content="Fermer"
-							Background="{DynamicResource PrimaryColor}"
-							Foreground="White"
-							HorizontalAlignment="Center"
-							VerticalAlignment="Center"
-							Grid.Column="1"
-							HorizontalContentAlignment="Center"
-							Margin="10"
-							Click="OnClose"/>
-				</Grid>
-			</StackPanel>
-		</Border>
-	</StackPanel>
+                    <TextBlock x:Name="MessageNewParking" IsVisible="false" FontSize="15" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid ColumnDefinitions="Auto,Auto" HorizontalAlignment="Center">
+                    <Button Content="Enregistrer"
+                            Background="{DynamicResource PrimaryColor}"
+                            Foreground="White"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Grid.Column="0"
+                            HorizontalContentAlignment="Center"
+                            Margin="10"
+                            Click="OnSave"/>
+
+                    <Button Content="Fermer"
+                            Background="{DynamicResource PrimaryColor}"
+                            Foreground="White"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Grid.Column="1"
+                            HorizontalContentAlignment="Center"
+                            Margin="10"
+                            Click="OnClose"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </StackPanel>
 </Window>

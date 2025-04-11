@@ -72,8 +72,6 @@ public partial class DeleteParking : Window
 
         try
         {
-
-
             var request = new HttpRequestMessage(HttpMethod.Delete, $"{Program.Settings.Api.BaseUrl}/deleteparking/{SelectedParking.Nom}");
             request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
@@ -85,7 +83,7 @@ public partial class DeleteParking : Window
         catch (HttpRequestException ex)
         {
             Log.Error($"Erreur lors de la suppression du parking : {ex.Message}");
-            MessageDeleteParking.Text = $"Le parking {SelectedParking.Nom} ne peut pas être supprimé";
+            MessageDeleteParking.Text = $"Erreur lors de la suppression du parking {SelectedParking.Nom}";
             MessageDeleteParking.Foreground = new SolidColorBrush(Colors.Red);
         }
         DeleteParkingInfo();
