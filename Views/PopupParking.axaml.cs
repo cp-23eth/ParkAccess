@@ -44,7 +44,7 @@ namespace ParkAccess
             catch (Exception ex)
             {
                 Log.Error($"Erreur lors de l'ajout du parking : {ex.Message}");
-                MessageNewParking.Text = $"Formlaire incorrect ou incomplet";
+                MessageNewParking.Text = $"Formlaire incomplet";
                 MessageNewParking.Foreground = new SolidColorBrush(Colors.Red);
                 CreateParkingInfo();
             }
@@ -55,38 +55,42 @@ namespace ParkAccess
             // TODO : il ne détecte pas les doubles parkings (avec le meme email)
             using (HttpClient client = new HttpClient())
             {
-                try
+
+                var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
+                request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+
+                HttpResponseMessage response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+                string json = await response.Content.ReadAsStringAsync();
+
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var existingParkings = JsonSerializer.Deserialize<List<ParkingData>>(json, options);
+
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
-                    request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
-
-                    HttpResponseMessage response = await client.SendAsync(request);
-                    response.EnsureSuccessStatusCode();
-                    string json = await response.Content.ReadAsStringAsync();
-
-                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                    var existingParkings = JsonSerializer.Deserialize<List<ParkingData>>(json, options);
-
-                    return existingParkings?.Any(p =>
-                        p.Nom == newParking.Nom &&
-                        p.Ip == newParking.Ip &&
-                        p.Mail == newParking.Mail
-                    ) ?? false;
-
-
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"Erreur lors de la vérification de l'existence du parking : {ex.Message}");
+                    Log.Error($"Erreur lors de la récupération des parkings : {response.StatusCode}");
+                    MessageNewParking.Text = $"Erreur lors de la récupération des parkings : {response.StatusCode}";
+                    MessageNewParking.Foreground = new SolidColorBrush(Colors.Red);
+                    CreateParkingInfo();
                     return false;
                 }
+
+                return existingParkings?.Any(p =>
+                    p.Nom == newParking.Nom &&
+                    p.Ip == newParking.Ip &&
+                    p.Mail == newParking.Mail
+                ) ?? false;
             }
         }
 
         private async void OnSave(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            if (nameParking.Text == null || emailParking.Text == null || ipParking.Text == null || ceffComboBox.SelectedItem == null)
+            if (nameParking.Text == "" || emailParking.Text == "" || ipParking.Text == "" || ceffComboBox.SelectedItem == null)
             {
+                Log.Information("Formulaire incorrect ou incomplet");
+                MessageNewParking.Text = $"Formulaire incorrect ou incomplet";
+                MessageNewParking.Foreground = new SolidColorBrush(Colors.Red);
+                CreateParkingInfo();
                 return;
             }
 
