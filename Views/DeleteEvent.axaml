@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParkAccess"
-		mc:Ignorable="d"
+        mc:Ignorable="d"
         x:Class="ParkAccess.DeleteEvent"
         x:DataType="local:DeleteEvent"
         Width="600"
@@ -65,25 +65,25 @@
                        HorizontalAlignment="Center"
                        Margin="0 0 0 20"/>
 
-			<Grid RowDefinitions="Auto, Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
-				<TextBlock Grid.Row="0" Grid.Column="0" Text="Evenement :" VerticalAlignment="Center"/>
-				<ComboBox Grid.Row="0" Grid.Column="1"
-                          Width="300" HorizontalAlignment="Left" Margin="10"
+            <Grid RowDefinitions="Auto,Auto,20" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Evenement :" VerticalAlignment="Center" Margin="0 0 0 30"/>
+                <ComboBox Grid.Row="0" Grid.Column="1"
+                          Width="300" HorizontalAlignment="Left" Margin="10 10 10 30"
                           ItemsSource="{Binding Events}"
                           PlaceholderText="Sélectionner un évenement"
                           SelectedItem="{Binding SelectedEvent}">
-					<ComboBox.ItemTemplate>
-						<DataTemplate x:DataType="local:EventData">
-							<TextBlock Text="{Binding Name}" />
-						</DataTemplate>
-					</ComboBox.ItemTemplate>
-				</ComboBox>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="local:EventData">
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
-				<TextBlock x:Name="MessageDeleteEvent" IsVisible="false" FontSize="15" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-			</Grid>
+                <TextBlock x:Name="MessageDeleteEvent" IsVisible="false" FontSize="15" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
 
             <Button Content="Supprimer"
-					Click="OnDelete"
+                    Click="OnDelete"
                     Foreground="White"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
