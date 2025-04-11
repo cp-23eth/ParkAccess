@@ -57,8 +57,6 @@ namespace ParkAccess.ViewModels
                 response.EnsureSuccessStatusCode();
                 string json = await response.Content.ReadAsStringAsync();
 
-                //log.information(json);
-
                 var options = new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
@@ -66,16 +64,13 @@ namespace ParkAccess.ViewModels
 
                 var parkings = JsonSerializer.Deserialize<ObservableCollection<ParkingData>>(json, options);
 
-                //Log.Information($"Count parkings: {parkings?.Count}");
                 if (parkings != null)
                 {
-                    //Log.Information($"Nombre de parkings désérialisés : {parkings.Count}");
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         Parkings.Clear();
                         foreach (var p in parkings)
                         {
-                            //Log.Information($"Ajout du parking : Nom: {parking.Nom}, Mail: {parking.Mail}, Ceff: {parking.Ceff}, Ip: {parking.Ip}");
                             Parkings.Add(p);
                         }
                     });
