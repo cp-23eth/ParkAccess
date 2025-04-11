@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System;
 using System.Text;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 
 namespace ParkAccess;
 
@@ -64,7 +65,7 @@ public partial class PopupEvent : Window
         }
         catch (HttpRequestException)
         {
-
+            Log.Information("Erreur lors de la récupération des parkings.");
         }
 
     }
@@ -96,8 +97,12 @@ public partial class PopupEvent : Window
 
     async Task CreateEvent(string accessToken)
     {
-        if (dateChoice.SelectedDate is null || beginHourChoice.SelectedTime is null || finalHourChoice.SelectedTime is null)
+        if (dateChoice.SelectedDate is null || beginHourChoice.SelectedTime is null || finalHourChoice.SelectedTime is null || nameText.Text == null || SelectedParking == null)
         {
+            Log.Information("Formulair incomplet");
+            MessageNewEvent.Text = "Formulaire incomplet";
+            MessageNewEvent.Foreground = new SolidColorBrush(Colors.Red);
+            CreateActivityInfo();
             return;
         }
 
@@ -140,13 +145,17 @@ public partial class PopupEvent : Window
             if (response.IsSuccessStatusCode)
             {
                 Log.Information("Événement créé avec succès !");
-                CreateActivityInfo();
+                MessageNewEvent.Text = "Événement créé avec succès !";
+                MessageNewEvent.Foreground = new SolidColorBrush(Colors.Black);
             }
             else
             {
                 string errorResponse = await response.Content.ReadAsStringAsync();
                 Log.Information($"Erreur: {response.StatusCode} - {errorResponse}");
+                MessageNewEvent.Text = "Erreur lors de la création de l'événement";
+                MessageNewEvent.Foreground = new SolidColorBrush(Colors.Red);
             }
+            CreateActivityInfo();
         }
     }
 

@@ -79,7 +79,7 @@
 					</ComboBox.ItemTemplate>
 				</ComboBox>
 
-				<TextBlock x:Name="MessageNewEvent" IsVisible="false" FontSize="15" Text="Votre événement à bien été supprimé." Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+				<TextBlock x:Name="MessageDeleteEvent" IsVisible="false" FontSize="15" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 			</Grid>
 
             <Button Content="Supprimer"

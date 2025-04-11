@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.Threading;
 using ParkAccess.ViewModels;
 using Serilog;
@@ -63,22 +64,32 @@ public partial class DeleteEvent : Window
     }
     private async void OnDelete(object sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        if (SelectedEvent == null)
+        try
         {
-            return;
+            if (SelectedEvent == null)
+            {
+                return;
+            }
+
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"{Program.Settings.Api.BaseUrl}/deleteevent/{SelectedEvent.Name}");
+            request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+
+            HttpResponseMessage response = await client.SendAsync(request);
+            Log.Information("Evenement supprimé");
+            MessageDeleteEvent.Text = "Événement supprimé avec succès";
+            MessageDeleteEvent.Foreground = new SolidColorBrush(Colors.Black);
         }
-
-        var request = new HttpRequestMessage(HttpMethod.Delete, $"{Program.Settings.Api.BaseUrl}/deleteevent/{SelectedEvent.Name}");
-        request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
-
-        HttpResponseMessage response = await client.SendAsync(request);
-        Log.Information("Evenement supprimé");
+        catch
+        {
+            Log.Error("Erreur lors de la suppression de l'événement");
+            MessageDeleteEvent.Text = "Erreur lors de la suppression de l'événement";
+            MessageDeleteEvent.Foreground = new SolidColorBrush(Colors.Red);
+        }
         DeleteEventInfo();
-
     }
 
     private void DeleteEventInfo()
     {
-        MessageNewEvent.IsVisible = true;
+        MessageDeleteEvent.IsVisible = true;
     }
 }

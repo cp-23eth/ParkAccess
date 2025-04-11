@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.Threading;
 using Serilog;
 using System.Collections.ObjectModel;
@@ -69,17 +70,28 @@ public partial class DeleteParking : Window
             return;
         }
 
-        var request = new HttpRequestMessage(HttpMethod.Delete, $"{Program.Settings.Api.BaseUrl}/deleteparking/{SelectedParking.Nom}");
-        request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+        try
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"{Program.Settings.Api.BaseUrl}/deleteparking/{SelectedParking.Nom}");
+            request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
-        HttpResponseMessage response = await client.SendAsync(request);
-        Log.Information($"Parking supprimé");
+            HttpResponseMessage response = await client.SendAsync(request);
+            Log.Information($"Parking supprimé");
+            MessageDeleteParking.Text = $"Le parking {SelectedParking.Nom} a été supprimé avec succès.";
+            MessageDeleteParking.Foreground = new SolidColorBrush(Colors.Black);
+        }
+        catch (HttpRequestException ex)
+        {
+            Log.Error($"Erreur lors de la suppression du parking : {ex.Message}");
+            MessageDeleteParking.Text = $"Erreur lors de la suppression du parking {SelectedParking.Nom}";
+            MessageDeleteParking.Foreground = new SolidColorBrush(Colors.Red);
+        }
         DeleteParkingInfo();
 
     }
 
     private void DeleteParkingInfo()
     {
-        MessageNewEvent.IsVisible = true;
+        MessageDeleteParking.IsVisible = true;
     }
 }
