@@ -29,7 +29,7 @@ namespace ParkAccess.ViewModels
             set => SetProperty(ref _selectedParking, value);
         }
 
-        public MainWindowViewModel ()
+        public MainWindowViewModel()
         {
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.File("log.txt")
@@ -49,6 +49,12 @@ namespace ParkAccess.ViewModels
         {
             try
             {
+                if (Program.Settings?.Api == null || string.IsNullOrEmpty(Program.Settings.Api.BaseUrl) || string.IsNullOrEmpty(Program.Settings.Api.Key))
+                {
+                    Log.Error("API settings are not properly configured.");
+                    return;
+                }
+
                 var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
                 request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
@@ -57,8 +63,6 @@ namespace ParkAccess.ViewModels
                 response.EnsureSuccessStatusCode();
                 string json = await response.Content.ReadAsStringAsync();
 
-                //log.information(json);
-
                 var options = new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
@@ -66,26 +70,28 @@ namespace ParkAccess.ViewModels
 
                 var parkings = JsonSerializer.Deserialize<ObservableCollection<ParkingData>>(json, options);
 
-                //Log.Information($"Count parkings: {parkings?.Count}");
                 if (parkings != null)
                 {
-                    //Log.Information($"Nombre de parkings désérialisés : {parkings.Count}");
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         Parkings.Clear();
                         foreach (var p in parkings)
                         {
-                            //Log.Information($"Ajout du parking : Nom: {parking.Nom}, Mail: {parking.Mail}, Ceff: {parking.Ceff}, Ip: {parking.Ip}");
                             Parkings.Add(p);
                         }
                     });
                 }
             }
-            catch (HttpRequestException)
+            catch (HttpRequestException ex)
             {
-                
+                Log.Error($"HTTP request failed: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"An unexpected error occurred: {ex.Message}");
             }
         }
+
 
         public async void InitializeEvents()
         {
@@ -130,7 +136,7 @@ namespace ParkAccess.ViewModels
             }
         }
 
-        private async Task SendShellyCommand(string ip,string state)
+        private async Task SendShellyCommand(string ip, string state)
         {
             try
             {
@@ -155,7 +161,7 @@ namespace ParkAccess.ViewModels
         {
             try
             {
-                
+
                 string url = $"http://{ip}/relay/0";
                 HttpResponseMessage response = await client.GetAsync(url);
                 if (response.IsSuccessStatusCode)

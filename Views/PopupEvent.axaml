@@ -7,7 +7,7 @@
         x:Class="ParkAccess.PopupEvent"
         x:DataType="local:PopupEvent"
         Width="750"
-        Height="450"
+        Height="500"
         Title="PopupEvent"
         CanResize="False"
         WindowStartupLocation="CenterOwner">
@@ -66,7 +66,7 @@
                        HorizontalAlignment="Center"
                        Margin="0 0 0 20"/>
 
-            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,20" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Nom :" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="0" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Nom de l'évenement" x:Name="nameText"/>
 
@@ -88,11 +88,11 @@
                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Heure de début :" VerticalAlignment="Center"/>
                 <TimePicker Grid.Row="4" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="beginHourChoice"/>
 
-                <TextBlock Grid.Row="5" Grid.Column="0" Text="Heure de fin :" VerticalAlignment="Center"/>
-                <TimePicker Grid.Row="5" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="finalHourChoice"/>
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Heure de fin :" Margin="0 0 0 30" VerticalAlignment="Center"/>
+                <TimePicker Grid.Row="5" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10 10 10 30" x:Name="finalHourChoice"/>
 
-				<TextBlock x:Name="MessageNewEvent" IsVisible="false" FontSize="15" Text="Votre événement à bien été créé." Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-			</Grid>
+                <TextBlock x:Name="MessageNewEvent" IsVisible="false" FontSize="15" Text="Votre événement à bien été créé." Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            </Grid>
 
             <Button Content="Enregistrer"
                     Click="CreateActivity"
