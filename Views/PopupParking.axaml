@@ -83,7 +83,7 @@
 					<TextBlock Grid.Row="3" Grid.Column="0" Text="IP :" VerticalAlignment="Center"/>
 					<TextBox Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="ipParking" Watermark="IP"/>
 
-					<TextBlock x:Name="MessageNewEvent" IsVisible="false" FontSize="15" Text="Votre parking à bien été créé." Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					<TextBlock x:Name="MessageNewParking" IsVisible="false" FontSize="15" Text="Votre parking à bien été créé." Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				</Grid>
 				<Grid ColumnDefinitions="Auto,Auto" HorizontalAlignment="Center">
 					<Button Content="Enregistrer"
