@@ -5,91 +5,138 @@ using Avalonia.Media;
 using Avalonia.Threading;
 using ParkAccess.ViewModels;
 using Serilog;
+using System;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 
-namespace ParkAccess;
-
-public partial class DeleteEvent : Window
+namespace ParkAccess
 {
-    private static readonly HttpClient client = new HttpClient();
-
-    public ObservableCollection<EventData> Events { get; } = new();
-
-    public EventData SelectedEvent { get; set; }
-    public DeleteEvent()
+    public partial class DeleteEvent : Window
     {
-        InitializeComponent();
-        DataContext = this;
-        InitializeEvents();
-    }
-    public async void InitializeEvents()
-    {
-        try
+        private static readonly HttpClient client = new();
+
+        public ObservableCollection<EventData> Events { get; } = new();
+
+        private EventData _selectedEvent;
+        public EventData SelectedEvent
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/events");
-            request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+            get => _selectedEvent;
+            set => _selectedEvent = value;
+        }
 
-            HttpResponseMessage response = await client.SendAsync(request);
+        public DeleteEvent()
+        {
+            InitializeComponent();
+            DataContext = this;
+            _ = InitializeEvents();
+        }
 
-            response.EnsureSuccessStatusCode();
-            string json = await response.Content.ReadAsStringAsync();
-
-            Log.Information(json);
-
-            var options = new JsonSerializerOptions
+        private async Task InitializeEvents()
+        {
+            try
             {
-                PropertyNameCaseInsensitive = true
-            };
-
-            var events = JsonSerializer.Deserialize<ObservableCollection<EventData>>(json, options);
-
-            if (events != null)
-            {
-                await Dispatcher.UIThread.InvokeAsync(() =>
+                if (Program.Settings?.Api == null || string.IsNullOrEmpty(Program.Settings.Api.BaseUrl) || string.IsNullOrEmpty(Program.Settings.Api.Key))
                 {
-                    Events.Clear();
-                    foreach (var e in events)
+                    Log.Error("API settings are not properly configured.");
+                    return;
+                }
+
+                var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/events");
+                request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+
+                HttpResponseMessage response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+
+                string json = await response.Content.ReadAsStringAsync();
+
+                Log.Information(json);
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                var events = JsonSerializer.Deserialize<ObservableCollection<EventData>>(json, options);
+
+                if (events != null)
+                {
+                    await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Events.Add(e);
-                    }
-                });
+                        Events.Clear();
+                        foreach (var e in events)
+                        {
+                            Events.Add(e);
+                        }
+                    });
+                }
+                else
+                {
+                    Log.Warning("No events found in the API response.");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Log.Error($"HTTP request failed: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Unhandled exception in InitializeEvents: {ex}");
             }
         }
-        catch (HttpRequestException)
-        {
 
-        }
-    }
-    private async void OnDelete(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-    {
-        try
+        private async void OnDelete(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             if (SelectedEvent == null)
             {
+                Log.Warning("No event selected for deletion.");
                 return;
             }
 
-            var request = new HttpRequestMessage(HttpMethod.Delete, $"{Program.Settings.Api.BaseUrl}/deleteevent/{SelectedEvent.Name}");
-            request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+            try
+            {
+                if (Program.Settings?.Api == null || string.IsNullOrEmpty(Program.Settings.Api.BaseUrl) || string.IsNullOrEmpty(Program.Settings.Api.Key))
+                {
+                    Log.Error("API settings are not properly configured.");
+                    return;
+                }
 
-            HttpResponseMessage response = await client.SendAsync(request);
-            Log.Information("Evenement supprimé");
-            MessageDeleteEvent.Text = "Événement supprimé avec succès";
-            MessageDeleteEvent.Foreground = new SolidColorBrush(Colors.Black);
+                var request = new HttpRequestMessage(HttpMethod.Delete, $"{Program.Settings.Api.BaseUrl}/deleteevent/{SelectedEvent.Name}");
+                request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+
+                HttpResponseMessage response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+
+                Log.Information("Event successfully deleted.");
+
+                await Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    MessageDeleteEvent.Text = "Événement supprimé avec succès";
+                    MessageDeleteEvent.Foreground = new SolidColorBrush(Colors.Black);
+                    MessageDeleteEvent.IsVisible = true;
+                });
+            }
+            catch (HttpRequestException ex)
+            {
+                Log.Error($"HTTP request failed during event deletion: {ex.Message}");
+                await ShowErrorMessage();
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Unhandled exception during event deletion: {ex}");
+                await ShowErrorMessage();
+            }
         }
-        catch
+
+        private async Task ShowErrorMessage()
         {
-            Log.Error("Erreur lors de la suppression de l'événement");
-            MessageDeleteEvent.Text = "Erreur lors de la suppression de l'événement";
-            MessageDeleteEvent.Foreground = new SolidColorBrush(Colors.Red);
+            await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                MessageDeleteEvent.Text = "Erreur lors de la suppression de l'événement";
+                MessageDeleteEvent.Foreground = new SolidColorBrush(Colors.Red);
+                MessageDeleteEvent.IsVisible = true;
+            });
         }
-        DeleteEventInfo();
-    }
-
-    private void DeleteEventInfo()
-    {
-        MessageDeleteEvent.IsVisible = true;
     }
 }

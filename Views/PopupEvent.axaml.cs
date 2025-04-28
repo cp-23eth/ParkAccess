@@ -1,74 +1,91 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.Threading;
-using Serilog;
-using System.Collections.ObjectModel;
-using static Microsoft.Graph.Constants;
-using System.Net.Http;
-using System.Text.Json;
 using Microsoft.Identity.Client;
 using Newtonsoft.Json;
 using ParkAccess.ViewModels;
-using System.Threading.Tasks;
+using Serilog;
 using System;
+using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Text;
-using Avalonia.Interactivity;
-using Avalonia.Media;
+using System.Text.Json;
+using System.Threading.Tasks;
 
-namespace ParkAccess;
-
-public partial class PopupEvent : Window
+namespace ParkAccess
 {
-    private static readonly HttpClient client = new HttpClient();
-
-    public ObservableCollection<ParkingData> Parkings { get; } = new();
-
-    public ParkingData SelectedParking { get; set; }
-
-    public PopupEvent()
+    public partial class PopupEvent : Window
     {
-        InitializeComponent();
-        DataContext = this;
-        InitializeParkings();
-    }
+        private static readonly HttpClient client = new();
 
-    public async void InitializeParkings()
-    {
-        try
+        public ObservableCollection<ParkingData> Parkings { get; } = new();
+
+        private ParkingData _selectedParking;
+        public ParkingData SelectedParking
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
-            request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+            get => _selectedParking;
+            set => _selectedParking = value;
+        }
 
-            HttpResponseMessage response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            string json = await response.Content.ReadAsStringAsync();
+        public PopupEvent()
+        {
+            InitializeComponent();
+            DataContext = this;
+            _ = InitializeParkings();
+        }
 
-            var options = new JsonSerializerOptions
+        private async Task InitializeParkings()
+        {
+            try
             {
-                PropertyNameCaseInsensitive = true
-            };
-
-            var parkings = System.Text.Json.JsonSerializer.Deserialize<ObservableCollection<ParkingData>>(json, options);
-
-            if (parkings != null)
-            {
-                await Dispatcher.UIThread.InvokeAsync(() =>
+                if (Program.Settings?.Api == null || string.IsNullOrEmpty(Program.Settings.Api.BaseUrl) || string.IsNullOrEmpty(Program.Settings.Api.Key))
                 {
-                    Parkings.Clear();
-                    foreach (var parking in parkings)
+                    Log.Error("API settings are not correctement configurés.");
+                    return;
+                }
+
+                var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
+                request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+
+                HttpResponseMessage response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+                string json = await response.Content.ReadAsStringAsync();
+
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                var parkings = System.Text.Json.JsonSerializer.Deserialize<ObservableCollection<ParkingData>>(json, options);
+
+                if (parkings != null)
+                {
+                    await Dispatcher.UIThread.InvokeAsync(() =>
                     {
-                        Parkings.Add(parking);
-                    }
-                });
+                        Parkings.Clear();
+                        foreach (var parking in parkings)
+                        {
+                            Parkings.Add(parking);
+                        }
+                    });
+                }
+                else
+                {
+                    Log.Warning("La désérialisation des parkings a retourné null.");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Log.Error($"Erreur HTTP lors de la récupération des parkings : {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Erreur inattendue dans InitializeParkings : {ex}");
             }
         }
-        catch (HttpRequestException)
-        {
-            Log.Information("Erreur lors de la récupération des parkings.");
-        }
-
-    }
 
     private async void CreateActivity(object sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
@@ -83,52 +100,74 @@ public partial class PopupEvent : Window
 
         if (nameText.Text != null)
         {
-            var eventData = new EventData
+            var planning = new EventData
             {
                 Name = nameText.Text,
-                ParkingMail = SelectedParking?.Mail ?? "Parking inconnu",
-                ParkingIp = SelectedParking?.Ip ?? "IP inconnue",
-                Start = new DateTimeOffset(dateChoice.SelectedDate.Value.Date + beginHourChoice.SelectedTime.Value),
-                End = new DateTimeOffset(dateChoice.SelectedDate.Value.Date + finalHourChoice.SelectedTime.Value)
+                ParkingMail = (DataContext as MainWindowViewModel)?.SelectedParking?.Mail ?? "Parking inconnu", // parkingChoice.SelectedItem?.ToString() ?? 
+                StartDateTime = dateChoice.SelectedDate.Value.Date + beginHourChoice.SelectedTime.Value,
+                EndDateTime = dateChoice.SelectedDate.Value.Date + finalHourChoice.SelectedTime.Value
             };
 
-            var jsonPayload = JsonConvert.SerializeObject(eventData, Formatting.Indented);
+            var eventPayload = new
+            {
+                subject = planning.Name,
+                start = new { dateTime = planning.StartDateTime.ToString("yyyy-MM-ddTHH:mm:ss"), timeZone = "Europe/Paris" },
+                end = new { dateTime = planning.EndDateTime.ToString("yyyy-MM-ddTHH:mm:ss"), timeZone = "Europe/Paris" },
+                location = new { displayName = planning.ParkingMail },
+            };
+
+            var jsonPayload = JsonConvert.SerializeObject(eventPayload, Formatting.Indented);
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
-            try
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+            var mail = SelectedParking?.Mail;
+
+            if (string.IsNullOrWhiteSpace(mail))
             {
-                using var client = new HttpClient();
-                client.DefaultRequestHeaders.Add("X-Api-Key", Program.Settings.Api.Key);
-
-                var response = await client.PostAsync($"{Program.Settings.Api.BaseUrl}/addevent", content);
-                var responseBody = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    Log.Information($"Événement créé avec succès : {responseBody}");
-                    MessageNewEvent.Text = "Événement ajouté avec succès.";
-                    MessageNewEvent.Foreground = new SolidColorBrush(Colors.Green);
-                }
-                else
-                {
-                    Log.Error($"Erreur API : {response.StatusCode} - {responseBody}");
-                    MessageNewEvent.Text = $"Erreur API : {response.StatusCode}";
-                    MessageNewEvent.Foreground = new SolidColorBrush(Colors.Red);
-                }
+                Log.Information("Aucun parking sélectionné ou mail invalide.");
+                return;
             }
-            catch (Exception ex)
+
+            var url = $"https://graph.microsoft.com/v1.0/users/{mail}/events";
+            //var url = $"https://graph.microsoft.com/v1.0/users/{(DataContext as MainWindowViewModel)?.SelectedParking?.Mail}/events";
+            var response = await httpClient.PostAsync(url, content);
+
+            if (response.IsSuccessStatusCode)
             {
-                Log.Error($"Exception lors de l'ajout de l'événement : {ex}");
-                MessageNewEvent.Text = "Erreur lors de la communication avec l'API.";
+                Log.Information("Événement créé avec succès !");
+                MessageNewEvent.Text = "Événement créé avec succès !";
+                MessageNewEvent.Foreground = new SolidColorBrush(Colors.Black);
+            }
+            else
+            {
+                string errorResponse = await response.Content.ReadAsStringAsync();
+                Log.Information($"Erreur: {response.StatusCode} - {errorResponse}");
+                MessageNewEvent.Text = "Erreur lors de la création de l'événement";
                 MessageNewEvent.Foreground = new SolidColorBrush(Colors.Red);
             }
-
             CreateActivityInfo();
         }
-    }
 
-    private void CreateActivityInfo()
-    {
-        MessageNewEvent.IsVisible = true;
+        private async Task ShowErrorMessage(string message)
+        {
+            await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                MessageNewEvent.Text = message;
+                MessageNewEvent.Foreground = new SolidColorBrush(Colors.Red);
+                MessageNewEvent.IsVisible = true;
+            });
+        }
+
+        private async Task ShowSuccessMessage(string message)
+        {
+            await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                MessageNewEvent.Text = message;
+                MessageNewEvent.Foreground = new SolidColorBrush(Colors.Black);
+                MessageNewEvent.IsVisible = true;
+            });
+        }
     }
 }

@@ -5,12 +5,11 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Collections.ObjectModel;
 using Microsoft.Graph.Models;
-using System.Collections.Generic;
-using static Microsoft.Graph.Constants;
 using Serilog;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace ParkAccess.ViewModels
 {
@@ -44,17 +43,16 @@ namespace ParkAccess.ViewModels
             InitializeEvents();
         }
 
-
         public async void InitializeParkings()
         {
+            if (Program.Settings?.Api == null || string.IsNullOrEmpty(Program.Settings.Api.BaseUrl) || string.IsNullOrEmpty(Program.Settings.Api.Key))
+            {
+                Log.Error("API settings are not properly configured.");
+                return;
+            }
+
             try
             {
-                if (Program.Settings?.Api == null || string.IsNullOrEmpty(Program.Settings.Api.BaseUrl) || string.IsNullOrEmpty(Program.Settings.Api.Key))
-                {
-                    Log.Error("API settings are not properly configured.");
-                    return;
-                }
-
                 var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
                 request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
 
@@ -68,7 +66,7 @@ namespace ParkAccess.ViewModels
                     PropertyNameCaseInsensitive = true
                 };
 
-                var parkings = JsonSerializer.Deserialize<ObservableCollection<ParkingData>>(json, options);
+                var parkings = JsonSerializer.Deserialize<List<ParkingData>>(json, options);
 
                 if (parkings != null)
                 {
@@ -81,6 +79,10 @@ namespace ParkAccess.ViewModels
                         }
                     });
                 }
+                else
+                {
+                    Log.Warning("No parkings found in the API response.");
+                }
             }
             catch (HttpRequestException ex)
             {
@@ -88,13 +90,18 @@ namespace ParkAccess.ViewModels
             }
             catch (Exception ex)
             {
-                Log.Error($"An unexpected error occurred: {ex.Message}");
+                Log.Error($"An unexpected error occurred: {ex}");
             }
         }
 
-
         public async void InitializeEvents()
         {
+            if (Program.Settings?.Api == null || string.IsNullOrEmpty(Program.Settings.Api.BaseUrl) || string.IsNullOrEmpty(Program.Settings.Api.Key))
+            {
+                Log.Error("API settings are not configured properly.");
+                return;
+            }
+
             try
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/events");
@@ -112,7 +119,7 @@ namespace ParkAccess.ViewModels
                     PropertyNameCaseInsensitive = true
                 };
 
-                var events = JsonSerializer.Deserialize<ObservableCollection<EventData>>(json, options);
+                var events = JsonSerializer.Deserialize<List<EventData>>(json, options);
 
                 if (events != null)
                 {
@@ -127,12 +134,18 @@ namespace ParkAccess.ViewModels
                         }
                     });
                 }
-
-
+                else
+                {
+                    Log.Warning("No events found in the API response.");
+                }
             }
-            catch (HttpRequestException)
+            catch (HttpRequestException ex)
             {
-
+                Log.Error($"HTTP request failed: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Unhandled exception in InitializeEvents: {ex}");
             }
         }
 
@@ -157,11 +170,10 @@ namespace ParkAccess.ViewModels
             }
         }
 
-        private async Task chooseCommand(string ip)
+        private async Task ChooseCommand(string ip)
         {
             try
             {
-
                 string url = $"http://{ip}/relay/0";
                 HttpResponseMessage response = await client.GetAsync(url);
                 if (response.IsSuccessStatusCode)
@@ -188,9 +200,9 @@ namespace ParkAccess.ViewModels
         {
             string ip = "157.26.121.184";
 
-            await chooseCommand(ip);
+            await ChooseCommand(ip);
 
-            if (status == true)
+            if (status)
             {
                 await SendShellyCommand(ip, "off");
             }
