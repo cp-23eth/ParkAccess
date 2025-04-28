@@ -87,87 +87,61 @@ namespace ParkAccess
             }
         }
 
-    private async void CreateActivity(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-    {
-        if (dateChoice.SelectedDate is null || beginHourChoice.SelectedTime is null || finalHourChoice.SelectedTime is null || nameText.Text == null || SelectedParking == null)
+        private async void CreateActivity(object sender, RoutedEventArgs e)
         {
-            Log.Information("Formulair incomplet");
-            MessageNewEvent.Text = "Formulaire incomplet";
-            MessageNewEvent.Foreground = new SolidColorBrush(Colors.Red);
-            CreateActivityInfo();
-            return;
-        }
-
-        if (nameText.Text != null)
-        {
-            var planning = new EventData
+            if (dateChoice.SelectedDate is null || beginHourChoice.SelectedTime is null || finalHourChoice.SelectedTime is null || nameText.Text == null || SelectedParking == null)
             {
-                Name = nameText.Text,
-                ParkingMail = (DataContext as MainWindowViewModel)?.SelectedParking?.Mail ?? "Parking inconnu", // parkingChoice.SelectedItem?.ToString() ?? 
-                StartDateTime = dateChoice.SelectedDate.Value.Date + beginHourChoice.SelectedTime.Value,
-                EndDateTime = dateChoice.SelectedDate.Value.Date + finalHourChoice.SelectedTime.Value
-            };
-
-            var eventPayload = new
-            {
-                subject = planning.Name,
-                start = new { dateTime = planning.StartDateTime.ToString("yyyy-MM-ddTHH:mm:ss"), timeZone = "Europe/Paris" },
-                end = new { dateTime = planning.EndDateTime.ToString("yyyy-MM-ddTHH:mm:ss"), timeZone = "Europe/Paris" },
-                location = new { displayName = planning.ParkingMail },
-            };
-
-            var jsonPayload = JsonConvert.SerializeObject(eventPayload, Formatting.Indented);
-            var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-
-            var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
-
-            var mail = SelectedParking?.Mail;
-
-            if (string.IsNullOrWhiteSpace(mail))
-            {
-                Log.Information("Aucun parking sélectionné ou mail invalide.");
+                Log.Information("Formulaire incomplet");
+                MessageNewEvent.Text = "Formulaire incomplet";
+                MessageNewEvent.Foreground = new SolidColorBrush(Colors.Red);
+                CreateActivityInfo();
                 return;
             }
 
-            var url = $"https://graph.microsoft.com/v1.0/users/{mail}/events";
-            //var url = $"https://graph.microsoft.com/v1.0/users/{(DataContext as MainWindowViewModel)?.SelectedParking?.Mail}/events";
-            var response = await httpClient.PostAsync(url, content);
+            var eventData = new EventData
+            {
+                Name = nameText.Text,
+                ParkingMail = SelectedParking?.Mail ?? "Parking inconnu",
+                Start = new DateTimeOffset(dateChoice.SelectedDate.Value.Date + beginHourChoice.SelectedTime.Value),
+                End = new DateTimeOffset(dateChoice.SelectedDate.Value.Date + finalHourChoice.SelectedTime.Value)
+            };
 
-            if (response.IsSuccessStatusCode)
+            var jsonPayload = JsonConvert.SerializeObject(eventData, Formatting.Indented);
+            var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+            try
             {
-                Log.Information("Événement créé avec succès !");
-                MessageNewEvent.Text = "Événement créé avec succès !";
-                MessageNewEvent.Foreground = new SolidColorBrush(Colors.Black);
+                using var client = new HttpClient();
+                client.DefaultRequestHeaders.Add("X-Api-Key", Program.Settings.Api.Key);
+
+                var response = await client.PostAsync($"{Program.Settings.Api.BaseUrl}/addevent", content);
+                var responseBody = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Log.Information($"Événement créé avec succès : {responseBody}");
+                    MessageNewEvent.Text = "Événement ajouté avec succès.";
+                    MessageNewEvent.Foreground = new SolidColorBrush(Colors.Green);
+                }
+                else
+                {
+                    Log.Error($"Erreur API : {response.StatusCode} - {responseBody}");
+                    MessageNewEvent.Text = $"Erreur API : {response.StatusCode}";
+                    MessageNewEvent.Foreground = new SolidColorBrush(Colors.Red);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                string errorResponse = await response.Content.ReadAsStringAsync();
-                Log.Information($"Erreur: {response.StatusCode} - {errorResponse}");
-                MessageNewEvent.Text = "Erreur lors de la création de l'événement";
+                Log.Error($"Exception lors de l'ajout de l'événement : {ex}");
+                MessageNewEvent.Text = "Erreur lors de la communication avec l'API.";
                 MessageNewEvent.Foreground = new SolidColorBrush(Colors.Red);
             }
+
             CreateActivityInfo();
         }
-
-        private async Task ShowErrorMessage(string message)
+        private void CreateActivityInfo()
         {
-            await Dispatcher.UIThread.InvokeAsync(() =>
-            {
-                MessageNewEvent.Text = message;
-                MessageNewEvent.Foreground = new SolidColorBrush(Colors.Red);
-                MessageNewEvent.IsVisible = true;
-            });
-        }
-
-        private async Task ShowSuccessMessage(string message)
-        {
-            await Dispatcher.UIThread.InvokeAsync(() =>
-            {
-                MessageNewEvent.Text = message;
-                MessageNewEvent.Foreground = new SolidColorBrush(Colors.Black);
-                MessageNewEvent.IsVisible = true;
-            });
+            MessageNewEvent.IsVisible = true;
         }
     }
 }
