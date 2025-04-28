@@ -123,7 +123,7 @@ namespace ParkAccess.ViewModels
 
                 if (events != null)
                 {
-                    var sortedEvents = events.OrderBy(e => e.StartDateTime).ToList();
+                    var sortedEvents = events.OrderBy(e => e.Start).ToList();
 
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
