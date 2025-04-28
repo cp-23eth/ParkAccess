@@ -205,29 +205,6 @@
             <TabItem Header="Ouverture manuelle">
                 <Border Classes="Card">
                     <StackPanel Spacing="24">
-                        <!-- CEFF Selection Dropdown -->
-                        <Grid RowDefinitions="Auto">
-                            <StackPanel Spacing="10" HorizontalAlignment="Center">
-                                <TextBlock Text="Sélectionner un établissement"
-                                           FontSize="16"
-                                           FontWeight="Medium"
-                                           HorizontalAlignment="Center"/>
-                                <ComboBox x:Name="ceffSelector"
-                                          Width="300"
-                                          HorizontalAlignment="Center"
-                                          SelectedIndex="0"
-                                          SelectionChanged="ceffSelector_SelectionChanged">
-                                    <ComboBoxItem>CEFF Industrie</ComboBoxItem>
-                                    <ComboBoxItem>CEFF Santé-Social</ComboBoxItem>
-                                    <ComboBoxItem>CEFF Commerce</ComboBoxItem>
-                                    <ComboBoxItem>CEFF Artisanal</ComboBoxItem>
-                                </ComboBox>
-
-                            </StackPanel>
-                        </Grid>
-
-                        <Separator Height="1" Background="#e5e5e5" Margin="0 8"/>
-
                         <!-- CEFF Industrie Content -->
                         <StackPanel x:Name="ceffIndustrieContent" IsVisible="True" Spacing="24">
                             <!-- Section Pierre-Jolissaint -->
