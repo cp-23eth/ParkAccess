@@ -203,7 +203,6 @@
 
         <TabControl Grid.Row="1" Margin="0">
             <TabItem Header="Ouverture manuelle">
-<<<<<<< HEAD
 				<Border Classes="Card">
 					<StackPanel Spacing="24">
 						<StackPanel x:Name="ceffIndustrieContent" IsVisible="True" Spacing="24">
@@ -235,7 +234,6 @@
 						</StackPanel>
 					</StackPanel>
 				</Border>
-=======
                 <Border Classes="Card">
                     <StackPanel Spacing="24">
                         <!-- CEFF Industrie Content -->
@@ -351,7 +349,6 @@
                         </StackPanel>
                     </StackPanel>
                 </Border>
->>>>>>> e754ace1246cf09b8f3d560f63d120cb705e6503
             </TabItem>
             <TabItem Header="Voir les évenements">
                 <Border Classes="Card">
@@ -498,7 +495,6 @@
                     </StackPanel>
                 </Border>
             </TabItem>
-
         </TabControl>
     </Grid>
 </Window>
