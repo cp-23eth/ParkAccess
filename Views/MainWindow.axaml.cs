@@ -17,42 +17,41 @@ namespace ParkAccess.Views;
 
 public partial class MainWindow : Window
 {
-    string ip = "157.26.121.184";
     private static readonly HttpClient client = new HttpClient();
     private CancellationTokenSource? _cts;
 
     public MainWindow()
     {
         InitializeComponent();
-        InitializeBtn();
+        //InitializeBtn();
 
         StartPeriodicRefresh();
     }
 
-    async void InitializeBtn()
-    {
-        try
-        {
-            string url = $"http://{ip}/relay/0";
-            HttpResponseMessage response = await client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
-            {
-                string jsonResponse = await response.Content.ReadAsStringAsync();
-                using JsonDocument doc = JsonDocument.Parse(jsonResponse);
-                bool status = doc.RootElement.GetProperty("ison").GetBoolean();
+    //async void InitializeBtn()
+    //{
+        //try
+        //{
+        //    string url = $"http://{ip}/relay/0";
+        //    HttpResponseMessage response = await client.GetAsync(url);
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        string jsonResponse = await response.Content.ReadAsStringAsync();
+        //        using JsonDocument doc = JsonDocument.Parse(jsonResponse);
+        //        bool status = doc.RootElement.GetProperty("ison").GetBoolean();
 
-                parkingBtn1.IsChecked = status;
-            }
-            else
-            {
-                Console.WriteLine("Erreur de connexion");
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Exception : {ex.Message}");
-        }
-    }
+        //        parkingBtn1.IsChecked = status;
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Erreur de connexion");
+        //    }
+        //}
+        //catch (Exception ex)
+        //{
+        //    Console.WriteLine($"Exception : {ex.Message}");
+        //}
+    //}
 
     private async void StartPeriodicRefresh()
     {
@@ -64,7 +63,7 @@ public partial class MainWindow : Window
             using var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
             while (await timer.WaitForNextTickAsync(token))
             {
-                await Dispatcher.UIThread.InvokeAsync(InitializeBtn);
+                //await Dispatcher.UIThread.InvokeAsync(InitializeBtn);
             }
         }
         catch (OperationCanceledException)
@@ -81,22 +80,6 @@ public partial class MainWindow : Window
         base.OnClosing(e);
     }
 
-    private void ceffSelector_SelectionChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        if (sender is ComboBox combo && combo.SelectedItem is ComboBoxItem selectedItem)
-        {
-            string? selectedText = selectedItem.Content?.ToString();
-
-            if (ceffIndustrieContent != null)
-                ceffIndustrieContent.IsVisible = selectedText == "CEFF Industrie";
-            if (ceffSanteSocialContent != null)
-                ceffSanteSocialContent.IsVisible = selectedText == "CEFF Santé-Social";
-            if (ceffCommerceContent != null)
-                ceffCommerceContent.IsVisible = selectedText == "CEFF Commerce";
-            if (ceffArtisanalContent != null)
-                ceffArtisanalContent.IsVisible = selectedText == "CEFF Artisanal";
-        }
-    }
     private async void OnParkButtonClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         var popup = new PopupParking();
