@@ -95,18 +95,18 @@ namespace ParkAccess
             }
 
             var selectedItem = ceffComboBox.SelectedItem as ComboBoxItem;
-            string ceff = selectedItem?.Content.ToString();
+            string? ceff = selectedItem?.Content!.ToString();
 
             ParkingData newParking = new ParkingData(
-                nameParking.Text,
-                emailParking.Text,
-                ceff,
-                ipParking.Text
+                nameParking.Text!,
+                emailParking.Text!,
+                ceff!,
+                ipParking.Text!
             );
 
             IPAddress ip;
 
-            if (!IPAddress.TryParse(ipParking.Text, out ip))
+            if (!IPAddress.TryParse(ipParking.Text, out ip!))
             {
                 Log.Information("Adresse Ip incorrecte");
                 MessageNewParking.Text = $"L'adresse IP est incorrecte";
