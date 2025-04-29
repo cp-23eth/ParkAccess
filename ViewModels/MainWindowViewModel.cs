@@ -1,22 +1,19 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using Avalonia.Threading;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Serilog;
 using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
-using System.Collections.ObjectModel;
-using Microsoft.Graph.Models;
-using Serilog;
-using Avalonia.Threading;
-using CommunityToolkit.Mvvm.ComponentModel;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace ParkAccess.ViewModels
 {
     public partial class MainWindowViewModel : ObservableObject
     {
-        private static readonly HttpClient client = new HttpClient();
-        public bool status { get; set; }
+        private static readonly HttpClient client = new();
+        public bool Status { get; set; }
 
         public ObservableCollection<ParkingData> Parkings { get; } = new();
         public ObservableCollection<EventData> Events { get; } = new();
@@ -56,12 +53,7 @@ namespace ParkAccess.ViewModels
                 response.EnsureSuccessStatusCode();
 
                 string json = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-
-                var parkings = JsonSerializer.Deserialize<List<ParkingData>>(json, options);
+                var parkings = JsonSerializer.Deserialize<List<ParkingData>>(json, JsonOptions);
 
                 if (parkings != null)
                 {
@@ -109,12 +101,7 @@ namespace ParkAccess.ViewModels
 
                 Log.Information(json);
 
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-
-                var events = JsonSerializer.Deserialize<List<EventData>>(json, options);
+                var events = JsonSerializer.Deserialize<List<EventData>>(json, JsonOptions);
 
                 if (events != null)
                 {
@@ -143,5 +130,10 @@ namespace ParkAccess.ViewModels
                 Log.Error($"Unhandled exception in InitializeEvents: {ex}");
             }
         }
+
+        private static readonly JsonSerializerOptions JsonOptions = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
     }
 }

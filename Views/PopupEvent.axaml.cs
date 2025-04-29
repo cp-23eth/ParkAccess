@@ -1,12 +1,8 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Threading;
-using Microsoft.Identity.Client;
 using Newtonsoft.Json;
-using ParkAccess.ViewModels;
 using Serilog;
 using System;
 using System.Collections.ObjectModel;

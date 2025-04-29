@@ -1,7 +1,4 @@
-﻿using Avalonia.Controls.Primitives;
-using Avalonia.Interactivity;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.Graph.Models;
+﻿using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Net.Http;
 using System.Text.Json;
