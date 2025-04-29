@@ -17,7 +17,7 @@ namespace ParkAccess.Views;
 
 public partial class MainWindow : Window
 {
-    private static readonly HttpClient client = new HttpClient();
+    private static readonly HttpClient client = new();
     private CancellationTokenSource? _cts;
     private DispatcherTimer? _dispatcherTimer;
 
@@ -80,31 +80,32 @@ public partial class MainWindow : Window
         }
     }
 
-    private async Task<List<ParkingData>> FetchParkingsAsync()
+    static async Task<List<ParkingData>> FetchParkingsAsync()
     {
         var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
-        request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+        request.Headers.Add("ApiKey", Program.Settings.Api.Key);
 
         HttpResponseMessage response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
 
         string json = await response.Content.ReadAsStringAsync();
-        var options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        };
 
-        var parkings = System.Text.Json.JsonSerializer.Deserialize<List<ParkingData>>(json, options);
+        var parkings = System.Text.Json.JsonSerializer.Deserialize<List<ParkingData>>(json, JsonOptions);
 
         return parkings ?? new List<ParkingData>();
     }
 
-    private async Task<bool> CheckIfParkingIsOpen(string parkingIp)
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true
+    };
+
+    static async Task<bool> CheckIfParkingIsOpen(string parkingIp)
     {
         try
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"http://{parkingIp}/relay/0");
-            request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+            request.Headers.Add("ApiKey", Program.Settings.Api.Key);
 
             HttpResponseMessage response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
@@ -132,15 +133,6 @@ public partial class MainWindow : Window
         }
 
         return null;
-    }
-
-    private void ToggleButton_Loaded(object sender, RoutedEventArgs e)
-    {
-        var toggleButton = sender as ToggleButton;
-        if (toggleButton != null)
-        {
-            var parkingNom = toggleButton.CommandParameter as string;
-        }
     }
 
     protected override void OnClosing(WindowClosingEventArgs e)

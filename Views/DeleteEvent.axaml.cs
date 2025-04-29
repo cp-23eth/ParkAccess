@@ -44,7 +44,7 @@ namespace ParkAccess
                 }
 
                 var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/events");
-                request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+                request.Headers.Add("ApiKey", Program.Settings.Api.Key);
 
                 HttpResponseMessage response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
@@ -103,7 +103,7 @@ namespace ParkAccess
                 }
 
                 var request = new HttpRequestMessage(HttpMethod.Delete, $"{Program.Settings.Api.BaseUrl}/deleteevent/{SelectedEvent.Name}");
-                request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+                request.Headers.Add("ApiKey", Program.Settings.Api.Key);
 
                 HttpResponseMessage response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();

@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using Avalonia.Media;
-using ParkAccess.ViewModels;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -24,22 +23,20 @@ namespace ParkAccess
         {
             try
             {
-                using (HttpClient client = new HttpClient())
+                using var client = new HttpClient();
+                string json = JsonSerializer.Serialize(new
                 {
-                    string json = JsonSerializer.Serialize(new
-                    {
-                        nom = newParking.Nom,
-                        ceff = newParking.Ceff,
-                        mail = newParking.Mail,
-                        ip = newParking.Ip
-                    });
+                    nom = newParking.Nom,
+                    ceff = newParking.Ceff,
+                    mail = newParking.Mail,
+                    ip = newParking.Ip
+                });
 
-                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                StringContent content = new(json, Encoding.UTF8, "application/json");
 
-                    client.DefaultRequestHeaders.Add("X-Api-Key", Program.Settings.Api.Key);
+                client.DefaultRequestHeaders.Add("ApiKey", Program.Settings.Api.Key);
 
-                    HttpResponseMessage response = await client.PostAsync($"{Program.Settings.Api.BaseUrl}/addparking", content);
-                }
+                HttpResponseMessage response = await client.PostAsync($"{Program.Settings.Api.BaseUrl}/addparking", content);
             }
             catch (Exception ex)
             {
@@ -52,12 +49,11 @@ namespace ParkAccess
 
         private async Task<bool> ParkingExistsAsync(ParkingData newParking)
         {
-            // TODO : il ne détecte pas les doubles parkings (avec le meme email)
-            using (HttpClient client = new HttpClient())
+            try
             {
-
+                using var client = new HttpClient();
                 var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
-                request.Headers.Add("X-Api-Key", Program.Settings.Api.Key);
+                request.Headers.Add("ApiKey", Program.Settings.Api.Key);
 
                 HttpResponseMessage response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
@@ -66,7 +62,7 @@ namespace ParkAccess
                 var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                 var existingParkings = JsonSerializer.Deserialize<List<ParkingData>>(json, options);
 
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                if (response.StatusCode != HttpStatusCode.OK)
                 {
                     Log.Error($"Erreur lors de la récupération des parkings : {response.StatusCode}");
                     MessageNewParking.Text = $"Erreur lors de la récupération des parkings : {response.StatusCode}";
@@ -80,6 +76,11 @@ namespace ParkAccess
                     p.Ip == newParking.Ip &&
                     p.Mail == newParking.Mail
                 ) ?? false;
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Erreur lors de la récupération des parkings : {ex.Message}");
+                return false;
             }
         }
 
