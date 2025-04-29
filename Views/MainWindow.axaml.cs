@@ -19,7 +19,6 @@ public partial class MainWindow : Window
 {
     private static readonly HttpClient client = new HttpClient();
     private CancellationTokenSource? _cts;
-    private Timer? _updateTimer;
     private DispatcherTimer? _dispatcherTimer;
 
     public MainWindow()
