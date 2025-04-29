@@ -1,9 +1,6 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Threading;
-using ParkAccess.ViewModels;
 using Serilog;
 using System;
 using System.Collections.ObjectModel;
