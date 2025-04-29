@@ -30,10 +30,6 @@ namespace ParkAccess.ViewModels
 
         public MainWindowViewModel()
         {
-            Log.Logger = new LoggerConfiguration()
-                .WriteTo.File("log.txt")
-                .CreateLogger();
-
             RefreshData();
         }
 

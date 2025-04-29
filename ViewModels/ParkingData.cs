@@ -1,7 +1,9 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using Avalonia.Controls.Primitives;
+using Avalonia.Interactivity;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Graph.Models;
 using System;
-using System.Net.Http; // Ajout pour HttpClient
+using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -25,9 +27,8 @@ namespace ParkAccess
 
         public ICommand ToggleParkingCommand { get; }
 
-        private readonly HttpClient client; // Déclaration du HttpClient
+        private readonly HttpClient client;
 
-        // Constructeur
         public ParkingData(string nom, string mail, string ceff, string ip)
         {
             Nom = nom;
@@ -35,14 +36,13 @@ namespace ParkAccess
             Ceff = ceff;
             Ip = ip;
 
-            client = new HttpClient(); // Initialisation du client HTTP
+            client = new HttpClient();
             ToggleParkingCommand = new RelayCommand(async () => await ToggleParkingFonction());
         }
 
-        // Méthode pour basculer l'état du parking
         private async Task ToggleParkingFonction()
         {
-            bool status = await ChooseCommand(Ip);  // Doit attendre le résultat
+            bool status = await ChooseCommand(Ip);
 
             if (status)
                 await SendShellyCommand(Ip, "off");
@@ -50,16 +50,6 @@ namespace ParkAccess
                 await SendShellyCommand(Ip, "on");
         }
 
-        // Commande publique (RelayCommand) pour lier avec la vue
-        private async Task ToggleParking(ParkingData parking)
-        {
-            if (parking == null)
-                return;
-
-            // Ajoutez votre logique ici si nécessaire
-        }
-
-        // Vérifie l'état actuel du relais sur le périphérique Shelly
         private async Task<bool> ChooseCommand(string ip)
         {
             try
@@ -71,7 +61,7 @@ namespace ParkAccess
                 {
                     string jsonResponse = await response.Content.ReadAsStringAsync();
                     using JsonDocument doc = JsonDocument.Parse(jsonResponse);
-                    return doc.RootElement.GetProperty("ison").GetBoolean();  // Retourne le statut
+                    return doc.RootElement.GetProperty("ison").GetBoolean();
                 }
                 else
                 {
@@ -86,7 +76,6 @@ namespace ParkAccess
             }
         }
 
-        // Envoie la commande à Shelly pour basculer l'état du relais
         private async Task SendShellyCommand(string ip, string state)
         {
             try
