@@ -430,8 +430,10 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Date"
                                                     Width="*"/>
+                                <DataGridTextColumn Header="Heure"
+                                                    Width="*"/>
                                 <DataGridTextColumn Header="Description"
-                                                    Width="3*"/>
+                                                    Width="4*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
