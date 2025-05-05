@@ -184,5 +184,26 @@ namespace ParkAccess.ViewModels
         {
             PropertyNameCaseInsensitive = true
         };
+
+        public void DeleteHistory()
+        {
+            try
+            {
+                var request = new HttpRequestMessage(HttpMethod.Delete, $"{Program.Settings.Api.BaseUrl}/deletehistory");
+                request.Headers.Add("ApiKey", Program.Settings.Api.Key);
+                HttpResponseMessage response = client.SendAsync(request).Result;
+                response.EnsureSuccessStatusCode();
+
+                RefreshData();
+            }
+            catch (HttpRequestException ex)
+            {
+                Log.Error($"HTTP request failed: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"An unexpected error occurred: {ex}");
+            }
+        }
     }
 }

@@ -442,6 +442,7 @@
                                        VerticalAlignment="Center"/>
 
                             <Button Content="Supprimer"
+									Command="{Binding DeleteHistory}"
                                     Classes="DelButton"
                                     Grid.Column="4"
                                     HorizontalAlignment="Left"
