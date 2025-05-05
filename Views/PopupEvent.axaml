@@ -60,7 +60,7 @@
     </Window.Styles>
     <Border Classes="Card">
         <StackPanel Spacing="20">
-            <TextBlock Text="Nouvel évenement"
+            <TextBlock Text="Nouvel évènement"
                        FontSize="20"
                        FontWeight="SemiBold"
                        HorizontalAlignment="Center"
@@ -68,7 +68,7 @@
 
             <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,20" ColumnDefinitions="Auto,*" HorizontalAlignment="Center">
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Nom :" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Nom de l'évenement" x:Name="nameText"/>
+                <TextBox Grid.Row="0" Grid.Column="1"  Width="300" HorizontalAlignment="Left" Margin="10" Watermark="Nom de l'évènement" x:Name="nameText"/>
 
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Parking :" VerticalAlignment="Center"/>
                 <ComboBox Grid.Row="2" Grid.Column="1"
@@ -82,7 +82,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Date de l'évenement :" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Date de l'évènement :" VerticalAlignment="Center"/>
                 <DatePicker Grid.Row="3" Grid.Column="1" Width="300" HorizontalAlignment="Left" Margin="10" x:Name="dateChoice"/>
 
                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Heure de début :" VerticalAlignment="Center"/>
