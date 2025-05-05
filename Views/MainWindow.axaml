@@ -244,7 +244,7 @@
                 </Border>
             </TabItem>
 
-            <TabItem Header="Voir les évenements">
+            <TabItem Header="Voir les évènements">
                 <Border Classes="Card">
                     <StackPanel Spacing="20">
                         <Grid>
@@ -267,7 +267,7 @@
                                           Height="14"/>
                             </Button>
 
-                            <TextBlock Text="Liste des évenements"
+                            <TextBlock Text="Liste des évènements"
                                        FontSize="20"
                                        FontWeight="SemiBold"
                                        Grid.Column="2"
@@ -412,7 +412,7 @@
                                           Height="14"/>
                             </Button>
 
-                            <TextBlock Text="Historique des évenements"
+                            <TextBlock Text="Historique des évènements"
                                        FontSize="20"
                                        FontWeight="SemiBold"
                                        Grid.Column="2"
@@ -420,7 +420,8 @@
                                        VerticalAlignment="Center"/>
                         </Grid>
 
-                        <DataGrid AutoGenerateColumns="False"
+                        <DataGrid ItemsSource="{Binding History}"
+							      AutoGenerateColumns="False"
                                   IsReadOnly="True"
                                   GridLinesVisibility="All"
                                   BorderThickness="2"
@@ -429,11 +430,11 @@
                                   MaxHeight="500">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Date"
-                                                    Width="*"/>
-                                <DataGridTextColumn Header="Heure"
+													Binding="{Binding Date}"
                                                     Width="*"/>
                                 <DataGridTextColumn Header="Description"
-                                                    Width="4*"/>
+													Binding="{Binding Description}"
+                                                    Width="5*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
