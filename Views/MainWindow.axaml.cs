@@ -1,10 +1,14 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Data.Converters;
+using Avalonia.Diagnostics;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
@@ -114,7 +118,8 @@ public partial class MainWindow : Window
             var status = System.Text.Json.JsonSerializer.Deserialize<ParkingStatus>(json);
 
             return status?.IsOpen ?? false;
-        }catch
+        }
+        catch
         {
             Log.Error("Erreur dans CheckIfParkingIsOpen");
             return false;

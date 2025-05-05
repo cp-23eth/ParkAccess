@@ -10,9 +10,13 @@
         Title="ParkAccess"
         Background="#f5f5f7"
         TransparencyLevelHint="AcrylicBlur"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        xmlns:local="clr-namespace:ParkAccess"
+        >
 
     <Window.Resources>
+        <local:ScrollConverter x:Key="ScrollConverter" />
+        <local:DatagridConverter x:Key="DatagridConverter" />
         <Color x:Key="PrimaryColor">#4361ee</Color>
         <Color x:Key="SecondaryColor">#3a0ca3</Color>
         <Color x:Key="AccentColor">#4cc9f0</Color>
@@ -205,9 +209,19 @@
             <TabItem Header="Ouverture manuelle">
                 <Border Classes="Card">
                     <StackPanel Spacing="24">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="{Binding Path=Bounds.Height,
-                                      RelativeSource={RelativeSource AncestorType=Window}}">
+                        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                            <ScrollViewer.Height>
+                                <MultiBinding Converter="{StaticResource ScrollConverter}">
+                                    <Binding Path="Bounds.Height" RelativeSource="{RelativeSource AncestorType=Window}"/>
+                                </MultiBinding>
+                            </ScrollViewer.Height>
                             <StackPanel x:Name="ParkingContent" IsVisible="True" Spacing="24">
+                                <Separator Grid.Row="2"
+                                           HorizontalAlignment="Stretch"
+                                           VerticalAlignment="Top"
+                                           Background="LightGray"
+                                           Opacity="0.5"
+                                           Margin="0 24 0 0"/>
                                 <ItemsControl ItemsSource="{Binding Parkings}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
@@ -296,8 +310,12 @@
                                   GridLinesVisibility="All"
                                   BorderThickness="2"
                                   BorderBrush="#e5e5e5"
-                                  Margin="10"
-                                  MaxHeight="500">
+                                  Margin="10">
+                            <DataGrid.MaxHeight>
+                                <MultiBinding Converter="{StaticResource DatagridConverter}">
+                                    <Binding Path="Bounds.Height" RelativeSource="{RelativeSource AncestorType=Window}"/>
+                                </MultiBinding>
+                            </DataGrid.MaxHeight>
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Nom"
                                                     Binding="{Binding Name}"
@@ -369,8 +387,12 @@
                                   GridLinesVisibility="All"
                                   BorderThickness="2"
                                   BorderBrush="#e5e5e5"
-                                  Margin="10"
-                                  MaxHeight="500">
+                                  Margin="10">
+                            <DataGrid.MaxHeight>
+                                <MultiBinding Converter="{StaticResource DatagridConverter}">
+                                    <Binding Path="Bounds.Height" RelativeSource="{RelativeSource AncestorType=Window}"/>
+                                </MultiBinding>
+                            </DataGrid.MaxHeight>
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Nom"
                                                     Binding="{Binding Nom}"
