@@ -440,22 +440,33 @@
                                        Grid.Column="2"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"/>
+
+                            <Button Content="Supprimer"
+                                    Classes="DelButton"
+                                    Grid.Column="4"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Margin="10,0"/>
                         </Grid>
 
                         <DataGrid ItemsSource="{Binding History}"
-							      AutoGenerateColumns="False"
+                                  AutoGenerateColumns="False"
                                   IsReadOnly="True"
                                   GridLinesVisibility="All"
                                   BorderThickness="2"
                                   BorderBrush="#e5e5e5"
-                                  Margin="10"
-                                  MaxHeight="500">
+                                  Margin="10">
+                            <DataGrid.MaxHeight>
+                                <MultiBinding Converter="{StaticResource DatagridConverter}">
+                                    <Binding Path="Bounds.Height" RelativeSource="{RelativeSource AncestorType=Window}"/>
+                                </MultiBinding>
+                            </DataGrid.MaxHeight>
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Date"
-													Binding="{Binding Date}"
+                                                    Binding="{Binding Date}"
                                                     Width="*"/>
                                 <DataGridTextColumn Header="Description"
-													Binding="{Binding Description}"
+                                                    Binding="{Binding Description}"
                                                     Width="5*"/>
                             </DataGrid.Columns>
                         </DataGrid>
