@@ -154,10 +154,12 @@ namespace ParkAccess.ViewModels
 
                 if (history != null)
                 {
+                    var sortedHistory = history.OrderByDescending(h => h.Date).ToList();
+
                     await Dispatcher.UIThread.InvokeAsync(() =>
                     {
                         History.Clear();
-                        foreach (var h in history)
+                        foreach (var h in sortedHistory)
                         {
                             History.Add(h);
                         }
