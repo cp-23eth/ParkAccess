@@ -7,6 +7,7 @@ using Serilog;
 using System;
 using System.Collections.ObjectModel;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -45,6 +46,8 @@ namespace ParkAccess
 
                 var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
                 request.Headers.Add("ApiKey", Program.Settings.Api.Key);
+                var _token = SecureTokenStore.GetToken();
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
 
                 HttpResponseMessage response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
@@ -109,6 +112,8 @@ namespace ParkAccess
             {
                 using var client = new HttpClient();
                 client.DefaultRequestHeaders.Add("ApiKey", Program.Settings.Api.Key);
+                var _token = SecureTokenStore.GetToken();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
 
                 var response = await client.PostAsync($"{Program.Settings.Api.BaseUrl}/addevent", content);
                 var responseBody = await response.Content.ReadAsStringAsync();

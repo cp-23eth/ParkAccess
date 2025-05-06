@@ -5,12 +5,14 @@ using Avalonia.Data.Converters;
 using Avalonia.Diagnostics;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
+using ParkAccess.ViewModels;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -83,6 +85,8 @@ public partial class MainWindow : Window
     {
         var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
         request.Headers.Add("ApiKey", Program.Settings.Api.Key);
+        var _token = SecureTokenStore.GetToken();
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
 
         HttpResponseMessage response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
@@ -105,6 +109,8 @@ public partial class MainWindow : Window
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"http://{parkingIp}/relay/0");
             request.Headers.Add("ApiKey", Program.Settings.Api.Key);
+            var _token = SecureTokenStore.GetToken();
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
 
             HttpResponseMessage response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();

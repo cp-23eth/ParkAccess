@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -88,6 +90,8 @@ namespace ParkAccess
                 var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
                 client2.DefaultRequestHeaders.Add("ApiKey", Program.Settings.Api.Key);
+                var _token = SecureTokenStore.GetToken();
+                client2.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
                 HttpResponseMessage response2 = await client2.PostAsync($"{Program.Settings.Api.BaseUrl}/addhistory", content);
 
             }
