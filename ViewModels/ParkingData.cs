@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -42,9 +43,9 @@ namespace ParkAccess
             bool status = await ChooseCommand(Ip);
 
             if (status)
-                await SendShellyCommand(Ip, "off");
+                await SendShellyCommand(Ip, Nom, "off");
             else
-                await SendShellyCommand(Ip, "on");
+                await SendShellyCommand(Ip, Nom, "on");
         }
 
         private async Task<bool> ChooseCommand(string ip)
@@ -62,36 +63,37 @@ namespace ParkAccess
                 }
                 else
                 {
-                    Console.WriteLine("Erreur de connexion");
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception : {ex.Message}");
                 return false;
             }
         }
 
-        private async Task SendShellyCommand(string ip, string state)
+        private async Task SendShellyCommand(string ip, string nom, string state)
         {
             try
             {
                 var url = $"http://{ip}/relay/0?turn={state}";
                 var response = await client.GetAsync(url);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.WriteLine($"Commande {state} envoyée avec succès !");
-                }
-                else
-                {
-                    Console.WriteLine($"Erreur : {response.StatusCode}");
-                }
+                using var client2 = new HttpClient();
+
+                string rawMessage = $"Le parking \"{nom}\" a été mis en \"{state}\" manuellement";
+
+                string jsonPayload = JsonSerializer.Serialize(rawMessage);
+
+                var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+                client2.DefaultRequestHeaders.Add("ApiKey", Program.Settings.Api.Key);
+                HttpResponseMessage response2 = await client2.PostAsync($"{Program.Settings.Api.BaseUrl}/addhistory", content);
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception : {ex.Message}");
+                
             }
         }
 

@@ -39,7 +39,7 @@ public partial class MainWindow : Window
         _cts = new CancellationTokenSource();
         _dispatcherTimer = new DispatcherTimer
         {
-            Interval = TimeSpan.FromMilliseconds(500)
+            Interval = TimeSpan.FromMilliseconds(100)
         };
 
         _dispatcherTimer.Tick += async (_, _) =>
