@@ -75,7 +75,7 @@ namespace ParkAccess.ViewModels
             }
             catch (HttpRequestException ex)
             {
-                Log.Error($"HTTP request failed: {ex.Message}");
+                Log.Error($"Parking HTTP request failed: {ex.Message}");
             }
             catch (Exception ex)
             {
@@ -125,7 +125,7 @@ namespace ParkAccess.ViewModels
             }
             catch (HttpRequestException ex)
             {
-                Log.Error($"HTTP request failed: {ex.Message}");
+                Log.Error($"Event HTTP request failed: {ex.Message}");
             }
             catch (Exception ex)
             {
@@ -143,7 +143,7 @@ namespace ParkAccess.ViewModels
 
             try
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/gethistory");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/history");
                 request.Headers.Add("ApiKey", Program.Settings.Api.Key);
 
                 HttpResponseMessage response = await client.SendAsync(request);
@@ -172,7 +172,7 @@ namespace ParkAccess.ViewModels
             }
             catch (HttpRequestException ex)
             {
-                Log.Error($"HTTP request failed: {ex.Message}");
+                Log.Error($"History HTTP request failed: {ex.Message}");
             }
             catch (Exception ex)
             {

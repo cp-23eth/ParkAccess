@@ -75,10 +75,6 @@ public partial class MainWindow : Window
                 {
                     toggleButton.IsChecked = isOpen;
                 }
-                else
-                {
-                    Log.Warning($"Aucun bouton trouvé pour {parking.Nom}");
-                }
             });
         }
     }
