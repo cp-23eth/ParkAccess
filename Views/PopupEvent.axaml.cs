@@ -46,8 +46,7 @@ namespace ParkAccess
 
                 var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
                 request.Headers.Add("ApiKey", Program.Settings.Api.Key);
-                var _token = SecureTokenStore.GetToken();
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AuthService.token);
 
                 HttpResponseMessage response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
@@ -112,8 +111,7 @@ namespace ParkAccess
             {
                 using var client = new HttpClient();
                 client.DefaultRequestHeaders.Add("ApiKey", Program.Settings.Api.Key);
-                var _token = SecureTokenStore.GetToken();
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthService.token);
 
                 var response = await client.PostAsync($"{Program.Settings.Api.BaseUrl}/addevent", content);
                 var responseBody = await response.Content.ReadAsStringAsync();

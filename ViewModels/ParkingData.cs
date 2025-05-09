@@ -90,8 +90,7 @@ namespace ParkAccess
                 var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
                 client2.DefaultRequestHeaders.Add("ApiKey", Program.Settings.Api.Key);
-                var _token = SecureTokenStore.GetToken();
-                client2.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                client2.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AuthService.token);
                 HttpResponseMessage response2 = await client2.PostAsync($"{Program.Settings.Api.BaseUrl}/addhistory", content);
 
             }

@@ -17,8 +17,6 @@ namespace ParkAccess.ViewModels
         private static readonly HttpClient client = new();
         public bool Status { get; set; }
 
-        private string? _token;
-
         public ObservableCollection<ParkingData> Parkings { get; } = new();
         public ObservableCollection<EventData> Events { get; } = new();
         public ObservableCollection<History> History { get; } = new();
@@ -32,29 +30,29 @@ namespace ParkAccess.ViewModels
 
         public MainWindowViewModel()
         {
-            _ = InitializeAsync();
+            InitializeAsync();
         }
 
         private async Task InitializeAsync()
         {
-            await AuthenticateAsync();
+            await Authenticate();
 
             RefreshData();
         }
 
         public void RefreshData()
         {
-            _ = InitializeParkings();
-            _ = InitializeEvents();
-            _ = InitializeHistory();
+            InitializeParkings();
+            InitializeEvents();
+            InitializeHistory();
         }
 
-        public async Task AuthenticateAsync()
+        public async Task Authenticate()
         {
             var authService = new AuthService();
-            _token = await authService.LoginAndGetTokenAsync();
+            await authService.Login();
 
-            if (string.IsNullOrEmpty(_token))
+            if (string.IsNullOrEmpty(AuthService.token))
             {
                 Console.WriteLine("L'utilisateur n'est pas connecté.");
             }
@@ -70,7 +68,7 @@ namespace ParkAccess.ViewModels
 
             try
             {
-                if (string.IsNullOrEmpty(_token))
+                if (string.IsNullOrEmpty(AuthService.token))
                 {
                     Log.Error("Token d'accès manquant.");
                     return;
@@ -78,7 +76,7 @@ namespace ParkAccess.ViewModels
 
                 var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
                 request.Headers.Add("ApiKey", Program.Settings.Api.Key);
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AuthService.token);
 
                 HttpResponseMessage response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
@@ -122,7 +120,7 @@ namespace ParkAccess.ViewModels
 
             try
             {
-                if (string.IsNullOrEmpty(_token))
+                if (string.IsNullOrEmpty(AuthService.token))
                 {
                     Log.Error("Token d'accès manquant.");
                     return;
@@ -130,7 +128,7 @@ namespace ParkAccess.ViewModels
 
                 var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/events");
                 request.Headers.Add("ApiKey", Program.Settings.Api.Key);
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AuthService.token);
 
                 HttpResponseMessage response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
@@ -178,7 +176,7 @@ namespace ParkAccess.ViewModels
 
             try
             {
-                if (string.IsNullOrEmpty(_token))
+                if (string.IsNullOrEmpty(AuthService.token))
                 {
                     Log.Error("Token d'accès manquant.");
                     return;
@@ -186,7 +184,7 @@ namespace ParkAccess.ViewModels
 
                 var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/history");
                 request.Headers.Add("ApiKey", Program.Settings.Api.Key);
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AuthService.token);
 
                 HttpResponseMessage response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
@@ -231,7 +229,7 @@ namespace ParkAccess.ViewModels
         {
             try
             {
-                if (string.IsNullOrEmpty(_token))
+                if (string.IsNullOrEmpty(AuthService.token))
                 {
                     Log.Error("Token d'accès manquant.");
                     return;
@@ -239,7 +237,7 @@ namespace ParkAccess.ViewModels
 
                 var request = new HttpRequestMessage(HttpMethod.Delete, $"{Program.Settings.Api.BaseUrl}/deletehistory");
                 request.Headers.Add("ApiKey", Program.Settings.Api.Key);
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AuthService.token);
 
                 HttpResponseMessage response = client.SendAsync(request).Result;
                 response.EnsureSuccessStatusCode();

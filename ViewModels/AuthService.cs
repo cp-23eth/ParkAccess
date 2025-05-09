@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 public class AuthService
 {
+    public static string? token { get; set; } = null;
     private readonly IPublicClientApplication _msalApp;
-    private readonly string[] _scopes = new[] { "api://1ff69fc9-74de-4fba-9c13-34bf73df95a4/access_as_user" };
 
     public AuthService()
     {
@@ -19,62 +19,19 @@ public class AuthService
             .Build();
     }
 
-    public async Task<string?> LoginAndGetTokenAsync()
+    public async Task Login()
     {
-        var existingToken = SecureTokenStore.GetToken();
-        if (!string.IsNullOrWhiteSpace(existingToken))
-        {
-            Console.WriteLine("Token trouvé localement.");
-            return existingToken;
-        }
-
         try
         {
-            var result = await _msalApp.AcquireTokenInteractive(_scopes)
+            var result = await _msalApp.AcquireTokenInteractive(["api://315ca165-3c88-45c1-b62f-45679cb58e62/api_access"])
                 .WithPrompt(Prompt.SelectAccount)
                 .ExecuteAsync();
 
-            SecureTokenStore.SetToken(result.AccessToken);
-
-            return result.AccessToken;
+            token = result.AccessToken;
         }
         catch (MsalException ex)
         {
-            Console.WriteLine($"Login failed: {ex.Message}");
-            return null;
+            
         }
-    }
-}
-
-public class SecureTokenStore
-{
-    private static string FilePath => Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-        "ParkAccess",
-        "token.dat");
-
-    public static void SetToken(string token)
-    {
-        var directory = Path.GetDirectoryName(FilePath);
-        if (!Directory.Exists(directory))
-            Directory.CreateDirectory(directory!);
-
-        byte[] encrypted = ProtectedData.Protect(
-            Encoding.UTF8.GetBytes(token),
-            null,
-            DataProtectionScope.CurrentUser);
-
-        File.WriteAllBytes(FilePath, encrypted);
-    }
-
-    public static string? GetToken()
-    {
-        if (!File.Exists(FilePath))
-            return null;
-
-        byte[] encrypted = File.ReadAllBytes(FilePath);
-        byte[] decrypted = ProtectedData.Unprotect(encrypted, null, DataProtectionScope.CurrentUser);
-
-        return Encoding.UTF8.GetString(decrypted);
     }
 }

@@ -22,6 +22,7 @@ namespace ParkAccess.Views;
 
 public partial class MainWindow : Window
 {
+    public static AuthService AuthService { get; set; } = new();
     private static readonly HttpClient client = new();
     private CancellationTokenSource? _cts;
     private DispatcherTimer? _dispatcherTimer;
@@ -85,8 +86,7 @@ public partial class MainWindow : Window
     {
         var request = new HttpRequestMessage(HttpMethod.Get, $"{Program.Settings.Api.BaseUrl}/parkings");
         request.Headers.Add("ApiKey", Program.Settings.Api.Key);
-        var _token = SecureTokenStore.GetToken();
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AuthService.token);
 
         HttpResponseMessage response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
@@ -109,8 +109,7 @@ public partial class MainWindow : Window
         {
             var request = new HttpRequestMessage(HttpMethod.Get, $"http://{parkingIp}/relay/0");
             request.Headers.Add("ApiKey", Program.Settings.Api.Key);
-            var _token = SecureTokenStore.GetToken();
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AuthService.token);
 
             HttpResponseMessage response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
