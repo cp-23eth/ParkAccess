@@ -1,4 +1,5 @@
 ﻿using Microsoft.Identity.Client;
+using ParkAccess;
 using System;
 using System.IO;
 using System.Net.Http.Headers;
@@ -13,9 +14,9 @@ public class AuthService
 
     public AuthService()
     {
-        _msalApp = PublicClientApplicationBuilder.Create("315ca165-3c88-45c1-b62f-45679cb58e62")
-            .WithTenantId("0bd66e42-d830-4cdc-b580-f835a405d038")
-            .WithRedirectUri("http://localhost")
+        _msalApp = PublicClientApplicationBuilder.Create(Program.Settings.Api.ClientId)
+            .WithTenantId(Program.Settings.Api.TenantId)
+            .WithRedirectUri(Program.Settings.Api.RedirectUrl)
             .Build();
     }
 
@@ -23,7 +24,7 @@ public class AuthService
     {
         try
         {
-            var result = await _msalApp.AcquireTokenInteractive(["api://315ca165-3c88-45c1-b62f-45679cb58e62/api_access"])
+            var result = await _msalApp.AcquireTokenInteractive([Program.Settings.Api.Audience])
                 .WithPrompt(Prompt.SelectAccount)
                 .ExecuteAsync();
 
